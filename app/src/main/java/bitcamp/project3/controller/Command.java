@@ -7,7 +7,4 @@ public interface Command {
     void read();
     void update();
     void delete();
-
-
-
 }
