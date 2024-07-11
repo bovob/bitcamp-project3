@@ -1,5 +1,6 @@
 package bitcamp.project3;
 
+import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.util.Prompt;
 
 public class App {
@@ -8,6 +9,8 @@ public class App {
     static String[] adminMenus = new String[]{"도서관리", "대출관리", "유저관리", "종료"};
     // 유저 메뉴
     static String[] userMenus = new String[]{"도서대출", "도서반납", "회원정보수정", "종료"};
+
+    BookCommand bookCommand = new BookCommand("도서관리");
 
     // Main
     public static void main(String[] args) {
@@ -19,7 +22,7 @@ public class App {
                 app.adminExecute();
                 break;
             case 2:
-                app.executeUser();
+                app.userExecute();
                 break;
         }
     }
@@ -54,7 +57,7 @@ public class App {
     }
 
     // 유저 메뉴 실행
-    void executeUser() {
+    void userExecute() {
         String command;
         System.out.println("유저");
         printUserMenu();
@@ -121,7 +124,7 @@ public class App {
         switch (menuTitle) {
             case "도서관리":
                 System.out.println("도서관리 메뉴입니다.");
-                //bookCommand.execute();
+                bookCommand.execute(menuTitle);
                 break;
             case "대출관리":
                 System.out.println("대출관리 메뉴입니다.");
