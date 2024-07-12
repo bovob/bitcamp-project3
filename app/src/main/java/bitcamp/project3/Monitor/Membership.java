@@ -16,7 +16,7 @@ public class Membership {
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
     Membership(){
-        this.id = "user";       //default
+        this.id = "OREO";       //default
         this.pw = "0000";   //default
     }
 
@@ -84,6 +84,7 @@ public class Membership {
 
         str = "[관리자] ID:root PW:0000\n"+
                 "[유저] ID:user PW:0000\n";
+
         return str;
     }
 

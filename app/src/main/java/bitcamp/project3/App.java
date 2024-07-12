@@ -3,6 +3,7 @@ package bitcamp.project3;
 import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.Monitor.Membership;
 import bitcamp.project3.Monitor.Monitor;
+import bitcamp.project3.controller.MbtiCommand;
 import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.UserCommand;
 import bitcamp.project3.util.Prompt;
@@ -25,6 +26,8 @@ public class App {
     // Main
     public static void main(String[] args) {
         App app = new App();
+
+        MbtiCommand mc = MbtiCommand.getInstance();
 
         // 로그인 후 회원SeqNo get
         // 관리자SeqNo : 0
