@@ -16,6 +16,11 @@ public class App {
     // Main
     public static void main(String[] args) {
         App app = new App();
+
+        // 로그인 후 회원SeqNo get
+        // 관리자SeqNo : 0
+        // 유저SeqNo: 1~
+        // 로그인 실패 시 -1, INPUT으로 따로 1/2 관리자 유저 접속
         int check = Membership.getInstance().cmd();
 
         if(check==0){
