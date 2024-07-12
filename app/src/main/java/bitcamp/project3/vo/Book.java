@@ -1,16 +1,43 @@
 package bitcamp.project3.vo;
 
+import java.util.Objects;
+
 public class Book {
     private static int seqNo;
-
     private String title;
     private String author;
+    private String bookCategory;
     private int count;
     private int no;
     private int M;
     private int B;
     private int T;
     private int I;
+    private String id;
+
+    public Book() {
+    }
+
+    //@Override
+    //public boolean equals(Object o) {
+    //    if (this == o) {
+    //        return true;
+    //    }
+    //    if (o == null || getClass() != o.getClass()) {
+    //        return false;
+    //    }
+    //    Book book = (Book) o;
+    //    return no == book.no;
+    //}
+    //
+    //@Override
+    //public int hashCode() {
+    //    return Objects.hashCode(no);
+    //}
+
+    public Book(int no) {
+        this.no = no;
+    }
 
     public static int getNextSeqNo() {
         return ++seqNo;
@@ -78,6 +105,22 @@ public class Book {
     }
 
     public void setTitle(String title) {
+        this.title = title;
+    }
 
+    public String getBookCategory() {
+        return bookCategory;
+    }
+
+    public void setBookCategory(String bookCategory) {
+        this.bookCategory = bookCategory;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

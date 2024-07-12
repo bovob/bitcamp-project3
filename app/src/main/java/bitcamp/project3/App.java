@@ -3,6 +3,7 @@ package bitcamp.project3;
 import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.Monitor.Membership;
 import bitcamp.project3.Monitor.Monitor;
+import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.Monitor.UserMonitor;
 
@@ -12,6 +13,7 @@ public class App {
     static String[] adminMenus = new String[]{"도서관리", "대출관리", "유저관리", "종료"};
 
     BookCommand bookCommand = new BookCommand("도서관리");
+    BorrowCommand borrowCommand = new BorrowCommand("대출관리");
 
     // Main
     public static void main(String[] args) {
@@ -102,7 +104,7 @@ public class App {
                 break;
             case "대출관리":
                 System.out.println("대출관리 메뉴입니다.");
-                //bookLoanCommand.execute();
+                borrowCommand.execute(menuTitle);
                 break;
             case "유저관리":
                 System.out.println("유저관리 메뉴입니다.");
