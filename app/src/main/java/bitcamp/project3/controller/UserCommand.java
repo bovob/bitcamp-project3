@@ -1,26 +1,45 @@
 package bitcamp.project3.controller;
 
+import bitcamp.project3.util.Prompt;
+import bitcamp.project3.util.UserMonitor;
 import bitcamp.project3.vo.User;
 import java.util.ArrayList;
 
 public class UserCommand implements Command{
 
     public static ArrayList<User> userList = new ArrayList<>();
+    private static User currentUser;    //TEST USER1
+
 
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
     UserCommand(){
-
+        create();
+        currentUser = userList.getFirst();
     }
-
 
 
 
     ///////////////////////////////////////////////////////////
     ////////////////////// getInstance() //////////////////////
     ///////////////////////////////////////////////////////////
+    private static UserCommand uc;
 
+    // setup UserCommand Instance
+    public static UserCommand getInstance() {
+
+        if (uc == null) {
+            uc = new UserCommand();
+        }
+
+        return uc;
+    }// Method getInstance END
+
+    // reset UserCommand Instance
+    public static void freeInstance() {
+        uc = null;
+    }// Method freeInstance END
 
 
 
@@ -30,38 +49,40 @@ public class UserCommand implements Command{
     @Override
     public void cmd(){
         printTUI();
+//        read();
+        update();
     }
+
 
     @Override
     public void printTUI(){
+        String str = "";
 
+        str = "'"+currentUser.getName() + "'"+"님 환영합니다!\n";
+
+        System.out.print(str);
     }
 
 
     
     @Override
     public void create(){
-        userList.add(createUser());
+        userList.add( new User(createUserData(), createMbtiData()) );
     }
 
 
-    private User createUser(){
-        User user = new User(createUserData(), createMbtiData());
-        return user;
-    }
+//    private User createUser(){
+//        User user = new User(createUserData(), createMbtiData());
+//        return user;
+//    }
 
 
     private String[] createUserData(){
         String[] userData = new String[3];
 
-        System.out.print("이름: ");
-        userData[0] = "a";
-
-        System.out.print("ID: ");
-        userData[1] = "b";
-
-        System.out.print("PW: ");
-        userData[2] = "c";
+        userData[0]=Prompt.input("이름: ");
+        userData[1]=Prompt.input("ID: ");
+        userData[2]=Prompt.input("PW: ");
 
         return userData;
     }
@@ -83,26 +104,29 @@ public class UserCommand implements Command{
 
     @Override
     public void read(){
-        String str = "";
-        User user = userList.getFirst();
-
+        StringBuilder str = new StringBuilder();
         int[] width={4, 15, 15, 15};
         //no, name, id, mbti
-        str += printLine(width);
-        str += printUser(width, user);
-        str += printLine(width);
+        int no=0;
+
+        str.append(printLine(width));
+        for(User user :userList) {
+            str.append(printUser(width, user, ++no));
+        }
+        str.append(printLine(width));
 
         System.out.print(str);
     }
 
-    private String printUser(int[] width, User user){
+    private String printUser(int[] width, User user, int no){
         String str = "";
 
-        str = printUserFormat(width[0], String.format("%d", 1))+
+        str = printUserFormat(width[0], String.format("%d", no))+
               printUserFormat(width[1], user.getName())+
               printUserFormat(width[2], user.getId())+
               printUserFormat(width[3], printMbti(user.getMbti()))+
-              ":\n";
+              "|"+
+              "\n";
 
         return str;
     }
@@ -111,8 +135,8 @@ public class UserCommand implements Command{
         StringBuilder str;
 
         str = new StringBuilder("+");
-        for(int i:width) {
-            str.append("-".repeat(Math.max(0, width[i])));
+        for(int i=0 ; i<width.length ; i++) {
+            str.append("-".repeat(width[i]));
             str.append("+");
         }
         str.append("\n");
@@ -125,7 +149,7 @@ public class UserCommand implements Command{
        String str = "";
 
        str = "|" +
-               String.format("%-" + width + "s", data);
+             String.format("%-" + width + "s", data);
 
        return str;
     }
@@ -140,8 +164,71 @@ public class UserCommand implements Command{
 
     @Override
     public void update(){
+        while(updateMenuCommand()){
 
+        };
     }
+
+    private boolean updateMenuCommand(){
+        int ans = 0;
+
+        System.out.print(printUserData(currentUser));
+        ans = Prompt.inputInt("> ");
+
+        return switch (ans) {
+            case 1 -> {
+                setUserPw();
+                yield true;
+            }
+            case 2 -> {
+                setMbti();
+                yield true;
+            }
+            case 0 -> false;
+            default -> {
+                System.out.print("올바른 메뉴 번호를 입력해주세요.\n");
+                yield true;
+            }
+        };
+    }
+
+    private String printUserData(User user){
+        String str = "";
+
+        str = "'"       + user.getName() +"'님의 회원 정보\n"+
+              "ID: "    + user.getId()                  +"\n"+
+              "PW: "    + user.getPw()                  +"\n"+
+              "MBTI: "  + printMbti(user.getMbti())     +"\n\n";
+
+        str += printSubMenu();
+
+
+        return str;
+    }
+
+    private String printSubMenu(){
+        String str = "";
+
+        for(int no = 0 ; no<UserMonitor.userMenu[3].length ; no++){
+            str += String.format("[%-1d] %s\n", no+1, UserMonitor.userMenu[3][no]);
+        }
+        str += String.format("[0] %s\n", "이전 메뉴");
+
+        return str;
+    }
+
+    private void setUserPw(){
+        String pw = Prompt.input(String.format("새 PW(이전: %s) ",currentUser.getPw()));
+        currentUser.setPw(pw);
+        System.out.print("변경 되었습니다.\n");
+    }
+
+
+    private void setMbti(){
+        System.out.print("setMbti function\n");
+    }
+
+
 
     @Override
     public void delete(){
