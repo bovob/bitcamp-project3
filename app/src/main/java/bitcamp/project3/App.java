@@ -22,7 +22,8 @@ public class App {
                 app.adminExecute();
                 break;
             case 2:
-                UserMonitor.userExecute();
+                UserMonitor um = UserMonitor.getInstance();
+                um.userExecute();
                 break;
         }
     }

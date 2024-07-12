@@ -49,18 +49,15 @@ public class UserCommand implements Command{
     @Override
     public void cmd(){
         printTUI();
-//        read();
-        update();
+
     }
 
 
     @Override
     public void printTUI(){
-        String str = "";
-
-        str = "'"+currentUser.getName() + "'"+"님 환영합니다!\n";
-
-        System.out.print(str);
+        System.out.print("'"+currentUser.getName() + "'"+"님 환영합니다!\n");
+        read();
+        System.out.print(printMenu(0));
     }
 
 
@@ -200,19 +197,25 @@ public class UserCommand implements Command{
               "PW: "    + user.getPw()                  +"\n"+
               "MBTI: "  + printMbti(user.getMbti())     +"\n\n";
 
-        str += printSubMenu();
+        str += printMenu(3);
 
 
         return str;
     }
 
-    private String printSubMenu(){
+    private String printMenu(int index){
         String str = "";
+        UserMonitor um = UserMonitor.getInstance();
+        String[] userMenu = um.getUserMenu()[index];
 
-        for(int no = 0 ; no<UserMonitor.userMenu[3].length ; no++){
-            str += String.format("[%-1d] %s\n", no+1, UserMonitor.userMenu[3][no]);
+        for(int no = 0 ; no<userMenu.length ; no++){
+            str += String.format("[%-1d] %s\n", no+1, userMenu[no]);
         }
-        str += String.format("[0] %s\n", "이전 메뉴");
+        if(index==0){
+            str += String.format("[0] %s\n", "종료");
+        }else{
+            str += String.format("[0] %s\n", "이전 메뉴");
+        }
 
         return str;
     }

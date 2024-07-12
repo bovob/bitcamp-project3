@@ -1,41 +1,58 @@
 package bitcamp.project3.util;
 
 import bitcamp.project3.controller.UserCommand;
-import bitcamp.project3.util.Monitor;
 
 public class UserMonitor extends Monitor  {
-        public static String[][] userMenu ={
+    private String[][] userMenu ={
             {"대출","반납","회원 정보 수정"}, //0~
             {"추천 도서 대출", "도서 검색"},  //1~
             {"제목", "저자"},                 //2~
             {"PW 수정", "MBTI 재검사"}        //3~
     };
 
+    ///////////////////////////////////////////////////////////
+    ////////////////////// getInstance() //////////////////////
+    ///////////////////////////////////////////////////////////
+    private static UserMonitor um;
+
+    // setup UserMonitor Instance
+    public static UserMonitor getInstance() {
+
+        if (um == null) {
+            um = new UserMonitor();
+        }
+
+        return um;
+    }// Method getInstance END
+
+    // reset UserMonitor Instance
+    public static void freeInstance() {
+        um = null;
+    }// Method freeInstance END
 
 
-
-    public static void userExecute() {
+    public void userExecute() {
         String command;
         UserCommand uc = UserCommand.getInstance();
 
 
-        System.out.println("유저");
-        printUserMenu();
-
-        uc.cmd();
+        System.out.println("UserCommand Monitor");
+//        printUserMenu();
+            uc.cmd();
 
         while (true) {
             try {
                 command = Prompt.input("메인> ");
                 if (command.equals("menu")) {
-                    printUserMenu();
+//                    printUserMenu();
+                    uc.cmd();
                     continue;
                 }
                 int menuNo = Integer.parseInt(command);
-                String menuTitle = getMenuTitle(menuNo, userMenu[0]);
-                if (menuTitle != null) {
-                    processUserMenu(menuTitle);
-                } else if(menuTitle.equals("종료")) {
+
+                if (menuNo>0) {
+                    processUserMenu(menuNo);
+                } else if(menuNo == 0) {
                     break;
                 } else {
                     System.out.println("유효한 메뉴 번호가 아닙니다.");
@@ -49,7 +66,7 @@ public class UserMonitor extends Monitor  {
     }
 
     // 유저 메뉴 출력
-    static void printUserMenu() {
+    void printUserMenu() {
         String line = "----------------------------------";
         String adminTitle = "[유저메뉴]";
         System.out.println(adminTitle);
@@ -66,22 +83,52 @@ public class UserMonitor extends Monitor  {
     }
 
     // 유저 메뉴 프로세스
-    static void processUserMenu(String menuTitle) {
-        switch (menuTitle) {
-            case "도서대출":
+    void processUserMenu(int ans) {
+        switch (ans) {
+            case 1:
                 System.out.println("도서대출 메뉴입니다.");
                 //bookCommand.execute();
                 break;
-            case "도서반납":
+            case 2:
                 System.out.println("대출반납 메뉴입니다.");
                 //bookLoanCommand.execute();
                 break;
-            case "회원정보수정":
+            case 3:
+                UserCommand uc = UserCommand.getInstance();
                 System.out.println("회원정보수정 메뉴입니다.");
+                uc.update();
                 //userCommand.execute();
                 break;
+            case 0:
+                System.out.println("종료");
+                break;
             default:
-                System.out.printf("%s 메뉴의 명령을 처리할 수 없습니다.\n", menuTitle);
+                System.out.print("메뉴의 명령을 처리할 수 없습니다.\n");
         }
+    }//Method processUserMenu END
+
+
+
+
+
+    ///////////////////////////////////////////////////////////
+    ///////////////// public getter, setter ///////////////////
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    //////////////////////// ---------- ///////////////////////
+    ////////////////////////// ------ /////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    ///////////////////////////////////////////////////////////
+
+
+    public String[][] getUserMenu() {
+        return userMenu;
     }
-}
+
+    public void setUserMenu(String[][] userMenu) {
+        this.userMenu = userMenu;
+    }
+}//Class UserMonitor END
