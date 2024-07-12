@@ -39,7 +39,7 @@ public class UserMonitor extends Monitor {
 
         System.out.println("UserCommand Monitor");
 //        printUserMenu();
-            uc.cmd();
+        uc.cmd();
 
         while (true) {
             try {

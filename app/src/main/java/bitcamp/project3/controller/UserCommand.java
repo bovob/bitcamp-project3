@@ -50,7 +50,6 @@ public class UserCommand implements Command{
     @Override
     public void cmd(){
         printTUI();
-
     }
 
 
@@ -72,13 +71,6 @@ public class UserCommand implements Command{
         userList.add( new User(user, mbti) );
     }
 
-
-//    private User createUser(){
-//        User user = new User(createUserData(), createMbtiData());
-//        return user;
-//    }
-
-
     private String[] createUserData(){
         String[] userData = new String[3];
 
@@ -90,15 +82,13 @@ public class UserCommand implements Command{
     }
 
 
-    private int[] createMbtiData(){
-        int[] mData = new int[4];
+    private User.Mbti createMbtiData(){
+        MbtiCommand mc = MbtiCommand.getInstance();
+        User.Mbti mbti = new User.Mbti();
 
-        mData[0] = 1;
-        mData[1] = 2;
-        mData[2] = 3;
-        mData[3] = 4;
+        mc.printTUI(mbti);
 
-        return mData;
+        return mbti;
     }
 
 
@@ -158,7 +148,7 @@ public class UserCommand implements Command{
 
 
     private String printMbti(User.Mbti mbti){
-        return String.format("%s%s%s%s", mbti.getBe(), mbti.getPw(), mbti.getSo(), mbti.getHm());
+        return String.format("%s%s%s%s", mbti.getEi(), mbti.getNs(), mbti.getFt(), mbti.getPj());
     }
 
 
@@ -200,7 +190,8 @@ public class UserCommand implements Command{
         str = "'"       + user.getName() +"'님의 회원 정보\n"+
               "ID: "    + user.getId()                  +"\n"+
               "PW: "    + user.getPw()                  +"\n"+
-              "MBTI: "  + printMbti(user.getMbti())     +"\n\n";
+//                "MBTI: "  + printMbti(user.getMbti())     +"\n\n";
+              "MBTI: "  + user.getMbti().getMbti()     +"\n\n";
 
         str += printMenu(3);
 
@@ -233,10 +224,9 @@ public class UserCommand implements Command{
 
 
     private void setMbti(){
-        System.out.print("setMbti function\n");
+        currentUser.setMbti(createMbtiData());
+        System.out.print("변경 되었습니다.\n");
     }
-
-
 
     @Override
     public void delete(){
@@ -262,5 +252,13 @@ public class UserCommand implements Command{
 
     public static void setUserList(ArrayList<User> userList) {
         UserCommand.userList = userList;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        UserCommand.currentUser = currentUser;
     }
 }
