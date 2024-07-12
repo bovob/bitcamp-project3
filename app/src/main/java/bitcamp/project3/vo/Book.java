@@ -1,42 +1,65 @@
 package bitcamp.project3.vo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class Book {
     private static int seqNo;
     private String title;
     private String author;
     private String bookCategory;
-    private int count;
+    private int count;//미구현
     private int no;
     private int M;
     private int B;
     private int T;
     private int I;
-    private String id;
 
-    public Book() {
-    }
-
-    //@Override
-    //public boolean equals(Object o) {
-    //    if (this == o) {
-    //        return true;
-    //    }
-    //    if (o == null || getClass() != o.getClass()) {
-    //        return false;
-    //    }
-    //    Book book = (Book) o;
-    //    return no == book.no;
-    //}
-    //
-    //@Override
-    //public int hashCode() {
-    //    return Objects.hashCode(no);
-    //}
+    public Book() {}
 
     public Book(int no) {
         this.no = no;
+    }
+
+    //더미생성
+    public static List<Book> generateDummyData(int count) {
+        List<Book> dummyBooks = new ArrayList<>();
+        Random random = new Random();
+        String[] categories = {"소설", "과학", "역사", "자기계발", "철학"};
+        String[] authors = {"김작가", "이저자", "박문학", "최과학", "정역사"};
+
+        for (int i = 0; i < count; i++) {
+            Book book = new Book();
+            book.setNo(i+1);
+            book.setTitle("책 제목 " + (i + 1));
+            book.setAuthor(authors[random.nextInt(authors.length)]);
+            book.setBookCategory(categories[random.nextInt(categories.length)]);
+            book.setM(random.nextInt(5) + 1);
+            book.setB(random.nextInt(5) + 1);
+            book.setT(random.nextInt(5) + 1);
+            book.setI(random.nextInt(5) + 1);
+            dummyBooks.add(book);
+        }
+        return dummyBooks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Book book = (Book) o;
+        return no == book.no;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(no);
     }
 
     public static int getNextSeqNo() {
@@ -116,11 +139,4 @@ public class Book {
         this.bookCategory = bookCategory;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

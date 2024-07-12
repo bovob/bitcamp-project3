@@ -263,4 +263,8 @@ public class UserCommand implements Command{
     public static void setUserList(ArrayList<User> userList) {
         UserCommand.userList = userList;
     }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
 }

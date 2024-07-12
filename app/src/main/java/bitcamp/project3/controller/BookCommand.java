@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public class BookCommand implements Command {
 
     String menuTitle;
-    String[] menus = {"도서등록", "도서조회", "도서수정", "도서삭제"};
+    String[] menus = {"도서등록", "도서목록", "도서수정", "도서삭제"};
 
     LinkedList bookList = new LinkedList();
 
@@ -40,7 +40,7 @@ public class BookCommand implements Command {
                     case "도서등록":
                         create();
                         break;
-                    case "도서조회":
+                    case "도서목록":
                         read();
                         break;
                     case "도서수정":
@@ -65,6 +65,7 @@ public class BookCommand implements Command {
         book.setBookCategory(Prompt.input("카테고리"));
         book.setTitle(Prompt.input("책 이름?"));
         book.setAuthor(Prompt.input("책 저자?"));
+
         book.setM(Prompt.inputInt("M ?"));
         book.setB(Prompt.inputInt("B ?"));
         book.setT(Prompt.inputInt("T ?"));
@@ -92,13 +93,10 @@ public class BookCommand implements Command {
     public void update() {
         System.out.println("도서수정 입니다.");
         int bookNo = Prompt.inputInt("도서번호?");
-        int index = bookList.indexOf(new Book(bookNo)); // Book의 인스턴스를 생성하여 인덱스 찾기
-
-        if (index == -1) {
-            System.out.println("해당 도서를 찾을 수 없습니다.");
+        Book book = (Book) bookList.get(bookList.indexOf(new Book(bookNo)));
+        if (book == null) {
+            System.out.printf("없는 책입니다.");
         }
-
-        Book book = (Book) bookList.get(index);
         book.setBookCategory(Prompt.input("카테고리"));
         book.setTitle(Prompt.input("책 이름?"));
         book.setAuthor(Prompt.input("책 저자?"));
@@ -108,6 +106,8 @@ public class BookCommand implements Command {
         book.setI(Prompt.inputInt("I ?"));
         System.out.println("변경되었습니다.");
     }
+
+
 
     //도서삭제
     @Override
@@ -149,5 +149,9 @@ public class BookCommand implements Command {
     // 메뉴 타이틀 출력
     static String getMenuTitle(int menuNo, String[] menus) {
         return isValidateMenu(menuNo, menus) ? menus[menuNo - 1] : null;
+    }
+
+    public LinkedList getBookList() {
+        return this.bookList;
     }
 }

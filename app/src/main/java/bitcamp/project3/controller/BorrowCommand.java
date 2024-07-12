@@ -3,32 +3,45 @@ package bitcamp.project3.controller;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
 import java.util.LinkedList;
+import java.util.List;
 
-public class BorrowCommand{
+public class BorrowCommand {
 
-    String menuTitle;
-    String[] menus = {"대출목록", "대출조회", "날짜수정"};
+    String menuTitle = "대출";
+    String[] menus = {"도서대출", "도서검색"};
+
+    String currentUser = "user";
 
     LinkedList borrowList = new LinkedList();
-    LinkedList bookList = new LinkedList();
+    //원래 북리스트
+    //LinkedList bookList;
+    
+    //더미 북 리스트
+    List<Book> bookList = Book.generateDummyData(10);
 
     // 생성자
     public BorrowCommand() {
     }
 
-    public BorrowCommand(String title) {
+    public BorrowCommand(String title, LinkedList bookList) {
         this.menuTitle = title;
+        this.bookList = bookList;
     }
 
     // 메인실행
-    public void execute(String menuTitle) {
+    public void execute() {
+
+        System.out.printf("안녕하세요 '%s' 님\n", currentUser);
+        System.out.println("++대출도서 목록예정++\n");
+        printBookList();
         cmd();
+
         while (true) {
             String command = Prompt.input(String.format("메인/%s>", menuTitle));
             if (command.equals("menu")) {
                 cmd();
                 continue;
-            } else if (command.equals("9")) { // 이전 메뉴 선택
+            } else if (command.equals("0")) { // 이전 메뉴 선택
                 return;
             } try {
                 int menuNo = Integer.parseInt(command);
@@ -38,14 +51,11 @@ public class BorrowCommand{
                     continue;
                 }
                 switch (menuName){
-                    case "대출목록":
-                        displayBorrowList();
+                    case "도서대출":
+                        bookBorrow();
                         break;
-                    case "대출조회":
-                        searchBorrowList();
-                        break;
-                    case "날짜수정":
-                        updateBorrowDate();
+                    case "도서검색":
+                        bookSearch();
                         break;
                 }
             } catch (NumberFormatException ex) {
@@ -54,32 +64,37 @@ public class BorrowCommand{
         }
     }
 
-    // 대출목록
-    public void displayBorrowList() {
-        System.out.println("대출목록 입니다.");
+    private void bookBorrow() {
+        System.out.println("도서대출 입니다.");
+        System.out.println("[도서번호?]");
+        Prompt.inputInt(">");
+
+
+
     }
 
-    // 대출조회
-    public void searchBorrowList() {
-        System.out.println("대출조회 입니다.");
+    private void printBookList() {
+        System.out.println("도서목록 입니다.");
+        System.out.println("번호 | 카테고리 | 도서명 | 저자");
+        for (Object obj : bookList.toArray()){
+            Book book = (Book) obj;
+            System.out.printf("%d  |   %s  |  %s  |  %s\n",
+                book.getNo(), book.getBookCategory() , book.getTitle(), book.getAuthor());
+        }
     }
 
-    // 날짜수정
-    public void updateBorrowDate() {
-        System.out.println("날짜수정 입니다.");
+    private void bookSearch() {
 
     }
 
     public void cmd() {
         System.out.printf("[%s]\n", menuTitle);
         for (int i = 0; i < menus.length; i++) {
-            System.out.printf("%d. %s\n", (i + 1), menus[i]);
+            System.out.printf("[%d] %s\n", (i + 1), menus[i]);
         }
-        System.out.println("9. 이전");
+        System.out.println("[0] 이전메뉴");
     }
 
-    public void printTUI() {
-    }
 
     // 메뉴 검증
     static boolean isValidateMenu(int menuNo, String[] menus) {

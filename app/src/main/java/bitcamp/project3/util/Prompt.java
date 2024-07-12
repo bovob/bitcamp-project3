@@ -32,6 +32,17 @@ public class Prompt {
         }
     }
 
+    // MBTI
+    public static String inputMBTI(String Mbti, String options) {
+        while (true) {
+            String input = input(Mbti +" ("+ options+" )?").toUpperCase();
+            if (input.length() == 1 && options.contains(input)){
+                return input;
+            }
+            System.out.printf("잘못된 입력입니다." +options+" 중 하나를 입력해주세요.");
+        }
+    }
+
     public static void close() {
         keyboardScanner.close();
     }

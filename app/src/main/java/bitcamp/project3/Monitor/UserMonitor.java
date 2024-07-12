@@ -1,5 +1,6 @@
 package bitcamp.project3.Monitor;
 
+import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.UserCommand;
 import bitcamp.project3.util.Prompt;
 
@@ -10,6 +11,9 @@ public class UserMonitor extends Monitor {
             {"제목", "저자"},                 //2~
             {"PW 수정", "MBTI 재검사"}        //3~
     };
+
+
+    BorrowCommand borrowCommand = new BorrowCommand();
 
     ///////////////////////////////////////////////////////////
     ////////////////////// getInstance() //////////////////////
@@ -88,7 +92,7 @@ public class UserMonitor extends Monitor {
         switch (ans) {
             case 1:
                 System.out.println("도서대출 메뉴입니다.");
-                //bookCommand.execute();
+                borrowCommand.execute();
                 break;
             case 2:
                 System.out.println("대출반납 메뉴입니다.");
