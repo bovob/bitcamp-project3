@@ -1,6 +1,7 @@
 package bitcamp.project3;
 
 import bitcamp.project3.controller.BookCommand;
+import bitcamp.project3.util.Membership;
 import bitcamp.project3.util.Monitor;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.util.UserMonitor;
@@ -15,8 +16,18 @@ public class App {
     // Main
     public static void main(String[] args) {
         App app = new App();
-        int check;
-        check = Prompt.inputInt("[임시]관리자 1/유저 2");
+        int check = Membership.getInstance().cmd();
+
+        if(check==0){
+            check = 1;
+        }
+        else if(check>0){
+            check = 2;
+        }
+        else {
+            check = Prompt.inputInt("[임시]관리자 1/유저 2");
+        }
+
         switch (check) {
             case 1:
                 app.adminExecute();

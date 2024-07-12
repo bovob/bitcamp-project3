@@ -15,8 +15,9 @@ public class UserCommand implements Command{
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
     UserCommand(){
-        create();
-        currentUser = userList.getFirst();
+        create(new String[]{"root", "root", "0000"},new int[]{0,0,0,0});
+        create(new String[]{"user", "user", "0000"},new int[]{0,0,0,0});
+        currentUser = userList.get(1);
     }
 
 
@@ -65,6 +66,10 @@ public class UserCommand implements Command{
     @Override
     public void create(){
         userList.add( new User(createUserData(), createMbtiData()) );
+    }
+
+    public void create(String[] user, int[] mbti){
+        userList.add( new User(user, mbti) );
     }
 
 
