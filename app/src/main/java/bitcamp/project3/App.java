@@ -1,10 +1,10 @@
 package bitcamp.project3;
 
 import bitcamp.project3.controller.BookCommand;
-import bitcamp.project3.util.Membership;
-import bitcamp.project3.util.Monitor;
+import bitcamp.project3.Monitor.Membership;
+import bitcamp.project3.Monitor.Monitor;
 import bitcamp.project3.util.Prompt;
-import bitcamp.project3.util.UserMonitor;
+import bitcamp.project3.Monitor.UserMonitor;
 
 public class App {
 

@@ -1,6 +1,7 @@
-package bitcamp.project3.util;
+package bitcamp.project3.Monitor;
 
 import bitcamp.project3.controller.UserCommand;
+import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.User;
 
 import java.util.Iterator;

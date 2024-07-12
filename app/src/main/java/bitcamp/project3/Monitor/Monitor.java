@@ -1,4 +1,4 @@
-package bitcamp.project3.util;
+package bitcamp.project3.Monitor;
 
 public class Monitor {
     // 메뉴 검증

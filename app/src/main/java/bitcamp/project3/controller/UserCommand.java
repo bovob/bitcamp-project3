@@ -1,7 +1,7 @@
 package bitcamp.project3.controller;
 
 import bitcamp.project3.util.Prompt;
-import bitcamp.project3.util.UserMonitor;
+import bitcamp.project3.Monitor.UserMonitor;
 import bitcamp.project3.vo.User;
 import java.util.ArrayList;
 

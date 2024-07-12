@@ -1,8 +1,9 @@
-package bitcamp.project3.util;
+package bitcamp.project3.Monitor;
 
 import bitcamp.project3.controller.UserCommand;
+import bitcamp.project3.util.Prompt;
 
-public class UserMonitor extends Monitor  {
+public class UserMonitor extends Monitor {
     private String[][] userMenu ={
             {"대출","반납","회원 정보 수정"}, //0~
             {"추천 도서 대출", "도서 검색"},  //1~
