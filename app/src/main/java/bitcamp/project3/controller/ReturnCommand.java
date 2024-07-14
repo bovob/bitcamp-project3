@@ -13,7 +13,7 @@ public class ReturnCommand {
 
         String currentUser = "user";
 
-        private List<Book> bookList;
+       List<Book> bookList;
         private List<Borrow> borrowList = new LinkedList<>();
 
     public ReturnCommand(List<Book> bookList, List<Borrow> borrowList) {
@@ -22,6 +22,7 @@ public class ReturnCommand {
     }
 
     public ReturnCommand() {
+        this.bookList = new ArrayList<>();
     }
         // 메인실행
         public void execute() {
@@ -110,6 +111,10 @@ public class ReturnCommand {
         private void printBookList() {
             System.out.println("도서목록 입니다.");
             System.out.println("번호 | 카테고리 | 도서명 | 저자 | 대출 상태");
+            if (bookList == null){
+                System.out.println("도서 목록이 없습니다.");
+                return;
+            }
             for (Book book : bookList) {
                 System.out.printf("%d  |   %s  |  %s  |  %s  |  %s\n",
                     book.getNo(), book.getBookCategory(), book.getTitle(),

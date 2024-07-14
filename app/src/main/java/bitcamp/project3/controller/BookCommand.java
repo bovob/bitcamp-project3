@@ -3,6 +3,7 @@ package bitcamp.project3.controller;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
 import java.util.LinkedList;
+import java.util.List;
 
 public class BookCommand implements Command {
 
@@ -151,7 +152,7 @@ public class BookCommand implements Command {
         return isValidateMenu(menuNo, menus) ? menus[menuNo - 1] : null;
     }
 
-    public LinkedList getBookList() {
+    public List getBookList() {
         return this.bookList;
     }
 }

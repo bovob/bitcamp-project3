@@ -23,7 +23,7 @@ public class BorrowCommand {
     }
     
     //더미 북 리스트
-    List<Book> bookList = Book.generateDummyData(10);
+    List<Book> bookList = Book.generateDummyData(5);
 
     public List getBookList() {
         return this.bookList;

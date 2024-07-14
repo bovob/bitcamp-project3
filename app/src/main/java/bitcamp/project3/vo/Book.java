@@ -1,5 +1,6 @@
 package bitcamp.project3.vo;
 
+import bitcamp.project3.util.Prompt;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,8 +27,7 @@ public class Book {
 
     //더미생성
     public static List<Book> generateDummyData(int count) {
-        List<Book> dummyBooks = new ArrayList<>();
-        Random random = new Random();
+        List<Book> booklist = new ArrayList<>();
         String[] categories = {"소설", "과학", "역사", "자기계발", "철학"};
         String[] authors = {"김작가", "이저자", "박문학", "최과학", "정역사"};
 
@@ -35,15 +35,15 @@ public class Book {
             Book book = new Book();
             book.setNo(i+1);
             book.setTitle("책 제목 " + (i + 1));
-            book.setAuthor(authors[random.nextInt(authors.length)]);
-            book.setBookCategory(categories[random.nextInt(categories.length)]);
-            book.setM(random.nextInt(5) + 1);
-            book.setB(random.nextInt(5) + 1);
-            book.setT(random.nextInt(5) + 1);
-            book.setI(random.nextInt(5) + 1);
-            dummyBooks.add(book);
+            book.setAuthor(authors[i]);
+            book.setBookCategory(categories[i]);
+            book.setM(i);
+            book.setB(i);
+            book.setT(i);
+            book.setI(i);
+            booklist.add(book);
         }
-        return dummyBooks;
+        return booklist;
     }
 
     @Override
