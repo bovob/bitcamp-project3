@@ -16,6 +16,7 @@ public class Book {
     private int B;
     private int T;
     private int I;
+    private boolean check;
 
     public Book() {}
 
@@ -138,5 +139,15 @@ public class Book {
     public void setBookCategory(String bookCategory) {
         this.bookCategory = bookCategory;
     }
+
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
 
 }

@@ -9,6 +9,7 @@ public class Borrow {
     private LocalDate startDate;
     private LocalDate endDate;
     private String title;
+    private String user;
 
     public Borrow(){};
 
@@ -54,4 +55,14 @@ public class Borrow {
     public long getBorrowPeriod() {
         return ChronoUnit.DAYS.between(startDate, endDate);
     }
+
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
 }

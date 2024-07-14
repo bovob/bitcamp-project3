@@ -1,6 +1,7 @@
 package bitcamp.project3.Monitor;
 
 import bitcamp.project3.controller.BorrowCommand;
+import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.controller.UserCommand;
 import bitcamp.project3.util.Prompt;
 
@@ -14,6 +15,7 @@ public class UserMonitor extends Monitor {
 
 
     BorrowCommand borrowCommand = new BorrowCommand();
+    ReturnCommand returnCommand = new ReturnCommand();
 
     ///////////////////////////////////////////////////////////
     ////////////////////// getInstance() //////////////////////
@@ -96,7 +98,7 @@ public class UserMonitor extends Monitor {
                 break;
             case 2:
                 System.out.println("대출반납 메뉴입니다.");
-                //bookLoanCommand.execute();
+                returnCommand.execute();
                 break;
             case 3:
                 UserCommand uc = UserCommand.getInstance();
