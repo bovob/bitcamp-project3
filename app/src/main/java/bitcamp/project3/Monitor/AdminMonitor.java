@@ -32,10 +32,12 @@ public class AdminMonitor extends Monitor {
         this.returnCommand = new ReturnCommand(bookCommand.getBookList(), borrowCommand.getBorrowList(), userCommand.getCurrentUser());
     }
 
+
     public AdminMonitor(List<Borrow> borrowList){
         this.bookCommand = new BookCommand(borrowList);
     }
 
+    private List<Borrow> borrowList;
 
 
     ///////////////////////////////////////////////////////////
@@ -57,9 +59,6 @@ public class AdminMonitor extends Monitor {
     public static void freeInstance() {
         rm = null;
     }// Method freeInstance END
-
-
-
 
 
     
@@ -123,6 +122,8 @@ public class AdminMonitor extends Monitor {
                 break;
             case 2: //대출 관리
                 System.out.println("대출관리 메뉴로 접속합니다.");
+                this.borrowList = BorrowCommand.getInstance().getBorrowList();
+                updateBorrowList(this.borrowList);
                 rc.adminExecute();
                 break;
             case 3: //유저 관리
@@ -162,5 +163,9 @@ public class AdminMonitor extends Monitor {
 
     public static void setAdminMenus(String[][] adminMenus) {
         AdminMonitor.adminMenus = adminMenus;
+    }
+
+    public void updateBorrowList(List<Borrow> updatedList) {
+        this.borrowList = updatedList;
     }
 }

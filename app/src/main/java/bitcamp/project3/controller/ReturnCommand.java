@@ -6,7 +6,6 @@ import bitcamp.project3.vo.Borrow;
 import bitcamp.project3.vo.User;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +26,7 @@ public class ReturnCommand {
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
+
     public ReturnCommand(List<Book> bookList, List<Borrow> borrowList, User currentUser) {
         this.bookList = bookList;
         this.borrowList = borrowList;
@@ -373,6 +373,14 @@ public class ReturnCommand {
         }
         System.out.print(":\n");
         System.out.print(printTableLine(widths));
+    }
+
+    public void setBorrowList(List<Borrow> borrowList) {
+        this.borrowList = borrowList;
+    }
+
+    public List<Borrow> getBorrowList() {
+        return this.borrowList;
     }
 
 }

@@ -3,9 +3,9 @@ package bitcamp.project3.controller;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.Borrow;
 import bitcamp.project3.vo.User;
+import bitcamp.project3.Monitor.AdminMonitor;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static bitcamp.project3.util.MenuFormat.*;
@@ -172,10 +172,15 @@ public class BorrowCommand implements Command {
         System.out.println("도서가 성공적으로 대출되었습니다.");
         System.out.printf("대출 도서: %s\n", selectedBook.getTitle());
         System.out.printf("대출 기간: %s ~ %s\n", borrow.getStartDate(), borrow.getEndDate());
+
+        updateBorrowListInOtherClasses();
     }
 
-
-
+    // 대출리스트 Update
+    private void updateBorrowListInOtherClasses() {
+        ReturnCommand.getInstance().setBorrowList(this.borrowList);
+        AdminMonitor.getInstance().updateBorrowList(this.borrowList);
+    }
 
 
     @Override
@@ -349,6 +354,10 @@ public class BorrowCommand implements Command {
 
     public List getBorrowList() {
         return this.borrowList;
+    }
+
+    public void setBorrowList(List borrowList) {
+        this.borrowList = borrowList;
     }
 }
 
