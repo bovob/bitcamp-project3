@@ -5,7 +5,6 @@ import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.Borrow;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static bitcamp.project3.util.MenuFormat.*;

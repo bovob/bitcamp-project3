@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Book {
-    private static int seqNo = 0;
+    public static int seqNo = 0;
     private String title;
     private String author;
     private String bookCategory;
@@ -45,7 +45,12 @@ public class Book {
             book.setI(i);
             booklist.add(book);
         }
+        setSeqNo(5);
         return booklist;
+    }
+    //더미seqNo 이후 설정
+    public static void setSeqNo(int no) {
+        seqNo = no;
     }
 
     @Override
