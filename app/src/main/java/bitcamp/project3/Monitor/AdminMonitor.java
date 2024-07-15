@@ -112,7 +112,8 @@ public class AdminMonitor {
                 bc.execute();
                 break;
             case 3: //유저 관리
-                UserCommand uc = UserCommand.getInstance();
+                UserCommand uc = UserCommand.getInstance(0);
+
                 System.out.println("유저관리 메뉴로 접속합니다.");
                 uc.adminExcute();
 

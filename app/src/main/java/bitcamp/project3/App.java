@@ -64,17 +64,33 @@ public class App {
         while(true) {
             int check = Membership.getInstance().cmd();
 
-            switch (check) {
-                case 0:
-                    rm.adminExecute();
-                    break;
-                case 1:
-                    um.execute();
-                    break;
-                case -1:
-                    close();
-                    return;
+            //종료
+            if(check==-1){
+                close();
+                return;
             }
+
+            //관리자모드
+            if(check==0){
+                rm.adminExecute();
+                continue;
+            }
+
+            //user
+            um.execute(check);
+
+//
+//            switch (check) {
+//                case 0:
+//                    rm.adminExecute();
+//                    break;
+//                case 1:
+//                    um.execute();
+//                    break;
+//                case -1:
+//                    close();
+//                    return;
+//            }
         }
     }
 

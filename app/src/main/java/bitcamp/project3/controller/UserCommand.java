@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
-import static bitcamp.project3.util.SystemMsg.printNumberFormatException;
-import static bitcamp.project3.util.SystemMsg.printNumberLimitException;
+import static bitcamp.project3.util.SystemMsg.*;
 import static bitcamp.project3.util.TableFormat.*;
 
 
@@ -20,9 +19,8 @@ public class UserCommand implements Command{
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
     UserCommand(){
-        create(new String[]{"root", "root", "0000"},new int[]{0,0,0,0});
+        create(new String[]{"root", "root", "0000"},new int[]{0,0,0,0});    //default:0
         create(new String[]{"user", "user", "0000"},new int[]{0,0,0,0});
-        currentUser = userList.get(1);
     }
 
 
@@ -33,11 +31,12 @@ public class UserCommand implements Command{
     private static UserCommand uc;
 
     // setup UserCommand Instance
-    public static UserCommand getInstance() {
+    public static UserCommand getInstance(int userNo) {
 
         if (uc == null) {
             uc = new UserCommand();
         }
+        currentUser = userList.get(userNo);
 
         return uc;
     }// Method getInstance END
