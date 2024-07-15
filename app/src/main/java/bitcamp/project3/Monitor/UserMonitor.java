@@ -3,7 +3,9 @@ package bitcamp.project3.Monitor;
 import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.controller.UserCommand;
+
 import static bitcamp.project3.util.Prompt.*;
+import static bitcamp.project3.util.SystemMsg.*;
 
 public class UserMonitor extends Monitor {
     private String[][] userMenus ={
@@ -52,7 +54,7 @@ public class UserMonitor extends Monitor {
     ///////////////////////////////////////////////////////////
     ////////////////////////// Method /////////////////////////
     ///////////////////////////////////////////////////////////
-    public void userExecute() {
+    public void execute() {
         int menus = userMenus[0].length;
         int menuNo;
 

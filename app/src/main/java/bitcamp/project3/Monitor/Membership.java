@@ -3,10 +3,9 @@ package bitcamp.project3.Monitor;
 import bitcamp.project3.controller.UserCommand;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.User;
-
 import java.util.Iterator;
 
-import static bitcamp.project3.util.Prompt.*;
+import static bitcamp.project3.util.SystemMsg.*;
 
 
 public class Membership {
@@ -120,6 +119,9 @@ public class Membership {
 
         }
     }//Method Menu END
+
+    private void printNumberFormatException() {
+    }
 
 
     private boolean login(){

@@ -34,7 +34,7 @@ public class Book {
         for (int i = 0; i < count; i++) {
             Book book = new Book();
             book.setNo(i+1);
-            book.setTitle("책 제목 " + (i + 1));
+            book.setTitle("책제목");
             book.setAuthor(authors[i]);
             book.setBookCategory(categories[i]);
             book.setM(i);

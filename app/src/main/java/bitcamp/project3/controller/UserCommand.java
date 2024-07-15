@@ -2,8 +2,10 @@ package bitcamp.project3.controller;
 
 import bitcamp.project3.vo.User;
 import java.util.ArrayList;
-import static bitcamp.project3.Monitor.Monitor.*;
+
+import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
+import static bitcamp.project3.util.TableFormat.*;
 
 
 public class UserCommand implements Command{
@@ -120,13 +122,13 @@ public class UserCommand implements Command{
         int no=0;   //user num(priKey X)
 
         //+----+---------------+---------------+---------------+
-        str.append(printLine(width));
+        str.append(printTableLine(width));
         //|1   |root           |root           |0000           |
         for(User user :userList) {
             str.append(printUser(width, user, ++no));
         }
         //+----+---------------+---------------+---------------+
-        str.append(printLine(width));
+        str.append(printTableLine(width));
 
         System.out.print(str);
     }//Method read END
@@ -137,52 +139,16 @@ public class UserCommand implements Command{
     private String printUser(int[] width, User user, int no){
         String str = "";
 
-        str = printUserFormat(width[0], String.format("%d", no))+
-              printUserFormat(width[1], user.getName())+
-              printUserFormat(width[2], user.getId())+
-              printUserFormat(width[3], printMbti(user.getMbti()))+
+        str = printTableDataFormat(width[0], String.format("%d", no))+
+              printTableDataFormat(width[1], user.getName())+
+              printTableDataFormat(width[2], user.getId())+
+              printTableDataFormat(width[3], printMbti(user.getMbti()))+
               "|"+
               "\n";
 
         return str;
     }//Method printUser END
 
-
-    //가로선 출력
-    //너비 배열 입력 시 가로선 출력 =>Prompt 이동 예정
-    //  +----+---------------+---------------+---------------+
-    //width: 가로 너비
-    private String printLine(int[] width){
-        StringBuilder str;
-
-        //start "+"
-        str = new StringBuilder("+");
-        // str += "----+"
-        for(int i=0 ; i<width.length ; i++) {
-            str.append("-".repeat(width[i]));
-            str.append("+");
-        }
-        //end "\n"
-        str.append("\n");
-
-        return str.toString();
-    }//Method printLine END
-
-    //표 내용 출력
-    //너비 배열과 데이터 입력 시 표에 맞게 출력
-    //for(printUserFormat)사용하여 한줄 출력 가능 =>Prompt 이동 예정
-    //  "|root           "
-    //width: 가로길이
-    //data(String): 정보
-    private String printUserFormat(int width, String data){
-       String str = "";
-
-        //start "|"
-       str = "|" +
-             String.format("%-" + width + "s", data);
-
-       return str;
-    }//Method printUserFormat END
 
 
     //mbti int->String 한줄 출력
@@ -242,37 +208,15 @@ public class UserCommand implements Command{
                 //PW: 0000
               "PW: "    + user.getPw()                  +"\n"+
                 //MBTI: istj
-//                "MBTI: "  + printMbti(user.getMbti())     +"\n\n";
               "MBTI: "  + user.getMbti().getMbti()     +"\n\n";
 
         //sub Menu 출력
-        //        [1] PW 수정
-        //        [2] MBTI 재검사
-        //        [0] 이전 메뉴
         str += printUserMenu(3);
 
 
         return str;
     }//Method printUserData END
-
-//    //print Menu
-//    //index=> 메뉴 배열 번호(main:0)             =>Prompt 이동 예정
-//    private String printUserMenu(int index){
-//        String str = "";
-//        UserMonitor um = UserMonitor.getInstance();
-//        String[] userMenu = um.getUserMenus()[index];
-//
-//        for(int no = 0 ; no<userMenu.length ; no++){
-//            str += String.format("[%-1d] %s\n", no+1, userMenu[no]);
-//        }
-//        if(index==0){
-//            str += String.format("[0] %s\n", "종료");
-//        }else{
-//            str += String.format("[0] %s\n", "이전 메뉴");
-//        }
-//
-//        return str;
-//    }//Method printMenu END
+    
 
 
     //PW update

@@ -2,7 +2,7 @@ package bitcamp.project3;
 
 import bitcamp.project3.Monitor.AdminMonitor;
 import bitcamp.project3.Monitor.Membership;
-import bitcamp.project3.Monitor.Monitor;
+import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.Monitor.UserMonitor;
@@ -20,9 +20,10 @@ public class App {
 
     static AdminMonitor rm = AdminMonitor.getInstance();
     static UserMonitor um = UserMonitor.getInstance();
+    static BookCommand bc = BookCommand.getInstance();
 
     public App(){
-        rm.borrowCommand = new BorrowCommand("대출관리", rm.bookCommand.getBookList());
+        rm.borrowCommand = new BorrowCommand("대출관리", bc.getBookList());
 
     }
 
@@ -51,7 +52,7 @@ public class App {
                 rm.adminExecute();
                 break;
             case 2:
-                um.userExecute();
+                um.execute();
                 break;
         }
     }

@@ -1,6 +1,5 @@
 package bitcamp.project3.controller;
 
-import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.Borrow;
 import java.time.LocalDate;
@@ -8,28 +7,27 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BorrowCommand {
+import static bitcamp.project3.util.MenuFormat.*;
+import static bitcamp.project3.util.Prompt.*;
+import static bitcamp.project3.util.SystemMsg.*;
+import static bitcamp.project3.util.TableFormat.*;
+
+
+public class BorrowCommand implements Command {
 
     String menuTitle = "대출";
-    String[] menus = {"도서대출", "도서검색"};
-
     String currentUser = "user";
 
     List<Borrow> borrowList = new LinkedList<>();
-    //원래 북리스트
-    //LinkedList bookList;
-    public List getBorrowList() {
-        return this.borrowList;
-    }
-    
-    //더미 북 리스트
-    List<Book> bookList = Book.generateDummyData(5);
 
-    public List getBookList() {
-        return this.bookList;
-    }
 
-    // 생성자
+
+
+
+
+    ///////////////////////////////////////////////////////////
+    ////////////////////// Constructor ////////////////////////
+    ///////////////////////////////////////////////////////////
     public BorrowCommand() {
     }
 
@@ -43,45 +41,85 @@ public class BorrowCommand {
 //        this.bookList = bookList;
 //    }
 
+
+
+
+
+    ///////////////////////////////////////////////////////////
+    ////////////////////////// Method /////////////////////////
+    ///////////////////////////////////////////////////////////
     // 메인실행
     public void execute() {
-
-        System.out.printf("안녕하세요 '%s' 님\n", currentUser);
-        System.out.println("++대출도서 목록예정++\n");
-        printBookList();
-        cmd();
-
-        while (true) {
-            String command = Prompt.input(String.format("메인/%s>", menuTitle));
+/*            String command = input(String.format("메인/%s>", menuTitle));
             if (command.equals("menu")) {
-                cmd();
+                System.out.print(printUserMenu(1));
                 continue;
             } else if (command.equals("0")) { // 이전 메뉴 선택
                 return;
-            } try {
+            }
                 int menuNo = Integer.parseInt(command);
                 String menuName = getMenuTitle(menuNo, menus);
                 if (menuName == null) {
                     System.out.println("유효한 메뉴 번호가 아닙니다.");
                     continue;
                 }
-                switch (menuName){
-                    case "도서대출":
+                switch (menuNo){
+                    case 1:
                         bookBorrow();
                         break;
-                    case "도서검색":
+                    case 2:
                         bookSearch();
                         break;
+                    default:
+                        printNumberLimitException();
+                }*/
+        while (processMenu()) {
+            try {
+
+                } catch (NumberFormatException ex) {
+                    printNumberFormatException();
                 }
-            } catch (NumberFormatException ex) {
-                System.out.println("숫자로 메뉴 번호를 입력하세요.");
-            }
         }
+    }//Method execute END
+
+    private boolean processMenu(){
+        printMenuTUI();
+        int menuNo = inputInt(String.format("메인/%s>", menuTitle));
+
+        return switch (menuNo) {
+            case 1 -> {
+                bookBorrow();
+                yield true;
+            }
+            case 2 -> {
+                bookSearch();
+                yield true;
+            }
+            case 0 -> false;
+            default -> {
+                printNumberLimitException();
+                yield true;
+            }
+        };
+    }//Method borrowMenuProcess END
+
+
+    private void printMenuTUI(){
+        setClearCmd();
+
+        System.out.printf("안녕하세요 '%s' 님\n", currentUser);
+        System.out.println("++대출도서 목록예정++\n");
+        read();
+
+        System.out.print(printUserMenu(1));
     }
+
+
+
 
     private void bookBorrow() {
         System.out.println("도서대출 입니다.");
-        int bookNo = Prompt.inputInt("도서번호를 입력하세요: ");
+        int bookNo = inputInt("도서번호를 입력하세요: ");
 
         // bookList에서 해당 도서 찾기
         Book selectedBook = null;
@@ -118,29 +156,68 @@ public class BorrowCommand {
         System.out.printf("대출 기간: %s ~ %s\n", borrow.getStartDate(), borrow.getEndDate());
     }
 
-    private void printBookList() {
+
+
+
+
+    @Override
+    public void read() {
+        String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
+        int[] width={4, 20, 20, 20, 15};
+        //no, cate, title, writer, status
+        int i=0;
+
+
         System.out.println("도서목록 입니다.");
-        System.out.println("번호 | 카테고리 | 도서명 | 저자 | 대출 상태");
-        for (Book book : bookList) {
-            System.out.printf("%d  |   %s  |  %s  |  %s  |  %s\n",
-                book.getNo(), book.getBookCategory(), book.getTitle(),
-                book.getAuthor(), book.isCheck() ? "대출 중" : "대출 가능");
+
+        //////////////////////////////////////////////////////////////
+        ////////////////////////result table//////////////////////////
+        //////////////////////////////////////////////////////////////
+        //table title
+        System.out.print(printTableLine(width));
+        for(String data: calm){
+            System.out.print(printTableDataFormat(width[i++], data));
         }
+        System.out.print(":\n");
+        System.out.print(printTableLine(width));
+
+        //table data
+        for (Book book : bookList) {
+            System.out.print(printTableDataFormat( width[0], String.format("%s", book.getNo())) );
+            System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
+            System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
+            System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
+            System.out.print(printTableDataFormat( width[4], String.format("%s", book.isCheck() ? "대출중" : "대출가능") ));
+            System.out.print(":\n");
+        }
+
+        //END line
+        System.out.print(printTableLine(width));
+        //////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////
+
     }
 
+
+
     private void bookSearch() {
+        String[] searchMenu = {"카테고리로 검색", "도서명으로 검색", "저자로 검색"};
+        String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
+        int[] width={4, 20, 20, 20, 15};
+        //no, cate, title, writer, status
+        int i=0;
+
+        setClearCmd();
         System.out.println("도서 검색");
-        System.out.println("1. 카테고리로 검색");
-        System.out.println("2. 도서명으로 검색");
-        System.out.println("3. 저자로 검색");
-        int searchOption = Prompt.inputInt("검색 옵션을 선택하세요: ");
+        System.out.print(printCustomMenu(searchMenu));
+        int searchOption = inputInt("검색 옵션을 선택하세요: ");
 
         String searchKeyword;
         List<Book> searchResults = new ArrayList<>();
 
         switch (searchOption) {
             case 1:
-                searchKeyword = Prompt.input("검색할 카테고리를 입력하세요: ");
+                searchKeyword = input("검색할 카테고리를 입력하세요: ");
                 for (Book book : bookList) {
                     if (book.getBookCategory().toLowerCase().contains(searchKeyword.toLowerCase())) {
                         searchResults.add(book);
@@ -148,7 +225,7 @@ public class BorrowCommand {
                 }
                 break;
             case 2:
-                searchKeyword = Prompt.input("검색할 도서명을 입력하세요: ");
+                searchKeyword = input("검색할 도서명을 입력하세요: ");
                 for (Book book : bookList) {
                     if (book.getTitle().toLowerCase().contains(searchKeyword.toLowerCase())) {
                         searchResults.add(book);
@@ -156,12 +233,14 @@ public class BorrowCommand {
                 }
                 break;
             case 3:
-                searchKeyword = Prompt.input("검색할 저자를 입력하세요: ");
+                searchKeyword = input("검색할 저자를 입력하세요: ");
                 for (Book book : bookList) {
                     if (book.getAuthor().toLowerCase().contains(searchKeyword.toLowerCase())) {
                         searchResults.add(book);
                     }
                 }
+                break;
+            case 0:
                 break;
             default:
                 System.out.println("잘못된 옵션을 선택하셨습니다.");
@@ -172,32 +251,93 @@ public class BorrowCommand {
             System.out.println("검색 결과가 없습니다.");
         } else {
             System.out.println("검색 결과:");
-            System.out.println("번호 | 카테고리 | 도서명 | 저자 | 대출 상태");
-            for (Book book : searchResults) {
-                System.out.printf("%d  |   %s  |  %s  |  %s  |  %s\n",
-                    book.getNo(), book.getBookCategory(), book.getTitle(),
-                    book.getAuthor(), book.isCheck() ? "대출 중" : "대출 가능");
+
+
+            //////////////////////////////////////////////////////////////
+            ////////////////////////result table//////////////////////////
+            //////////////////////////////////////////////////////////////
+            //table title
+            System.out.print(printTableLine(width));
+            for(String data: calm){
+                System.out.print(printTableDataFormat(width[i++], data));
             }
+            System.out.print(":\n");
+            System.out.print(printTableLine(width));
+
+            //table data
+            for (Book book : searchResults) {
+                System.out.print(printTableDataFormat( width[0], String.format("%s", book.getNo())) );
+                System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
+                System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
+                System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
+                System.out.print(printTableDataFormat( width[4], String.format("%s", book.isCheck() ? "대출중" : "대출가능") ));
+                System.out.print(":\n");
+            }
+
+            //END line
+            System.out.print(printTableLine(width));
+            //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
         }
     }
 
+//    public void cmd() {
+//        System.out.printf("[%s]\n", menuTitle);
+//        for (int i = 0; i < menus.length; i++) {
+//            System.out.printf("[%d] %s\n", (i + 1), menus[i]);
+//        }
+//        System.out.println("[0] 이전메뉴");
+//    }
+
+
+    @Override
     public void cmd() {
-        System.out.printf("[%s]\n", menuTitle);
-        for (int i = 0; i < menus.length; i++) {
-            System.out.printf("[%d] %s\n", (i + 1), menus[i]);
-        }
-        System.out.println("[0] 이전메뉴");
+
+    }
+
+    @Override
+    public void printTUI() {
+
+    }
+
+    @Override
+    public void create() {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void delete() {
+
     }
 
 
-    // 메뉴 검증
-    static boolean isValidateMenu(int menuNo, String[] menus) {
-        return menuNo >= 1 && menuNo <= menus.length;
+
+    ///////////////////////////////////////////////////////////
+    ///////////////// public getter, setter ///////////////////
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    //////////////////////// ---------- ///////////////////////
+    ////////////////////////// ------ /////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    ///////////////////////////////////////////////////////////
+    //원래 북리스트
+    //LinkedList bookList;
+    public List<Borrow> getBorrowList() {
+        return this.borrowList;
     }
 
-    // 메뉴 타이틀 출력
-    static String getMenuTitle(int menuNo, String[] menus) {
-        return isValidateMenu(menuNo, menus) ? menus[menuNo - 1] : null;
+    //더미 북 리스트
+    List<Book> bookList = Book.generateDummyData(5);
+    public List<Book> getBookList() {
+        return this.bookList;
     }
 }
 
