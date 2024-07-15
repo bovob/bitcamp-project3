@@ -140,9 +140,22 @@ public class UserCommand implements Command{
     @Override
     public void read(){
         StringBuilder str = new StringBuilder();
+
+        String[] calm = {"No", "이름", "ID", "MBTI"};
         int[] width={4, 15, 15, 15};
         //no, name, id, mbti
         int no=0;   //user num(priKey X)
+        int i=0;
+
+        //table title
+        str.append(printTableLine(width));
+        for(String data: calm){
+            str.append(printTableDataFormat(width[i++], data));
+        }
+        str.append(":\n");
+
+
+
 
         //+----+---------------+---------------+---------------+
         str.append(printTableLine(width));
@@ -272,28 +285,39 @@ public class UserCommand implements Command{
 
     @Override
     public void delete(){
-        userList.remove(deleteUser());
-        System.out.print("삭제되었습니다.\n");
+        deleteUser();
     }
 
-    private int deleteUser(){
+    private void deleteUser(){
         int ans=-1;
 
-        while(!isValidateUserNum(ans)) {
+        while(true) {
             try {
 
-                System.out.print("삭제할 유저 번호?\n");
+                System.out.print("삭제할 유저 번호?(이전: 0)\n");
                 ans = inputInt(">");
+
+                if(ans == 0){
+                    return;
+                }
+
+
+                if(isValidateUserNum(ans)) {
+                    System.out.printf("'%s'님이 삭제되었습니다.\n", userList.get(ans - 1).getName());
+                    userList.remove(ans - 1);
+                    return;
+                }else{
+                    System.out.print("올바른 번호를 입력해주세요.\n");
+                }
+
             } catch (NumberFormatException e) {
 
             }
         }
-
-        return ans-1;
     }
 
     private boolean isValidateUserNum(int ans){
-        return ans > 0 && ans < (userList.size() + 1);
+        return ans > 0 && ans <= (userList.size());
     }
 
 
