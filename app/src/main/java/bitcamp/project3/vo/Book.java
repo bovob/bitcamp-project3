@@ -1,17 +1,14 @@
 package bitcamp.project3.vo;
 
-import bitcamp.project3.util.Prompt;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 public class Book {
-    private static int seqNo;
+    private static int seqNo = 0;
     private String title;
     private String author;
     private String bookCategory;
-    private int count;//미구현
     private int no;
     private int M;
     private int B;
@@ -19,10 +16,15 @@ public class Book {
     private int I;
     private boolean check;
 
-    public Book() {}
+    public Book() {
+        this.no = ++seqNo;
+    }
 
-    public Book(int no) {
+    public Book(int no){
         this.no = no;
+        if (no > seqNo){
+            seqNo = no;
+        }
     }
 
     //더미생성
@@ -106,14 +108,6 @@ public class Book {
 
     public void setNo(int no) {
         this.no = no;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     public String getAuthor() {

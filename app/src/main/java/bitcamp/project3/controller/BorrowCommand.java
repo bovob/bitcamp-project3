@@ -16,7 +16,7 @@ import static bitcamp.project3.util.TableFormat.*;
 
 public class BorrowCommand implements Command {
 
-    String menuTitle;
+    String menuTitle = "대출";
     User currentUser;
         //= "user";
 
@@ -26,8 +26,8 @@ public class BorrowCommand implements Command {
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
-    public BorrowCommand(User currentUser) {
-        this.currentUser = currentUser;
+    public BorrowCommand() {
+
     }
 
     public BorrowCommand(List<Book> bookList, User currentUser) {
@@ -39,6 +39,27 @@ public class BorrowCommand implements Command {
 //        this.menuTitle = title;
 //        this.bookList = bookList;
 //    }
+
+    ///////////////////////////////////////////////////////////
+    ////////////////////// getInstance() //////////////////////
+    ///////////////////////////////////////////////////////////
+    private static BorrowCommand mc;
+
+    // setup BookCommand Instance
+    public static BorrowCommand getInstance() {
+
+        if (mc == null) {
+            mc = new BorrowCommand();
+        }
+
+        return mc;
+    }// Method getInstance END
+
+    // reset BookCommand Instance
+    public static void freeInstance() {
+        mc = null;
+    }// Method freeInstance END
+
 
 
     ///////////////////////////////////////////////////////////
@@ -69,13 +90,13 @@ public class BorrowCommand implements Command {
                     default:
                         printNumberLimitException();
                 }*/
-        while (processMenu()) {
-            try {
+            while (processMenu()) {
+                try {
 
                 } catch (NumberFormatException ex) {
                     printNumberFormatException();
                 }
-        }
+            }
     }//Method execute END
 
     //Menu Process
@@ -106,7 +127,6 @@ public class BorrowCommand implements Command {
         setClearCmd();
 
         System.out.printf("안녕하세요 '%s' 님\n", currentUser);
-        System.out.println("++대출도서 목록예정++\n");
         read();
 
         System.out.print(printUserMenu(1));
@@ -326,8 +346,7 @@ public class BorrowCommand implements Command {
     ////////////////////////// ------ /////////////////////////
     //////////////////////////// -- ///////////////////////////
     ///////////////////////////////////////////////////////////
-    //원래 북리스트
-    //LinkedList bookList;
+
     public List<Borrow> getBorrowList() {
         return this.borrowList;
     }

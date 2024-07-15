@@ -3,7 +3,8 @@ package bitcamp.project3.controller;
 import bitcamp.project3.Monitor.AdminMonitor;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
-import java.util.LinkedList;
+import bitcamp.project3.vo.Borrow;
+import java.util.ArrayList;
 import java.util.List;
 
 import static bitcamp.project3.util.MenuFormat.*;
@@ -17,9 +18,8 @@ public class BookCommand implements Command {
     String menuTitle = AdminMonitor.getAdminMenus()[0][0];
 //    {"도서등록","도서목록","도서수정","도서삭제"}   //1~
 //    String[] menus = AdminMonitor.getAdminMenus()[1];
-    LinkedList<Book> bookList = new LinkedList<>();
-
-
+    List<Book> bookList;
+    List<Borrow> borrowList;
 
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
@@ -27,14 +27,10 @@ public class BookCommand implements Command {
     public BookCommand() {
     }
 
-    public BookCommand(String title) {
-        this.menuTitle = title;
+    public BookCommand(List<Book> bookList, List<Borrow> borrowList) {
+        this.bookList = bookList != null ? bookList : new ArrayList<>();
+        this.borrowList = borrowList;
     }
-
-
-
-
-
 
 
     ///////////////////////////////////////////////////////////
@@ -65,7 +61,7 @@ public class BookCommand implements Command {
     ///////////////////////// Method //////////////////////////
     ///////////////////////////////////////////////////////////
     // 메인실행
-    public void execute() {
+    public void adminExecute() {
 /*        cmd();
         if (command.equals("menu")) {
                 cmd();
@@ -161,7 +157,7 @@ public class BookCommand implements Command {
         book.setB(inputInt("B ?"));
         book.setT(inputInt("T ?"));
         book.setI(inputInt("I ?"));
-        book.setNo(Book.getNextSeqNo());
+        //book.setNo(Book.getNextSeqNo());
         bookList.add(book);
 
     }
@@ -185,19 +181,42 @@ public class BookCommand implements Command {
     public void update() {
         System.out.println("도서수정 입니다.");
         int bookNo = inputInt("도서번호?");
-        Book book = (Book) bookList.get(bookList.indexOf(new Book(bookNo)));
-        if (book == null) {
-            System.out.printf("없는 책입니다.");
+        Book bookToUpdate = null;
+
+        for (Book book : bookList) {
+            if (book.getNo() == bookNo) {
+                bookToUpdate = book;
+                break;
+            }
         }
-        book.setBookCategory(Prompt.input("카테고리"));
-        book.setTitle(Prompt.input("책 이름?"));
-        book.setAuthor(Prompt.input("책 저자?"));
-        book.setM(inputInt("M ?"));
-        book.setB(inputInt("B ?"));
-        book.setT(inputInt("T ?"));
-        book.setI(inputInt("I ?"));
+
+        if (bookToUpdate == null) {
+            System.out.println("없는 책입니다.");
+            return;
+        }
+
+        bookToUpdate.setBookCategory(Prompt.input("카테고리"));
+        bookToUpdate.setTitle(Prompt.input("책 이름?"));
+        bookToUpdate.setAuthor(Prompt.input("책 저자?"));
+        bookToUpdate.setM(inputInt("M ?"));
+        bookToUpdate.setB(inputInt("B ?"));
+        bookToUpdate.setT(inputInt("T ?"));
+        bookToUpdate.setI(inputInt("I ?"));
         System.out.println("변경되었습니다.");
     }
+    //    Book book = (Book) bookList.get(bookList.indexOf(new Book(bookNo)));
+    //    if (book == null) {
+    //        System.out.printf("없는 책입니다.");
+    //    }
+    //    book.setBookCategory(Prompt.input("카테고리"));
+    //    book.setTitle(Prompt.input("책 이름?"));
+    //    book.setAuthor(Prompt.input("책 저자?"));
+    //    book.setM(inputInt("M ?"));
+    //    book.setB(inputInt("B ?"));
+    //    book.setT(inputInt("T ?"));
+    //    book.setI(inputInt("I ?"));
+    //    System.out.println("변경되었습니다.");
+    //}
 
 
 
@@ -207,16 +226,32 @@ public class BookCommand implements Command {
         System.out.println("도서삭제 입니다.");
 
         int bookNo = inputInt("책번호?");
-        int index = bookList.indexOf(new Book(bookNo));
+        Book bookToRemove = null;
 
-        Book book = (Book) bookList.get(index);
-        if (book != null){
-            bookList.remove(bookList.indexOf(index));
-            System.out.printf("%d번 %s를 삭제했습니다.\n", book.getNo(), book.getTitle());
-        } else{
-            System.out.printf("없는 도서번호 입니다.");
+        for (Book book : bookList) {
+            if (book.getNo() == bookNo) {
+                bookToRemove = book;
+                break;
+            }
+        }
+
+        if (bookToRemove != null) {
+            bookList.remove(bookToRemove);
+            System.out.printf("%d번 %s를 삭제했습니다.\n", bookToRemove.getNo(), bookToRemove.getTitle());
+        } else {
+            System.out.println("없는 도서번호 입니다.");
         }
     }
+    //    int index = bookList.indexOf(new Book(bookNo));
+    //
+    //    Book book = (Book) bookList.get(index);
+    //    if (book != null){
+    //        bookList.remove(bookList.indexOf(index));
+    //        System.out.printf("%d번 %s를 삭제했습니다.\n", book.getNo(), book.getTitle());
+    //    } else{
+    //        System.out.printf("없는 도서번호 입니다.");
+    //    }
+    //}
 
 
     @Override

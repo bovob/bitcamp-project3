@@ -32,6 +32,11 @@ public class MenuFormat {
 
 
     //print Admin Menu
+    //static String[][] adminMenus = new String[][]{
+    //    //Menu Num
+    //    {"도서관리", "대출관리", "유저관리"},     //0~
+    //    {"등록","조회","수정","삭제"}             //1~
+    //};
     //index: 메뉴 배열 번호(main:0)
     public static String printAdminMenu(int index){
         String str = "";

@@ -1,27 +1,36 @@
 package bitcamp.project3.Monitor;
 
 import bitcamp.project3.controller.BookCommand;
-import bitcamp.project3.controller.BorrowCommand;
+import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.controller.UserCommand;
+import bitcamp.project3.vo.Book;
+import bitcamp.project3.vo.Borrow;
+import java.util.List;
 
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
 import static bitcamp.project3.util.SystemMsg.*;
 
-public class AdminMonitor {
+public class AdminMonitor extends Monitor {
     // 관리자 메뉴
     static String[][] adminMenus = new String[][]{
                                                             //Menu Num
             {"도서관리", "대출관리", "유저관리"},           //0~
-            {"등록","조회","수정","삭제"}   //1~
+            {"등록","조회","수정","삭제"},                  //1~
+            {"전체현황", "유저현황"}                        //2~
     };
 
 
-//    public BookCommand bookCommand = new BookCommand("도서관리");
-    public BorrowCommand borrowCommand;
+    ///////////////////////////////////////////////////////////
+    ////////////////////// Constructor ////////////////////////
+    ///////////////////////////////////////////////////////////
+    public AdminMonitor(){
+        this.bookCommand = new BookCommand(this.bookList, this.borrowCommand.getBorrowList());
+    }
 
-
-
+    public AdminMonitor(List<Book> bookList, List<Borrow> borrowList){
+        this.bookCommand = new BookCommand(bookList, borrowList);
+    }
 
 
 
@@ -99,17 +108,18 @@ public class AdminMonitor {
     // 관리자 메뉴 프로세스
     void processAdminMenu(int ans) {
         BookCommand bc = BookCommand.getInstance();
+        ReturnCommand rc = ReturnCommand.getInstance();
         switch (ans) {
             case 1: //도서 관리
                 System.out.println("도서관리 메뉴로 접속합니다.");
 
 //                String menuTitle = Monitor.getMenuTitle(ans, adminMenus[0]);
 //                System.out.print(printAdminMenu(ans));;
-                bc.execute();
+                bc.adminExecute();
                 break;
             case 2: //대출 관리
                 System.out.println("대출관리 메뉴로 접속합니다.");
-                bc.execute();
+                rc.adminExecute();
                 break;
             case 3: //유저 관리
                 UserCommand uc = UserCommand.getInstance();
