@@ -1,9 +1,8 @@
 package bitcamp.project3.controller;
 
-import bitcamp.project3.util.Prompt;
-import bitcamp.project3.Monitor.UserMonitor;
 import bitcamp.project3.vo.User;
 import java.util.ArrayList;
+import static bitcamp.project3.util.Prompt.*;
 
 public class UserCommand implements Command{
 
@@ -62,7 +61,7 @@ public class UserCommand implements Command{
         //(TEST)User List
         read();
         //SubMenu 출력
-        System.out.print(printMenu(0));
+        System.out.print(printUserMenu(0));
     }//Method printTUI END
 
 
@@ -83,9 +82,9 @@ public class UserCommand implements Command{
     private String[] createUserData(){
         String[] userData = new String[3];
 
-        userData[0]=Prompt.input("이름: ");
-        userData[1]=Prompt.input("ID: ");
-        userData[2]=Prompt.input("PW: ");
+        userData[0]=input("이름: ");
+        userData[1]=input("ID: ");
+        userData[2]=input("PW: ");
 
         return userData;
     }//Method createUserData END
@@ -207,7 +206,7 @@ public class UserCommand implements Command{
         int ans = 0;
 
         System.out.print(printUserData(currentUser));
-        ans = Prompt.inputInt("> ");
+        ans = inputInt("> ");
 
         return switch (ans) {
             case 1 -> {
@@ -248,35 +247,35 @@ public class UserCommand implements Command{
         //        [1] PW 수정
         //        [2] MBTI 재검사
         //        [0] 이전 메뉴
-        str += printMenu(3);
+        str += printUserMenu(3);
 
 
         return str;
     }//Method printUserData END
 
-    //print Menu
-    //index=> 메뉴 배열 번호(main:0)             =>Prompt 이동 예정
-    private String printMenu(int index){
-        String str = "";
-        UserMonitor um = UserMonitor.getInstance();
-        String[] userMenu = um.getUserMenu()[index];
-
-        for(int no = 0 ; no<userMenu.length ; no++){
-            str += String.format("[%-1d] %s\n", no+1, userMenu[no]);
-        }
-        if(index==0){
-            str += String.format("[0] %s\n", "종료");
-        }else{
-            str += String.format("[0] %s\n", "이전 메뉴");
-        }
-
-        return str;
-    }//Method printMenu END
+//    //print Menu
+//    //index=> 메뉴 배열 번호(main:0)             =>Prompt 이동 예정
+//    private String printUserMenu(int index){
+//        String str = "";
+//        UserMonitor um = UserMonitor.getInstance();
+//        String[] userMenu = um.getUserMenus()[index];
+//
+//        for(int no = 0 ; no<userMenu.length ; no++){
+//            str += String.format("[%-1d] %s\n", no+1, userMenu[no]);
+//        }
+//        if(index==0){
+//            str += String.format("[0] %s\n", "종료");
+//        }else{
+//            str += String.format("[0] %s\n", "이전 메뉴");
+//        }
+//
+//        return str;
+//    }//Method printMenu END
 
 
     //PW update
     private void setUserPw(){
-        String pw = Prompt.input(String.format("새 PW(이전: %s) ",currentUser.getPw()));
+        String pw = input(String.format("새 PW(이전: %s) ",currentUser.getPw()));
         currentUser.setPw(pw);
         System.out.print("변경 되었습니다.\n");
     }//Method setUserPw END

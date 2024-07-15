@@ -17,7 +17,7 @@ public class Membership {
     ///////////////////////////////////////////////////////////
     Membership(){
         this.id = "OREO";       //default
-        this.pw = "0000";   //default
+        this.pw = "0000";       //default
     }
 
 

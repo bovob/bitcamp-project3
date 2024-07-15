@@ -1,22 +1,21 @@
 package bitcamp.project3.Monitor;
 
+import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.controller.BorrowCommand;
-import bitcamp.project3.controller.ReturnCommand;
-import bitcamp.project3.controller.UserCommand;
 import static bitcamp.project3.util.Prompt.*;
 
-public class UserMonitor extends Monitor {
-    private String[][] userMenus ={
-                                              //Menu Num
-            {"대출","반납","회원 정보 수정"}, //0~
-            {"추천 도서 대출", "도서 검색"},  //1~
-            {"제목", "저자"},                 //2~
-            {"PW 수정", "MBTI 재검사"}        //3~
+public class AdminMonitor {
+    // 관리자 메뉴
+    static String[][] adminMenus = new String[][]{
+                                                          //Menu Num
+            {"도서관리", "대출관리", "유저관리"},
+            {"",""}//0~
     };
 
 
-    BorrowCommand borrowCommand = new BorrowCommand();
-    ReturnCommand returnCommand = new ReturnCommand();
+    public BookCommand bookCommand = new BookCommand("도서관리");
+    public BorrowCommand borrowCommand;
+
 
 
 
@@ -25,39 +24,38 @@ public class UserMonitor extends Monitor {
     ///////////////////////////////////////////////////////////
     ////////////////////// getInstance() //////////////////////
     ///////////////////////////////////////////////////////////
-    private static UserMonitor um;
+    private static AdminMonitor rm;
 
-    // setup UserMonitor Instance
-    public static UserMonitor getInstance() {
+    // setup RootMonitor Instance
+    public static AdminMonitor getInstance() {
 
-        if (um == null) {
-            um = new UserMonitor();
+        if (rm == null) {
+            rm = new AdminMonitor();
         }
 
-        return um;
+        return rm;
     }// Method getInstance END
 
-    // reset UserMonitor Instance
+    // reset RootMonitor Instance
     public static void freeInstance() {
-        um = null;
+        rm = null;
     }// Method freeInstance END
 
 
 
 
 
-
-
-
+    
     ///////////////////////////////////////////////////////////
     ////////////////////////// Method /////////////////////////
     ///////////////////////////////////////////////////////////
-    public void userExecute() {
-        int menus = userMenus[0].length;
+    // 관리자 메뉴 실행
+    public void adminExecute() {
+        int menus = adminMenus.length;
         int menuNo;
 
-        //userMenu Main Menu Start
-        printUserMonitorTUI();
+        //RootMenu Main Menu Start
+        printAdminMonitorTUI();
 
         //Input Menu Num
         while (true) {
@@ -66,7 +64,7 @@ public class UserMonitor extends Monitor {
 
                 //Valid Menu Num
                 if (menuNo>0 && menuNo<=menus) {
-                    processUserMenu(menuNo);
+                    processAdminMenu(menuNo);
                 }
                 //Exit
                 else if(menuNo == 0) {
@@ -76,45 +74,47 @@ public class UserMonitor extends Monitor {
                 else {
                     printNumberLimitException();
                 }
-
             } catch (NumberFormatException ex) {
                 printNumberFormatException();
             }
 
             //restart Cmd TUI
-            printUserMonitorTUI();
+            printAdminMonitorTUI();
         }
 
         close();
-    }
+    }//Method adminExecute END
 
-    //userMonitor
-    void printUserMonitorTUI(){
-        UserCommand uc = UserCommand.getInstance();
-
+    //RootMonitor
+    void printAdminMonitorTUI(){
         setClearCmd();
-        uc.cmd();
-    }
+        System.out.print(printAdminMenu(0));;
+    }//Method printAdminMonitorTUI END
 
 
-    // Valid Menu Num
-    // 유저 메뉴 프로세스
-    void processUserMenu(int ans) {
+    // 관리자 메뉴 프로세스
+    void processAdminMenu(int ans) {
         switch (ans) {
-            case 1: //도서 대출
-                System.out.println("도서대출 메뉴입니다.");
+            case 1: //도서 관리
+                System.out.println("도서관리 메뉴입니다.");
+
+                String menuTitle = Monitor.getMenuTitle(ans, adminMenus[0]);
+                bookCommand.execute(menuTitle);
+                break;
+            case 2: //대출 관리
+                System.out.println("대출관리 메뉴입니다.");
                 borrowCommand.execute();
                 break;
-            case 2: //대출 반납
-                System.out.println("대출반납 메뉴입니다.");
-                returnCommand.execute();
+            case 3: //유저 관리
+                System.out.println("유저관리 메뉴입니다.");
+                //userCommand.execute();
                 break;
-            case 3: //회원 정보 수정
-                UserCommand uc = UserCommand.getInstance();
-                uc.update();
-                break;
-        }
-    }//Method processUserMenu END
+                }
+
+    }//Method processAdminMenu END
+
+
+
 
 
 
@@ -133,11 +133,11 @@ public class UserMonitor extends Monitor {
     ///////////////////////////////////////////////////////////
 
 
-    public String[][] getUserMenus() {
-        return userMenus;
+    public static String[][] getAdminMenus() {
+        return adminMenus;
     }
 
-    public void setUserMenus(String[][] userMenus) {
-        this.userMenus = userMenus;
+    public static void setAdminMenus(String[][] adminMenus) {
+        AdminMonitor.adminMenus = adminMenus;
     }
-}//Class UserMonitor END
+}
