@@ -82,6 +82,8 @@ public class BorrowCommand implements Command {
         }
     }//Method execute END
 
+    //Menu Process
+    //[0] 종료 입력시에만 process 종료
     private boolean processMenu(){
         printMenuTUI();
         int menuNo = inputInt(String.format("메인/%s>", menuTitle));
