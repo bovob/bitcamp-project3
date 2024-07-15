@@ -9,7 +9,7 @@ public class Borrow {
     private LocalDate startDate;
     private LocalDate endDate;
     private String title;
-    private String user;
+    private User user;
 
     public Borrow(){};
 
@@ -57,11 +57,11 @@ public class Borrow {
     }
 
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

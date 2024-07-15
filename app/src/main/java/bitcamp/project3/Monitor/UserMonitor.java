@@ -1,5 +1,6 @@
 package bitcamp.project3.Monitor;
 
+import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.controller.UserCommand;
@@ -17,10 +18,13 @@ public class UserMonitor extends Monitor {
     };
 
 
-    BorrowCommand borrowCommand = new BorrowCommand();
-    ReturnCommand returnCommand = new ReturnCommand();
-
-
+    ///////////////////////////////////////////////////////////
+    ////////////////////// Constructor ////////////////////////
+    ///////////////////////////////////////////////////////////
+    public UserMonitor(){
+        borrowCommand = new BorrowCommand(bookList, userCommand.getCurrentUser());
+        returnCommand = new ReturnCommand(bookList, borrowCommand.getBorrowList(), userCommand.getCurrentUser());
+    }
 
 
 

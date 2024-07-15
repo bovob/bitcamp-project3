@@ -110,8 +110,6 @@ public class User {
         }
     }//Class Mbti END
 
-
-
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
@@ -180,6 +178,11 @@ public class User {
     }
 
 
+    @Override
+    public String toString() {
+        return "[ID : " + name + ']';
+    }
+
 
 
     ///////////////////////////////////////////////////////////
@@ -219,7 +222,7 @@ public class User {
         this.pw = pw;
     }
 
-    public Mbti getMbti() {
+    public User.Mbti getMbti() {
         return mbti;
     }
 

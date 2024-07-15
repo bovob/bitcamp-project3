@@ -2,6 +2,7 @@ package bitcamp.project3.controller;
 
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.Borrow;
+import bitcamp.project3.vo.User;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -15,34 +16,29 @@ import static bitcamp.project3.util.TableFormat.*;
 
 public class BorrowCommand implements Command {
 
-    String menuTitle = "대출";
-    String currentUser = "user";
+    String menuTitle;
+    User currentUser;
+        //= "user";
 
-    List<Borrow> borrowList = new LinkedList<>();
-
-
-
-
-
-
+    //List<Book> bookList;
+    List<Borrow> borrowList = new ArrayList<>();
+    List<Book> bookList;
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
-    public BorrowCommand() {
+    public BorrowCommand(User currentUser) {
+        this.currentUser = currentUser;
     }
 
-    public BorrowCommand(String title, List<Book> bookList) {
-        this.menuTitle = title;
+    public BorrowCommand(List<Book> bookList, User currentUser) {
         this.bookList = bookList;
+        this.currentUser = currentUser;
     }
 
 //    public BorrowCommand(String title, LinkedList bookList) {
 //        this.menuTitle = title;
 //        this.bookList = bookList;
 //    }
-
-
-
 
 
     ///////////////////////////////////////////////////////////
@@ -337,7 +333,6 @@ public class BorrowCommand implements Command {
     }
 
     //더미 북 리스트
-    List<Book> bookList = Book.generateDummyData(5);
     public List<Book> getBookList() {
         return this.bookList;
     }

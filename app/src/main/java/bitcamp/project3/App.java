@@ -4,8 +4,14 @@ import bitcamp.project3.Monitor.AdminMonitor;
 import bitcamp.project3.Monitor.Membership;
 import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.controller.BorrowCommand;
+import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.Monitor.UserMonitor;
+import bitcamp.project3.vo.Book;
+import bitcamp.project3.vo.Borrow;
+import bitcamp.project3.vo.User;
+import java.util.LinkedList;
+import java.util.List;
 
 //                       Monitor, Prompt
 //                              |
@@ -23,7 +29,7 @@ public class App {
     static BookCommand bc = BookCommand.getInstance();
 
     public App(){
-        rm.borrowCommand = new BorrowCommand("대출관리", bc.getBookList());
+        //rm.borrowCommand = new BorrowCommand("대출관리", bc.getBookList());
 
     }
 
@@ -56,7 +62,5 @@ public class App {
                 break;
         }
     }
-
-
 }
 

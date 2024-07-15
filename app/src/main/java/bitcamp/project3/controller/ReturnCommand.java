@@ -3,6 +3,7 @@ package bitcamp.project3.controller;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.Borrow;
+import bitcamp.project3.vo.User;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,32 +17,19 @@ public class ReturnCommand {
         String menuTitle = "반납";
         String[] menus = {"도서반납"};
 
-        String currentUser = "user";
+        User currentUser;
 
         List<Book> bookList;
-        private List<Borrow> borrowList = new LinkedList<>();
-
-
-
-
-
-
-
-
-
+        List<Borrow> borrowList;
 
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
-    public ReturnCommand(List<Book> bookList, List<Borrow> borrowList) {
+    public ReturnCommand(List<Book> bookList, List<Borrow> borrowList, User currentUser) {
         this.bookList = bookList;
         this.borrowList = borrowList;
+        this.currentUser = currentUser;
     }
-
-
-
-
-
 
 
     ///////////////////////////////////////////////////////////
