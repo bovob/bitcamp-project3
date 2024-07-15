@@ -2,6 +2,7 @@ package bitcamp.project3.Monitor;
 
 import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.controller.BorrowCommand;
+import bitcamp.project3.controller.UserCommand;
 
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
@@ -111,8 +112,10 @@ public class AdminMonitor {
                 bc.execute();
                 break;
             case 3: //유저 관리
+                UserCommand uc = UserCommand.getInstance();
                 System.out.println("유저관리 메뉴로 접속합니다.");
-                //userCommand.execute();
+                uc.adminExcute();
+
                 break;
                 }
 
