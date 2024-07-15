@@ -2,9 +2,19 @@ package bitcamp.project3;
 
 import bitcamp.project3.Monitor.AdminMonitor;
 import bitcamp.project3.Monitor.Membership;
+import bitcamp.project3.Monitor.Monitor;
 import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.Monitor.UserMonitor;
+
+//                       Monitor, Prompt
+//                              |
+//  App: Membership -----[0]AdminMonitor
+//                              |
+//                  -----[1]UserMonitor
+//
+//
+
 
 public class App {
 

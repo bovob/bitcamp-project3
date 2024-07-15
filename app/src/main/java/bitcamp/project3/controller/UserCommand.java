@@ -2,7 +2,9 @@ package bitcamp.project3.controller;
 
 import bitcamp.project3.vo.User;
 import java.util.ArrayList;
+import static bitcamp.project3.Monitor.Monitor.*;
 import static bitcamp.project3.util.Prompt.*;
+
 
 public class UserCommand implements Command{
 

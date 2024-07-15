@@ -6,6 +6,8 @@ import bitcamp.project3.vo.User;
 
 import java.util.Iterator;
 
+import static bitcamp.project3.util.Prompt.*;
+
 
 public class Membership {
     String id;
@@ -83,7 +85,7 @@ public class Membership {
         String str = "";
 
         str = "[관리자] ID:root PW:0000\n"+
-                "[유저] ID:user PW:0000\n";
+              "[유저] ID:user PW:0000\n";
 
         return str;
     }
@@ -92,23 +94,30 @@ public class Membership {
         int ans; // user answer
 
         for (;;) {
-            System.out.print(membershipGuide());
-            ans = Prompt.inputInt("");
+            try{
+                System.out.print(membershipGuide());
+                ans = Prompt.inputInt("> ");
 
-            switch (ans){
-                case 1: //login
-                    if(login()){
-                        return getLoginUserNo();
-                    }else{
+                switch (ans){
+                    case 1: //login
+                        if(login()){
+                            return getLoginUserNo();
+                        }else{
+                            continue;
+                        }
+                    case 2: //join
+                        uc.create();
+                        printSuccessJoin();
                         continue;
-                    }
-                case 2: //join
-                    uc.create();
-                    continue;
-                case 0:
-                    return -1;
-                default:
+                    case 0:
+                        return -1;
+                    default:
+                        printNumberLimitException();
+                }
+            } catch (NumberFormatException ex) {
+                printNumberFormatException();
             }
+
         }
     }//Method Menu END
 
@@ -125,12 +134,15 @@ public class Membership {
                 this.id = id;
                 this.pw = pw;
 
+                printSuccessLogin();
                 return true;
             }
         }
 
         this.id = "";
         this.pw = "";
+
+        printDisaccordLogin();
         return false;
     }//Method login END
 

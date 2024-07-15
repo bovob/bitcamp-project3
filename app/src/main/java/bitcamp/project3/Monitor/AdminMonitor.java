@@ -2,14 +2,16 @@ package bitcamp.project3.Monitor;
 
 import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.controller.BorrowCommand;
+
+import static bitcamp.project3.Monitor.Monitor.*;
 import static bitcamp.project3.util.Prompt.*;
 
 public class AdminMonitor {
     // 관리자 메뉴
     static String[][] adminMenus = new String[][]{
-                                                          //Menu Num
-            {"도서관리", "대출관리", "유저관리"},
-            {"",""}//0~
+                                                            //Menu Num
+            {"도서관리", "대출관리", "유저관리"},           //0~
+            {"도서등록","도서목록","도서수정","도서삭제"}   //1~
     };
 
 
@@ -98,8 +100,9 @@ public class AdminMonitor {
             case 1: //도서 관리
                 System.out.println("도서관리 메뉴입니다.");
 
-                String menuTitle = Monitor.getMenuTitle(ans, adminMenus[0]);
-                bookCommand.execute(menuTitle);
+//                String menuTitle = Monitor.getMenuTitle(ans, adminMenus[0]);
+//                System.out.print(printAdminMenu(ans));;
+                bookCommand.execute("도서관리");
                 break;
             case 2: //대출 관리
                 System.out.println("대출관리 메뉴입니다.");
