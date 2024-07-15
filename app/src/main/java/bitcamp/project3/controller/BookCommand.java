@@ -5,6 +5,7 @@ import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.Borrow;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static bitcamp.project3.util.MenuFormat.*;
@@ -18,7 +19,8 @@ public class BookCommand implements Command {
     String menuTitle = AdminMonitor.getAdminMenus()[0][0];
 //    {"도서등록","도서목록","도서수정","도서삭제"}   //1~
 //    String[] menus = AdminMonitor.getAdminMenus()[1];
-    List<Book> bookList;
+    // 도서 Dummy 생성
+    ArrayList<Book> bookList = new ArrayList<>(Book.generateDummyData(5));
     List<Borrow> borrowList;
 
     ///////////////////////////////////////////////////////////
@@ -27,8 +29,7 @@ public class BookCommand implements Command {
     public BookCommand() {
     }
 
-    public BookCommand(List<Book> bookList, List<Borrow> borrowList) {
-        this.bookList = bookList != null ? bookList : new ArrayList<>();
+    public BookCommand(List<Borrow> borrowList) {
         this.borrowList = borrowList;
     }
 
@@ -36,21 +37,21 @@ public class BookCommand implements Command {
     ///////////////////////////////////////////////////////////
     ////////////////////// getInstance() //////////////////////
     ///////////////////////////////////////////////////////////
-    private static BookCommand mc;
+    private static BookCommand bc;
 
     // setup BookCommand Instance
     public static BookCommand getInstance() {
 
-        if (mc == null) {
-            mc = new BookCommand();
+        if (bc == null) {
+            bc = new BookCommand();
         }
 
-        return mc;
+        return bc;
     }// Method getInstance END
 
     // reset BookCommand Instance
     public static void freeInstance() {
-        mc = null;
+        bc = null;
     }// Method freeInstance END
 
 
@@ -109,16 +110,16 @@ public class BookCommand implements Command {
     private boolean processMenu(){
         System.out.print("[도서 관리]\n");
         printMenuTUI();
-        int menuNo = inputInt(String.format("메인/%s>", menuTitle));
+        int ans = inputInt(String.format("메인/%s>", menuTitle));
 
-        return switch (menuNo) {
+        return switch (ans) {
             case 1 -> {
                 create();
                 yield true; //도서 등록
             }
             case 2 -> {
                 read();
-                yield true; //도서 삭제
+                yield true; //도서 확인
             }
             case 3 -> {
                 update();

@@ -1,10 +1,12 @@
 package bitcamp.project3.Monitor;
 
 import bitcamp.project3.controller.BookCommand;
+import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.controller.UserCommand;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.Borrow;
+import java.util.ArrayList;
 import java.util.List;
 
 import static bitcamp.project3.util.MenuFormat.*;
@@ -25,11 +27,13 @@ public class AdminMonitor extends Monitor {
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
     public AdminMonitor(){
-        this.bookCommand = new BookCommand(this.bookList, this.borrowCommand.getBorrowList());
+        this.bookCommand = new BookCommand(this.borrowCommand.getBorrowList());
+        this.borrowCommand = new BorrowCommand(bookCommand.getBookList(), userCommand.getCurrentUser());
+        this.returnCommand = new ReturnCommand(bookCommand.getBookList(), borrowCommand.getBorrowList(), userCommand.getCurrentUser());
     }
 
-    public AdminMonitor(List<Book> bookList, List<Borrow> borrowList){
-        this.bookCommand = new BookCommand(bookList, borrowList);
+    public AdminMonitor(List<Borrow> borrowList){
+        this.bookCommand = new BookCommand(borrowList);
     }
 
 

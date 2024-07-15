@@ -23,8 +23,8 @@ public class UserMonitor extends Monitor {
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
     public UserMonitor(){
-        borrowCommand = new BorrowCommand(bookList, userCommand.getCurrentUser());
-        returnCommand = new ReturnCommand(bookList, borrowCommand.getBorrowList(), userCommand.getCurrentUser());
+        borrowCommand = new BorrowCommand(bookCommand.getBookList(), UserCommand.getCurrentUser());
+        returnCommand = new ReturnCommand(bookCommand.getBookList(), borrowCommand.getBorrowList(), UserCommand.getCurrentUser());
     }
 
 

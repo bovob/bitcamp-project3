@@ -274,16 +274,22 @@ public class ReturnCommand {
         rc.processAdminUser();
     }
 
+    private void printAdminMenuTUI(){
+        setClearCmd();
+
+        System.out.print(printAdminMenu(2));
+    }
+
     public void processAdminUser() {
         while (adminMenuCommand()) {
         }
     }//Method update END
 
     private boolean adminMenuCommand(){
-        int ans = 0;
 
-        rc.printBookList();
-        ans = inputInt("> ");
+        printAdminMenuTUI();
+
+        int ans = inputInt("메인/대출관리> ");
 
         return switch (ans) {
             case 1 -> {
@@ -304,7 +310,7 @@ public class ReturnCommand {
 
     private void printAllBorrowStatus() {
         System.out.println("\n[전체 대출 현황]");
-        if (borrowList.isEmpty()) {
+        if (borrowList == null || borrowList.isEmpty()) {
             System.out.println("현재 대출 중인 도서가 없습니다.");
             return;
         }
@@ -314,7 +320,7 @@ public class ReturnCommand {
         printTableHeader(columns, widths);
 
         int index = 1;
-        for (Borrow borrow : borrowList) {
+        for (Borrow borrow : this.borrowList) {
             System.out.print(printTableDataFormat(widths[0], String.valueOf(index)));
             System.out.print(printTableDataFormat(widths[1], borrow.getUser().getName()));
             System.out.print(printTableDataFormat(widths[2], borrow.getTitle()));
@@ -328,7 +334,7 @@ public class ReturnCommand {
 
     private void printBorrowStatusByUser() {
         System.out.println("\n[사용자별 대출 현황]");
-        if (borrowList.isEmpty()) {
+        if (borrowList == null || borrowList.isEmpty()) {
             System.out.println("현재 대출 중인 도서가 없습니다.");
             return;
         }

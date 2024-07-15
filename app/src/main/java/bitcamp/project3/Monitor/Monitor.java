@@ -11,15 +11,10 @@ import java.util.List;
 
 public class Monitor {
 
-    // 도서 Dummy 생성
-    List<Book> bookList = new ArrayList<>(Book.generateDummyData(5));
-    List<Borrow> borrowList = new ArrayList<>();
-
-
-    public UserCommand userCommand = UserCommand.getInstance();
+    public UserCommand userCommand = UserCommand.getInstance(1);
     public BorrowCommand borrowCommand = BorrowCommand.getInstance();
+    public BookCommand bookCommand = BookCommand.getInstance();
     public ReturnCommand returnCommand = ReturnCommand.getInstance();
-    public BookCommand bookCommand;
 
     // 메뉴 검증
     protected static boolean isValidateMenu(int menuNo, String[] menus) {

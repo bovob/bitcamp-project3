@@ -347,13 +347,8 @@ public class BorrowCommand implements Command {
     //////////////////////////// -- ///////////////////////////
     ///////////////////////////////////////////////////////////
 
-    public List<Borrow> getBorrowList() {
+    public List getBorrowList() {
         return this.borrowList;
-    }
-
-    //더미 북 리스트
-    public List<Book> getBookList() {
-        return this.bookList;
     }
 }
 
