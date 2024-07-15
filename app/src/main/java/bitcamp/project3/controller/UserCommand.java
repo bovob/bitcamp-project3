@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
+import static bitcamp.project3.util.SystemMsg.printNumberFormatException;
+import static bitcamp.project3.util.SystemMsg.printNumberLimitException;
 import static bitcamp.project3.util.TableFormat.*;
 
 
@@ -69,6 +71,22 @@ public class UserCommand implements Command{
     }//Method printTUI END
 
 
+    public void printAdminTUI(){
+        String[] calm = {"유저 삭제"};
+
+        //(TEST)User List
+        read();
+        //SubMenu 출력
+        System.out.print(printCustomMenu(calm));
+    }
+
+
+
+
+
+
+
+
     // User 생성 main Method(NEW User+프로필/MBTI user 입력)
     @Override
     public void create(){
@@ -109,6 +127,11 @@ public class UserCommand implements Command{
 
 
 
+
+
+
+
+
     //User List 출력 main Method
     //    +----+---------------+---------------+---------------+
     //    |1   |root           |root           |0000           |
@@ -142,7 +165,7 @@ public class UserCommand implements Command{
         str = printTableDataFormat(width[0], String.format("%d", no))+
               printTableDataFormat(width[1], user.getName())+
               printTableDataFormat(width[2], user.getId())+
-              printTableDataFormat(width[3], printMbti(user.getMbti()))+
+              printTableDataFormat(width[3], user.getMbti().getMbti())+
               "|"+
               "\n";
 
@@ -155,6 +178,12 @@ public class UserCommand implements Command{
     private String printMbti(User.Mbti mbti){
         return String.format("%s%s%s%s", mbti.getEi(), mbti.getNs(), mbti.getFt(), mbti.getPj());
     }//Method printMbti END
+
+
+
+
+
+
 
 
 
@@ -187,7 +216,7 @@ public class UserCommand implements Command{
             }
             case 0 -> false;
             default -> {
-                System.out.print("올바른 메뉴 번호를 입력해주세요.\n");
+                printNumberLimitException();
                 yield true;
             }
         };
@@ -216,7 +245,7 @@ public class UserCommand implements Command{
 
         return str;
     }//Method printUserData END
-    
+
 
 
     //PW update
@@ -235,10 +264,74 @@ public class UserCommand implements Command{
 
 
 
+
+
+
+
+
+
     @Override
     public void delete(){
-
+        userList.remove(deleteUser());
+        System.out.print("삭제되었습니다.\n");
     }
+
+    private int deleteUser(){
+        int ans=-1;
+
+        while(!isValidateUserNum(ans)) {
+            try {
+
+                System.out.print("삭제할 유저 번호?\n");
+                ans = inputInt(">");
+            } catch (NumberFormatException e) {
+
+            }
+        }
+
+        return ans-1;
+    }
+
+    private boolean isValidateUserNum(int ans){
+        return ans > 0 && ans < (userList.size() + 1);
+    }
+
+
+    ///////////////////////////////////////////////////////////
+    ///////////////////// Admin Process ///////////////////////
+    ///////////////////////////////////////////////////////////
+    public void adminExcute(){
+        uc.processAdminUser();
+    }
+
+    public void processAdminUser(){
+        while(adminMenuCommand()){
+
+        };
+    }//Method update END
+
+    //User data 수정 메뉴 선택
+    //while( (boolean)adminMenuCommand )
+    //[0]종료 입력시에만 return false=>Method 종료
+    private boolean adminMenuCommand(){
+        int ans = 0;
+
+        uc.printAdminTUI();
+        ans = inputInt("> ");
+
+        return switch (ans) {
+            case 1 -> {
+                delete();
+                yield true;
+            }
+            case 0 -> false;
+            default -> {
+                printNumberLimitException();
+                yield true;
+            }
+        };
+    }//Method updateMenuCommand END
+
 
 
     ///////////////////////////////////////////////////////////

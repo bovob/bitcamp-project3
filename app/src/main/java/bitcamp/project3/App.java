@@ -13,14 +13,37 @@ import bitcamp.project3.vo.User;
 import java.util.LinkedList;
 import java.util.List;
 
-//                       Monitor, Prompt
-//                              |
-//  App: Membership -----[0]AdminMonitor
-//                              |
-//                  -----[1]UserMonitor
-//
-//
+import java.time.LocalDate;
 
+//                       Monitor, util.*
+//                              |
+//  App: Membership -----[0]AdminMonitor    --[1]BookCommand
+//                                          --[2]
+//                                          --[3]UserCommand
+//
+//
+//                              |
+//                  -----[1]UserMonitor     --[1]BorrowCommand
+//                                          --[2]ReturnCommand
+//                                          --[3]UserCommand        --MbtiCommand
+//
+//
+//
+//  Class User {                            Class Borrow {                          Class Book {
+//      String name;                            int no;                                 static int seqNo;
+//      String id;                              static int seqNo;                       String title;
+//      String pw;                              LocalDate startDate;                    String author;
+//      Mbti mbti;                              LocalDate endDate;                      String bookCategory;
+//      int takeCnt;                            String title;                           int count;
+//                                              String user;                            int no;
+//      Class Mbti {                        }                                           int M;
+//          int ei;                                                                     int B;
+//          int ns;                                                                     int T;
+//          int ft;                                                                     int I;
+//          int pj;                                                                     boolean check;
+//      }                                                                           }
+//  }
+//
 
 public class App {
 
