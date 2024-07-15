@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
+import static bitcamp.project3.util.SystemMsg.printNumberLimitException;
 import static bitcamp.project3.util.TableFormat.*;
 
 
@@ -142,7 +143,7 @@ public class UserCommand implements Command{
         str = printTableDataFormat(width[0], String.format("%d", no))+
               printTableDataFormat(width[1], user.getName())+
               printTableDataFormat(width[2], user.getId())+
-              printTableDataFormat(width[3], printMbti(user.getMbti()))+
+              printTableDataFormat(width[3], user.getMbti().getMbti())+
               "|"+
               "\n";
 
@@ -187,7 +188,7 @@ public class UserCommand implements Command{
             }
             case 0 -> false;
             default -> {
-                System.out.print("올바른 메뉴 번호를 입력해주세요.\n");
+                printNumberLimitException();
                 yield true;
             }
         };
@@ -216,7 +217,7 @@ public class UserCommand implements Command{
 
         return str;
     }//Method printUserData END
-    
+
 
 
     //PW update

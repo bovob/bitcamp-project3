@@ -2,16 +2,21 @@ package bitcamp.project3.controller;
 
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.User;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import static bitcamp.project3.util.SystemMsg.*;
+
+
 
 public class MbtiCommand implements Command{
     private static final String PATH = "C:\\Users\\BITCAMP\\git\\bitcamp-project3\\app\\doc\\mbtiTest.txt";
     private static final File F = new File(PATH);
     private static ArrayList<String> F_list = new ArrayList<>();
     private static LinkedList<Score> scoreList = new LinkedList<>();
+
+
 
     class Score{
         private String sort;
@@ -120,9 +125,21 @@ public class MbtiCommand implements Command{
     }
 
     public void printTUI(User.Mbti mbti) {
+        int ans = -1;
         for(int i=0; i<F_list.size();i+=3){
-            System.out.print(printQuestionTUI(i));
-            scoreList.add( getScore(i, getUserIndex()) );
+
+            while(ans==-1){
+
+                System.out.print(printQuestionTUI(i));
+                ans = getUserIndex();
+                if(ans>0) {
+                    scoreList.add(getScore(i, ans));
+                }else{
+                printNumberLimitException();
+                }
+
+            }
+            ans = -1;
         }
 
         for(Score score : scoreList){
@@ -137,7 +154,14 @@ public class MbtiCommand implements Command{
     }
 
     private int getUserIndex(){
-        return Prompt.inputInt("> ");
+        try {
+            int ans = Prompt.inputInt("> ");
+
+            return (ans==1||ans==2) ? ans:-1;
+        }catch (NumberFormatException e){
+//            printNumberFormatException();
+        }
+        return -1;
     }
 
     private Score getScore(int index, int userAns){
