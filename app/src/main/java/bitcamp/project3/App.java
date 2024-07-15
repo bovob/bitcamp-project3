@@ -13,7 +13,7 @@ import java.time.LocalDate;
 //                              |
 //  App: Membership -----[0]AdminMonitor    --[1]BookCommand
 //                                          --[2]
-//                                          --[3]
+//                                          --[3]UserCommand
 //
 //
 //                              |
