@@ -86,7 +86,7 @@ public class AdminMonitor {
             printAdminMonitorTUI();
         }
 
-        close();
+        printGotoLogin();
     }//Method adminExecute END
 
     //RootMonitor

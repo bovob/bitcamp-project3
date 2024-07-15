@@ -87,7 +87,7 @@ public class UserMonitor extends Monitor {
             printUserMonitorTUI();
         }
 
-        close();
+        printGotoLogin();
     }
 
     //userMonitor

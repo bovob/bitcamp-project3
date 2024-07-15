@@ -9,6 +9,9 @@ import bitcamp.project3.Monitor.UserMonitor;
 
 import java.time.LocalDate;
 
+import static bitcamp.project3.util.Prompt.close;
+import static bitcamp.project3.util.Prompt.inputInt;
+
 //                       Monitor, util.*
 //                              |
 //  App: Membership -----[0]AdminMonitor    --[1]BookCommand
@@ -58,25 +61,20 @@ public class App {
         // 관리자SeqNo : 0
         // 유저SeqNo: 1~
         // 로그인 실패 시 -1, INPUT으로 따로 1/2 관리자 유저 접속
-        int check = Membership.getInstance().cmd();
+        while(true) {
+            int check = Membership.getInstance().cmd();
 
-        if(check==0){
-            check = 1;
-        }
-        else if(check>0){
-            check = 2;
-        }
-        else {
-            check = Prompt.inputInt("[임시]관리자 1/유저 2");
-        }
-
-        switch (check) {
-            case 1:
-                rm.adminExecute();
-                break;
-            case 2:
-                um.execute();
-                break;
+            switch (check) {
+                case 0:
+                    rm.adminExecute();
+                    break;
+                case 1:
+                    um.execute();
+                    break;
+                case -1:
+                    close();
+                    return;
+            }
         }
     }
 
