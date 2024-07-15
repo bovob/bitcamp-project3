@@ -16,6 +16,7 @@ public class UserMonitor extends Monitor {
             {"제목", "저자"},                 //2~
             {"PW 수정", "MBTI 재검사"}        //3~
     };
+    int userNo=0;
 
 
     ///////////////////////////////////////////////////////////
@@ -58,9 +59,10 @@ public class UserMonitor extends Monitor {
     ///////////////////////////////////////////////////////////
     ////////////////////////// Method /////////////////////////
     ///////////////////////////////////////////////////////////
-    public void execute() {
+    public void execute(int ans) {
         int menus = userMenus[0].length;
         int menuNo;
+        setUserNo(ans);
 
         //userMenu Main Menu Start
         printUserMonitorTUI();
@@ -91,12 +93,12 @@ public class UserMonitor extends Monitor {
             printUserMonitorTUI();
         }
 
-        close();
+        printGotoLogin();
     }
 
     //userMonitor
     void printUserMonitorTUI(){
-        UserCommand uc = UserCommand.getInstance();
+        UserCommand uc = UserCommand.getInstance(getUserNo());
 
         setClearCmd();
         uc.cmd();
@@ -116,7 +118,7 @@ public class UserMonitor extends Monitor {
                 returnCommand.execute();
                 break;
             case 3: //회원 정보 수정
-                UserCommand uc = UserCommand.getInstance();
+                UserCommand uc = UserCommand.getInstance(getUserNo());
                 uc.update();
                 break;
         }
@@ -145,5 +147,13 @@ public class UserMonitor extends Monitor {
 
     public void setUserMenus(String[][] userMenus) {
         this.userMenus = userMenus;
+    }
+
+    public int getUserNo() {
+        return userNo;
+    }
+
+    public void setUserNo(int userNo) {
+        this.userNo = userNo;
     }
 }//Class UserMonitor END

@@ -41,6 +41,11 @@ public class SystemMsg {
         System.out.print("[회원가입 되었습니다.]\n\n");
     }
 
+    //move login Monitor
+    public static void printGotoLogin() {
+        System.out.print("[회원가입 화면으로 돌아갑니다.]\n\n");
+    }
+
     //[ERROR]
     private static String printError(){ return "[ERROR) "; }
 

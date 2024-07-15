@@ -11,7 +11,10 @@ import static bitcamp.project3.util.SystemMsg.*;
 public class Membership {
     String id;
     String pw;
-    UserCommand uc = UserCommand.getInstance();
+
+
+    //관리자 모드로 진입
+    UserCommand uc = UserCommand.getInstance(0);
 
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
@@ -64,8 +67,9 @@ public class Membership {
         while(iter.hasNext()) {
             currentUser = iter.next();
 
-            if (this.id.equals(currentUser.getId()))
+            if (this.id.equals(currentUser.getId())) {
                 return userNo;
+            }
             userNo++;
         }
         return -1;
