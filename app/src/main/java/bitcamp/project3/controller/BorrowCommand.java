@@ -225,6 +225,34 @@ public class BorrowCommand implements Command {
         //////////////////////////////////////////////////////////////
 
     }
+    
+    // 전체 도서 출력
+    private void allBookPrint(){
+        String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
+        int[] width={SMALL, LARGE, HUGE, LARGE, MIDDLE};
+                System.out.print(printTableLine(width));
+//        for(String data: calm){
+//            System.out.print(printTableDataFormat(width[i++], data));
+//        }
+        for(int i = 0; i < calm.length; i++){
+            System.out.print(printTableDataFormat(width[i], calm[i]));
+        }
+        System.out.print(":\n");
+        System.out.print(printTableLine(width));
+
+        //table data
+        for (Book book : bookList) {
+            System.out.print(printTableDataFormat( width[0], String.format("%s", book.getNo())) );
+            System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
+            System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
+            System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
+            System.out.print(printTableDataFormat( width[4], String.format("%s", book.isCheck() ? "대출중" : "대출가능") ));
+            System.out.print(":\n");
+        }
+
+        //END line
+        System.out.print(printTableLine(width));
+    }
 
     private void bookMbti(String type){
         String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
@@ -279,8 +307,12 @@ public class BorrowCommand implements Command {
         //no, cate, title, writer, status
         int i=0;
 
+
+
         setClearCmd();
-//        System.out.println("도서 검색");
+        System.out.println("                                  +-- 전체 도서 목록 --+");
+        allBookPrint();
+
         System.out.print(printCustomMenu(searchMenu));
         int searchOption = inputInt("검색 옵션을 선택하세요: ");
 
