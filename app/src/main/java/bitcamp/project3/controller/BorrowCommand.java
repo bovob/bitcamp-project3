@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static bitcamp.project3.util.GetHtml.printMbtiDescription;
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
 import static bitcamp.project3.util.SystemMsg.*;
@@ -96,7 +95,7 @@ public class BorrowCommand implements Command {
                 try {
 
                 } catch (NumberFormatException ex) {
-                    printNumberFormatException();
+                    errorNumberFormatException();
                 }
             }
     }//Method execute END
@@ -118,7 +117,7 @@ public class BorrowCommand implements Command {
             }
             case 0 -> false;
             default -> {
-                printNumberLimitException();
+                errorNumberLimitException();
                 yield true;
             }
         };
@@ -151,12 +150,12 @@ public class BorrowCommand implements Command {
         }
 
         if (selectedBook == null) {
-            System.out.println("해당 번호의 도서를 찾을 수 없습니다.");
+            errorNotHereBook();
             return;
         }
 
         if (selectedBook.isCheck()) {
-            System.out.println("이미 대출 중인 도서입니다.");
+            errorAlreadyLend();
             return;
         }
 
@@ -171,7 +170,7 @@ public class BorrowCommand implements Command {
         // 도서를 대출 중으로 표시
         selectedBook.setCheck(true);
 
-        System.out.println("도서가 성공적으로 대출되었습니다.");
+        successLendBook();
         System.out.printf("대출 도서: %s\n", selectedBook.getTitle());
         System.out.printf("대출 기간: %s ~ %s\n", borrow.getStartDate(), borrow.getEndDate());
 
@@ -241,7 +240,7 @@ public class BorrowCommand implements Command {
         }
 
         if (resultList.isEmpty()) {
-            System.out.println("관련 도서가 없습니다.");
+            errorAccordBook();
             return;
         }
 
@@ -281,7 +280,7 @@ public class BorrowCommand implements Command {
         int i=0;
 
         setClearCmd();
-        System.out.println("도서 검색");
+//        System.out.println("도서 검색");
         System.out.print(printCustomMenu(searchMenu));
         int searchOption = inputInt("검색 옵션을 선택하세요: ");
 
@@ -317,12 +316,12 @@ public class BorrowCommand implements Command {
             case 0:
                 break;
             default:
-                System.out.println("잘못된 옵션을 선택하셨습니다.");
+                errorNumberLimitException();
                 return;
         }
 
         if (searchResults.isEmpty()) {
-            System.out.println("검색 결과가 없습니다.");
+            errorAccordBook();
         } else {
             System.out.println("검색 결과:");
 

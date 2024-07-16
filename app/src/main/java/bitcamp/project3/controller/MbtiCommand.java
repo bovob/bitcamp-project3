@@ -135,7 +135,7 @@ public class MbtiCommand implements Command{
                 if(ans>0) {
                     scoreList.add(getScore(i, ans));
                 }else{
-                printNumberLimitException();
+                errorNumberLimitException();
                 }
 
             }

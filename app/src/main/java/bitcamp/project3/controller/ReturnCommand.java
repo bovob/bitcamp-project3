@@ -90,7 +90,7 @@ public class ReturnCommand {
             try {
 
                 } catch (NumberFormatException ex) {
-                    printNumberFormatException();
+                    errorNumberFormatException();
                 }
         }
     }
@@ -109,7 +109,7 @@ public class ReturnCommand {
             }
             case 0 -> false;
             default -> {
-                printNumberLimitException();
+                errorNumberLimitException();
                 yield true;
             }
         };
@@ -147,12 +147,12 @@ public class ReturnCommand {
 
         int selectNo = Prompt.inputInt("반납할 도서의 번호를 입력하세요 (취소: 0): ");
         if (selectNo == 0) {
-            System.out.println("반납이 취소되었습니다.");
+            errorReturnBook();
             return;
         }
 
         if (selectNo < 1 || selectNo > userBorrows.size()) {
-            System.out.println("잘못된 번호입니다.");
+            errorNumberLimitException();
             return;
         }
 
@@ -189,7 +189,7 @@ public class ReturnCommand {
             }
 
             if (userBorrows.isEmpty()) {
-                System.out.println("현재 대출 중인 도서가 없습니다.\n\n");
+                errorNothingLend();
                 return;
             }
             //////////////////////////////////////////////////////////////
@@ -233,10 +233,10 @@ public class ReturnCommand {
                     book.getAuthor(), book.isCheck() ? "대출 중" : "대출 가능");
             }**/
 
-            System.out.println("도서목록 입니다.");
+//            System.out.println("도서목록 입니다.");
 
             if (bookList == null){
-                System.out.println("도서 목록이 없습니다.");
+                errorAccordBook();
                 return;
             }
 
@@ -302,7 +302,7 @@ public class ReturnCommand {
             }
             case 0 -> false;
             default -> {
-                printNumberLimitException();
+                errorNumberLimitException();
                 yield true;
             }
         };
@@ -311,7 +311,7 @@ public class ReturnCommand {
     private void printAllBorrowStatus() {
         System.out.println("\n[전체 대출 현황]");
         if (borrowList == null || borrowList.isEmpty()) {
-            System.out.println("현재 대출 중인 도서가 없습니다.\n\n");
+            errorNothingLend();
             return;
         }
 
@@ -335,7 +335,7 @@ public class ReturnCommand {
     protected void printBorrowStatusByUser() {
 //        System.out.println("\n[사용자별 대출 현황]");
         if (borrowList == null || borrowList.isEmpty()) {
-            System.out.println("현재 대출 중인 도서가 없습니다.\n\n");
+            errorNothingLend();
             return;
         }
 

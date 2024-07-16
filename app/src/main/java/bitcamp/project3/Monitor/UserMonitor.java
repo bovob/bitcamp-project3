@@ -1,6 +1,5 @@
 package bitcamp.project3.Monitor;
 
-import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.controller.UserCommand;
@@ -83,18 +82,18 @@ public class UserMonitor extends Monitor {
                 }
                 //defualt(범위 외 번호)
                 else {
-                    printNumberLimitException();
+                    errorNumberLimitException();
                 }
 
             } catch (NumberFormatException ex) {
-                printNumberFormatException();
+                errorNumberFormatException();
             }
 
             //restart Cmd TUI
             printUserMonitorTUI();
         }
 
-        printGotoLogin();
+        successGotoLogin();
     }
 
     //userMonitor

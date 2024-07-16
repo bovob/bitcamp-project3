@@ -230,7 +230,7 @@ public class UserCommand implements Command{
             }
             case 0 -> false;
             default -> {
-                printNumberLimitException();
+                errorNumberLimitException();
                 yield true;
             }
         };
@@ -266,14 +266,14 @@ public class UserCommand implements Command{
     private void setUserPw(){
         String pw = input(String.format("새 PW(이전: %s) ",currentUser.getPw()));
         currentUser.setPw(pw);
-        System.out.print("변경 되었습니다.\n");
+        successUpdate();
     }//Method setUserPw END
 
     //mbti update
     private void setMbti(){
 //        System.out.print("setMbti function\n");
         currentUser.setMbti(createMbtiData());
-        System.out.print("변경 되었습니다.\n");
+        successUpdate();
     }
 
 
@@ -312,7 +312,7 @@ public class UserCommand implements Command{
                     userList.remove(ans - 1);
                     return;
                 }else{
-                    System.out.print("올바른 번호를 입력해주세요.\n");
+                    errorUserNo();
                 }
 
             } catch (NumberFormatException e) {
@@ -355,7 +355,7 @@ public class UserCommand implements Command{
             }
             case 0 -> false;
             default -> {
-                printNumberLimitException();
+                errorNumberLimitException();
                 yield true;
             }
         };

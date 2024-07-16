@@ -4,9 +4,8 @@ import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.controller.UserCommand;
-import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.Borrow;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import static bitcamp.project3.util.MenuFormat.*;
@@ -88,17 +87,17 @@ public class AdminMonitor extends Monitor {
                 }
                 //default(범위 외 번호)
                 else {
-                    printNumberLimitException();
+                    errorNumberLimitException();
                 }
             } catch (NumberFormatException ex) {
-                printNumberFormatException();
+                errorNumberFormatException();
             }
 
             //restart Cmd TUI
             printAdminMonitorTUI();
         }
 
-        printGotoLogin();
+        successGotoLogin();
     }//Method adminExecute END
 
     //RootMonitor
@@ -114,14 +113,14 @@ public class AdminMonitor extends Monitor {
         ReturnCommand rc = ReturnCommand.getInstance();
         switch (ans) {
             case 1: //도서 관리
-                System.out.println("도서관리 메뉴로 접속합니다.");
+//                System.out.println("도서관리 메뉴로 접속합니다.");
 
 //                String menuTitle = Monitor.getMenuTitle(ans, adminMenus[0]);
 //                System.out.print(printAdminMenu(ans));;
                 bc.adminExecute();
                 break;
             case 2: //대출 관리
-                System.out.println("대출관리 메뉴로 접속합니다.");
+//                System.out.println("대출관리 메뉴로 접속합니다.");
                 this.borrowList = BorrowCommand.getInstance().getBorrowList();
                 updateBorrowList(this.borrowList);
                 rc.adminExecute();
@@ -129,7 +128,7 @@ public class AdminMonitor extends Monitor {
             case 3: //유저 관리
                 UserCommand uc = UserCommand.getInstance(0);
 
-                System.out.println("유저관리 메뉴로 접속합니다.");
+//                System.out.println("유저관리 메뉴로 접속합니다.");
                 uc.adminExcute();
 
                 break;

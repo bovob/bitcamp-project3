@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-import static bitcamp.project3.util.SystemMsg.printProgramExit;
+import static bitcamp.project3.util.SystemMsg.errorProgramExit;
 
 public class Prompt {
 
@@ -54,7 +54,7 @@ public class Prompt {
 
 
     public static void close() {
-        printProgramExit();
+        errorProgramExit();
         keyboardScanner.close();
     }
 }

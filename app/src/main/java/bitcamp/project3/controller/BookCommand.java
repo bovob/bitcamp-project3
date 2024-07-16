@@ -99,7 +99,7 @@ public class BookCommand implements Command {
             try {
 
             } catch (NumberFormatException e) {
-                printNumberFormatException();
+                errorNumberFormatException();
             }
         }
     }//Method execute END
@@ -130,7 +130,7 @@ public class BookCommand implements Command {
             }
             case 0 -> false; //종료
             default -> {
-                printNumberLimitException();
+                errorNumberLimitException();
                 yield true;
             }
         };
@@ -146,7 +146,7 @@ public class BookCommand implements Command {
     // 도서등록
     @Override
     public void create() {
-        System.out.println("도서등록 입니다.");
+//        System.out.println("도서등록 입니다.");
         Book book = new Book();
 
         book.setBookCategory(Prompt.input("카테고리"));
@@ -167,7 +167,7 @@ public class BookCommand implements Command {
     // 목록조회
     @Override
     public void read() {
-        System.out.println("도서목록 입니다.");
+//        System.out.println("도서목록 입니다.");
         System.out.println("번호 | 카테고리 | 도서명 저자 MBTI");
         for (Object obj : bookList.toArray()){
             Book book = (Book) obj;
@@ -190,7 +190,7 @@ public class BookCommand implements Command {
     // 도서수정
     @Override
     public void update() {
-        System.out.println("도서수정 입니다.");
+//        System.out.println("도서수정 입니다.");
         int bookNo = inputInt("도서번호?");
         Book bookToUpdate = null;
 
@@ -202,7 +202,7 @@ public class BookCommand implements Command {
         }
 
         if (bookToUpdate == null) {
-            System.out.println("없는 책입니다.");
+            errorNotHereBook();
             return;
         }
 
@@ -252,7 +252,7 @@ public class BookCommand implements Command {
             bookList.remove(bookToRemove);
             System.out.printf("%d번 %s를 삭제했습니다.\n", bookToRemove.getNo(), bookToRemove.getTitle());
         } else {
-            System.out.println("없는 도서번호 입니다.");
+            errorNotHereBook();
         }
     }
     //    int index = bookList.indexOf(new Book(bookNo));

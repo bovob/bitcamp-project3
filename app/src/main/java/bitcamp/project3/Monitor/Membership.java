@@ -78,7 +78,7 @@ public class Membership {
     private String membershipGuide(){
         String str = "";
 
-        str += printMembershipTUI();
+//        str += printMembershipTUI();
         str += "[1] 로그인\n[2] 회원가입\n[0] 종료\n";
 
         return str;
@@ -110,12 +110,12 @@ public class Membership {
                         }
                     case 2: //join
                         uc.create();
-                        printSuccessJoin();
+                        successJoin();
                         continue;
                     case 0:
                         return -1;
                     default:
-                        printNumberLimitException();
+                        errorNumberLimitException();
                 }
             } catch (NumberFormatException ex) {
                 printNumberFormatException();
@@ -140,7 +140,7 @@ public class Membership {
                 this.id = id;
                 this.pw = pw;
 
-                printSuccessLogin();
+                successLogin();
                 return true;
             }
         }
@@ -148,7 +148,7 @@ public class Membership {
         this.id = "";
         this.pw = "";
 
-        printDisaccordLogin();
+        errorDisaccordLogin();
         return false;
     }//Method login END
 
