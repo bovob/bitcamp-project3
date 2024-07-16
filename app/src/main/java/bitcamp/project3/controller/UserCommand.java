@@ -300,6 +300,10 @@ public class UserCommand implements Command{
                     return;
                 }
 
+                if(ans ==1){
+                    System.out.print("삭제할 수 없는 유저입니다.\n");
+                    continue;
+                }
 
                 if(isValidateUserNum(ans)) {
                     System.out.printf("'%s'님이 삭제되었습니다.\n", userList.get(ans - 1).getName());

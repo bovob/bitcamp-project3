@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static bitcamp.project3.util.GetHtml.getMbtiDescription;
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
 import static bitcamp.project3.util.SystemMsg.*;
@@ -191,7 +192,10 @@ public class BorrowCommand implements Command {
         int i=0;
 
 
-        System.out.println("도서목록 입니다.");
+//        System.out.println("도서목록 입니다.");
+
+        //Mbti 설명
+        getMbtiDescription(currentUser.getMbti().getMbti());
 
         //////////////////////////////////////////////////////////////
         ////////////////////////result table//////////////////////////

@@ -5,6 +5,7 @@ import bitcamp.project3.Monitor.Membership;
 import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.ReturnCommand;
+import bitcamp.project3.util.GetHtml;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.Monitor.UserMonitor;
 import bitcamp.project3.vo.Book;
@@ -56,7 +57,6 @@ public class App {
 
     public App(){
         //rm.borrowCommand = new BorrowCommand("대출관리", bc.getBookList());
-
     }
 
     // Main
