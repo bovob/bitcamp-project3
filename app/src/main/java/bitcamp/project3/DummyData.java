@@ -19,7 +19,7 @@ public class DummyData {
 
         String[][] dummy = {
                 {"부자의언어", "존소포릭", SEL, "istj"},
-                {"열한계단", "채사장", PHI, " isfj"},
+                {"열한계단", "채사장", PHI, "isfj"},
                 {"죽어마땅한사람들", "피터스완슨", NOV, "infj"},
                 {"마션","앤디위어",SCI,"intj"},
                 {"사람을움직이는처세술","데일카네기",SEL,"istp"},

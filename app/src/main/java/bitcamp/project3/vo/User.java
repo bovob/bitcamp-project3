@@ -83,25 +83,25 @@ public class User {
         public String getMbti(){
             String str = "";
 
-            if(this.ei>0){
+            if(this.ei==0){
                 str += "e";
             }else{
                 str += "i";
             }
 
-            if(this.ns>0){
+            if(this.ns==0){
                 str += "n";
             }else{
                 str += "s";
             }
 
-            if(this.ft>0){
+            if(this.ft==0){
                 str += "f";
             }else{
                 str += "t";
             }
 
-            if(this.pj>2){
+            if(this.pj<3){
                 str += "p";
             }else{
                 str += "j";

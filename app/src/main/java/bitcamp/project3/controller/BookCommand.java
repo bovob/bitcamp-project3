@@ -10,6 +10,8 @@ import java.util.List;
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
 import static bitcamp.project3.util.SystemMsg.*;
+import static bitcamp.project3.util.TableFormat.printTableDataFormat;
+import static bitcamp.project3.util.TableFormat.printTableLine;
 
 public class BookCommand implements Command {
 
@@ -107,7 +109,7 @@ public class BookCommand implements Command {
     //Menu Process
     //[0] 종료 입력시에만 process 종료
     private boolean processMenu(){
-        System.out.print("[도서 관리]\n");
+//        System.out.print("[도서 관리]\n");
         printMenuTUI();
         int ans = inputInt(String.format("메인/%s>", menuTitle));
 
@@ -167,23 +169,59 @@ public class BookCommand implements Command {
     // 목록조회
     @Override
     public void read() {
-//        System.out.println("도서목록 입니다.");
-        System.out.println("번호 | 카테고리 | 도서명 저자 MBTI");
-        for (Object obj : bookList.toArray()){
+        String[] calm = {"번호","카테고리","도서명","저자","MBTI"};
+        int[] width   = {SMALL, LARGE,       HUGE,  LARGE, MIDDLE};
+        int i=0;
+
+
+        //////////////////////////////////////////////////////////////
+        ////////////////////////result table//////////////////////////
+        //////////////////////////////////////////////////////////////
+        //table title
+        System.out.print(printTableLine(width));
+        for(String data: calm){
+            System.out.print(printTableDataFormat(width[i++], data));
+        }
+        System.out.print(":\n");
+        System.out.print(printTableLine(width));
+
+
+
+        //table data
+        for (Object obj : bookList.toArray()) {
             Book book = (Book) obj;
 
-            System.out.printf("%d  |   %s  | %s  %s  %s\n", book.getNo(),
-                                                            book.getBookCategory() ,
-                                                            book.getTitle(),
-                                                            book.getAuthor(),
-                                                            book.getMbti());
-
-
-
-//            System.out.printf("%d  |   %s  | %s  %s  %d %d %d %d\n",
-//            book.getNo(), book.getBookCategory() , book.getTitle(), book.getAuthor(),
-//            book.getM(), book.getB(), book.getT(), book.getI());
+            System.out.print(printTableDataFormat( width[0], String.format("%s", book.getNo())) );
+            System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
+            System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
+            System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
+            System.out.print(printTableDataFormat( width[4], String.format("%s", book.getMbti())));
+            System.out.print(":\n");
         }
+
+        //END line
+        System.out.print(printTableLine(width));
+        //////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////
+
+
+//        System.out.println("도서목록 입니다.");
+//        System.out.println("번호 | 카테고리 | 도서명 저자 MBTI");
+//        for (Object obj : bookList.toArray()){
+//            Book book = (Book) obj;
+//
+//            System.out.printf("%d  |   %s  | %s  %s  %s\n", book.getNo(),
+//                                                            book.getBookCategory() ,
+//                                                            book.getTitle(),
+//                                                            book.getAuthor(),
+//                                                            book.getMbti());
+//
+//
+//
+////            System.out.printf("%d  |   %s  | %s  %s  %d %d %d %d\n",
+////            book.getNo(), book.getBookCategory() , book.getTitle(), book.getAuthor(),
+////            book.getM(), book.getB(), book.getT(), book.getI());
+//        }
     }
 
 
@@ -209,7 +247,7 @@ public class BookCommand implements Command {
         bookToUpdate.setBookCategory(Prompt.input(yellowColorCode+"카테고리"+resetColorCode));
         bookToUpdate.setTitle(Prompt.input(yellowColorCode+"책 이름?"+resetColorCode));
         bookToUpdate.setAuthor(Prompt.input(yellowColorCode+"책 저자?"+resetColorCode));
-        bookToUpdate.setMbti(yellowColorCode+"MBTI ?"+resetColorCode);
+        bookToUpdate.setMbti(Prompt.input(yellowColorCode+"MBTI ?"+resetColorCode));
 
 //        bookToUpdate.setM(inputInt("M ?"));
 //        bookToUpdate.setB(inputInt("B ?"));
