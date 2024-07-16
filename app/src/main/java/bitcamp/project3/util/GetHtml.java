@@ -10,6 +10,19 @@ import java.util.Objects;
 public class GetHtml {
     static final String urlToRead = "https://www.readersnews.com/news/articleView.html?idxno=105991";
 
+    public static String[] getMbtiDescription(String mbti){
+        return getTypeDescriptuon(mbti);
+    }
+
+    public static void printMbtiDescription(String mbti){
+        String[] data = getTypeDescriptuon(mbti);
+
+        getTitle(Objects.requireNonNull(data)[0]);
+        getDescription(data[1]);
+
+        System.out.println("\n-출처: mbti 유형으로 본 나에게 어울리는 책은?, 김혜경, 독서신문\n");
+    }
+
     public static void getDescription(String data){
         String[] des = stringSplitPeriod(data);
         for(String str : des){
@@ -19,13 +32,6 @@ public class GetHtml {
 
     public static void getTitle(String data){
         System.out.printf("::  %s  ::\n",data);
-    }
-
-    public static void getMbtiDescription(String mbti){
-        String[] data = getTypeDescriptuon(mbti);
-
-        getTitle(Objects.requireNonNull(data)[0]);
-        getDescription(data[1]);
     }
 
     private static String[][] printData(){
@@ -99,8 +105,9 @@ public class GetHtml {
     //  2: intp     6: infp     10: isfj    14: isfp
     //  3: entj     7: enfj     11: estj    15: estp
     //  4: entp     8: enfp     12: esfj    16: esfp
-    private static String[] getTypeDescriptuon(String mbti){
+    private static String[] getTypeDescriptuon(String str){
         String[][] data = printData();
+        String mbti = isEquals(str);
 
         switch (mbti){
             case"intj":
@@ -138,6 +145,10 @@ public class GetHtml {
             default:
                 return null;
         }
+    }
+
+    private static String isEquals(String str){
+        return str.toLowerCase();
     }
 
 

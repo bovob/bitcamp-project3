@@ -2,12 +2,13 @@ package bitcamp.project3.util;
 
 public class SystemMsg {
     public static void setClearCmd(){
-        int top = 3;    //높이
+        int top = 5;    //높이
 
-
+//        loading(2000);
         for(int i=0;i<top;i++){
             System.out.print("\n");
         }
+
     }
 
 
@@ -49,4 +50,18 @@ public class SystemMsg {
     //[ERROR]
     private static String printError(){ return "[ERROR) "; }
 
+    //loading (...)
+    public static void loading(long time){
+        long sz = time/1000;
+        try {
+            for(int i=0;i<sz;i++) {
+                System.out.print(".");
+                Thread.sleep(time/sz);
+            }
+            System.out.print("\n");
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            // e.printStackTrace();
+        }
+    }
 }

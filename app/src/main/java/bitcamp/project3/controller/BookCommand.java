@@ -153,10 +153,12 @@ public class BookCommand implements Command {
         book.setTitle(Prompt.input("책 이름?"));
         book.setAuthor(Prompt.input("책 저자?"));
 
-        book.setM(inputInt("M ?"));
-        book.setB(inputInt("B ?"));
-        book.setT(inputInt("T ?"));
-        book.setI(inputInt("I ?"));
+        book.setMbti("MBTI? ");
+
+//        book.setM(inputInt("M ?"));
+//        book.setB(inputInt("B ?"));
+//        book.setT(inputInt("T ?"));
+//        book.setI(inputInt("I ?"));
         //book.setNo(Book.getNextSeqNo());
         bookList.add(book);
 
@@ -166,12 +168,21 @@ public class BookCommand implements Command {
     @Override
     public void read() {
         System.out.println("도서목록 입니다.");
-        System.out.println("번호 | 카테고리 | 도서명 저자 M B T I 점수");
+        System.out.println("번호 | 카테고리 | 도서명 저자 MBTI");
         for (Object obj : bookList.toArray()){
             Book book = (Book) obj;
-            System.out.printf("%d  |   %s  | %s  %s  %d %d %d %d\n",
-            book.getNo(), book.getBookCategory() , book.getTitle(), book.getAuthor(),
-            book.getM(), book.getB(), book.getT(), book.getI());
+
+            System.out.printf("%d  |   %s  | %s  %s  %s\n", book.getNo(),
+                                                            book.getBookCategory() ,
+                                                            book.getTitle(),
+                                                            book.getAuthor(),
+                                                            book.getMbti());
+
+
+
+//            System.out.printf("%d  |   %s  | %s  %s  %d %d %d %d\n",
+//            book.getNo(), book.getBookCategory() , book.getTitle(), book.getAuthor(),
+//            book.getM(), book.getB(), book.getT(), book.getI());
         }
     }
 
@@ -198,10 +209,12 @@ public class BookCommand implements Command {
         bookToUpdate.setBookCategory(Prompt.input("카테고리"));
         bookToUpdate.setTitle(Prompt.input("책 이름?"));
         bookToUpdate.setAuthor(Prompt.input("책 저자?"));
-        bookToUpdate.setM(inputInt("M ?"));
-        bookToUpdate.setB(inputInt("B ?"));
-        bookToUpdate.setT(inputInt("T ?"));
-        bookToUpdate.setI(inputInt("I ?"));
+        bookToUpdate.setMbti("MBTI ?");
+
+//        bookToUpdate.setM(inputInt("M ?"));
+//        bookToUpdate.setB(inputInt("B ?"));
+//        bookToUpdate.setT(inputInt("T ?"));
+//        bookToUpdate.setI(inputInt("I ?"));
         System.out.println("변경되었습니다.");
     }
     //    Book book = (Book) bookList.get(bookList.indexOf(new Book(bookNo)));

@@ -1,5 +1,7 @@
 package bitcamp.project3.vo;
 
+import bitcamp.project3.DummyData;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,10 +12,11 @@ public class Book {
     private String author;
     private String bookCategory;
     private int no;
-    private int M;
-    private int B;
-    private int T;
-    private int I;
+    private String mbti="istj";
+//    private int M;
+//    private int B;
+//    private int T;
+//    private int I;
     private boolean check;
 
     public Book() {
@@ -27,25 +30,32 @@ public class Book {
         }
     }
 
+    public Book(String[] data){
+        this.title = data[0];
+        this.author = data[1];
+        this.bookCategory = data[2];
+        this.mbti = data[3];
+    }
+
     //더미생성
     public static List<Book> generateDummyData(int count) {
         List<Book> booklist = new ArrayList<>();
         String[] categories = {"소설", "과학", "역사", "자기계발", "철학"};
         String[] authors = {"김작가", "이저자", "박문학", "최과학", "정역사"};
 
-        for (int i = 0; i < count; i++) {
-            Book book = new Book();
-            book.setNo(i+1);
-            book.setTitle("책제목");
-            book.setAuthor(authors[i]);
-            book.setBookCategory(categories[i]);
-            book.setM(i);
-            book.setB(i);
-            book.setT(i);
-            book.setI(i);
-            booklist.add(book);
-        }
-        setSeqNo(5);
+//        for (int i = 0; i < count; i++) {
+//            Book book = new Book();
+//            book.setNo(i+1);
+//            book.setTitle("책제목");
+//            book.setAuthor(authors[i]);
+//            book.setBookCategory(categories[i]);
+//            book.setMbti("entp");
+//            booklist.add(book);
+//        }
+
+        booklist.addAll(DummyData.addDummyBook());
+
+        setSeqNo(21);
         return booklist;
     }
     //더미seqNo 이후 설정
@@ -70,41 +80,51 @@ public class Book {
         return Objects.hashCode(no);
     }
 
+    public void setNextSeqNo(){ this.seqNo += 1; }
+
     public static int getNextSeqNo() {
         return ++seqNo;
     }
 
-    public int getM() {
-        return M;
+//    public int getM() {
+//        return M;
+//    }
+//
+//    public void setM(int m) {
+//        M = m;
+//    }
+//
+//    public int getB() {
+//        return B;
+//    }
+//
+//    public void setB(int b) {
+//        B = b;
+//    }
+//
+//    public int getT() {
+//        return T;
+//    }
+//
+//    public void setT(int t) {
+//        T = t;
+//    }
+//
+//
+//    public int getI() {
+//        return I;
+//    }
+//
+//    public void setI(int i) {
+//        I = i;
+//    }
+
+    public String getMbti() {
+        return mbti;
     }
 
-    public void setM(int m) {
-        M = m;
-    }
-
-    public int getB() {
-        return B;
-    }
-
-    public void setB(int b) {
-        B = b;
-    }
-
-    public int getT() {
-        return T;
-    }
-
-    public void setT(int t) {
-        T = t;
-    }
-
-
-    public int getI() {
-        return I;
-    }
-
-    public void setI(int i) {
-        I = i;
+    public void setMbti(String mbti) {
+        this.mbti = mbti;
     }
 
     public int getNo() {

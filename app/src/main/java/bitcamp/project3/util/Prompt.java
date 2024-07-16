@@ -8,6 +8,13 @@ import java.util.Scanner;
 import static bitcamp.project3.util.SystemMsg.printProgramExit;
 
 public class Prompt {
+
+    //width length
+    public static final int SMALL = 4;
+    public static final int MIDDLE = 15;
+    public static final int LARGE = 20;
+    public static final int HUGE = 30;
+
     static Scanner keyboardScanner = new Scanner(System.in);
 
     // String 값 Input

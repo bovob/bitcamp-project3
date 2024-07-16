@@ -1,5 +1,6 @@
 package bitcamp.project3.controller;
 
+import bitcamp.project3.util.GetHtml;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.Borrow;
 import bitcamp.project3.vo.User;
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static bitcamp.project3.util.GetHtml.getMbtiDescription;
+import static bitcamp.project3.util.GetHtml.printMbtiDescription;
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
 import static bitcamp.project3.util.SystemMsg.*;
@@ -127,7 +128,7 @@ public class BorrowCommand implements Command {
     private void printMenuTUI(){
         setClearCmd();
 
-        System.out.printf("안녕하세요 '%s' 님\n", currentUser);
+        System.out.printf("'%s' 님의 추천 도서\n", currentUser.getName());
         read();
 
         System.out.print(printUserMenu(1));
@@ -137,7 +138,7 @@ public class BorrowCommand implements Command {
 
 
     private void bookBorrow() {
-        System.out.println("도서대출 입니다.");
+//        System.out.println("도서대출 입니다.");
         int bookNo = inputInt("도서번호를 입력하세요: ");
 
         // bookList에서 해당 도서 찾기
@@ -187,15 +188,62 @@ public class BorrowCommand implements Command {
     @Override
     public void read() {
         String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
-        int[] width={4, 20, 20, 20, 15};
+        int[] width={SMALL, LARGE, HUGE, LARGE, MIDDLE};
         //no, cate, title, writer, status
         int i=0;
 
+        String userMbti = currentUser.getMbti().getMbti();
 
 //        System.out.println("도서목록 입니다.");
 
         //Mbti 설명
-        getMbtiDescription(currentUser.getMbti().getMbti());
+        GetHtml.printMbtiDescription(userMbti);
+        bookMbti(userMbti);
+        //////////////////////////////////////////////////////////////
+        ////////////////////////result table//////////////////////////
+        //////////////////////////////////////////////////////////////
+//        //table title
+//        System.out.print(printTableLine(width));
+//        for(String data: calm){
+//            System.out.print(printTableDataFormat(width[i++], data));
+//        }
+//        System.out.print(":\n");
+//        System.out.print(printTableLine(width));
+//
+//        //table data
+//        for (Book book : bookList) {
+//            System.out.print(printTableDataFormat( width[0], String.format("%s", book.getNo())) );
+//            System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
+//            System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
+//            System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
+//            System.out.print(printTableDataFormat( width[4], String.format("%s", book.isCheck() ? "대출중" : "대출가능") ));
+//            System.out.print(":\n");
+//        }
+//
+//        //END line
+//        System.out.print(printTableLine(width));
+        //////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////
+
+    }
+
+    private void bookMbti(String type){
+        String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
+        int[] width={SMALL, LARGE, HUGE, LARGE, MIDDLE};
+        //no, cate, title, writer, status
+        int i=0;
+        List<Book> resultList = new ArrayList<>();
+
+        for (Book book : bookList) {
+            if (book.getMbti().toLowerCase().contains(type.toLowerCase())) {
+                resultList.add(book);
+            }
+        }
+
+        if (resultList.isEmpty()) {
+            System.out.println("관련 도서가 없습니다.");
+            return;
+        }
 
         //////////////////////////////////////////////////////////////
         ////////////////////////result table//////////////////////////
@@ -209,7 +257,7 @@ public class BorrowCommand implements Command {
         System.out.print(printTableLine(width));
 
         //table data
-        for (Book book : bookList) {
+        for (Book book : resultList) {
             System.out.print(printTableDataFormat( width[0], String.format("%s", book.getNo())) );
             System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
             System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
@@ -222,15 +270,13 @@ public class BorrowCommand implements Command {
         System.out.print(printTableLine(width));
         //////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////
-
     }
 
 
-
     private void bookSearch() {
-        String[] searchMenu = {"카테고리로 검색", "도서명으로 검색", "저자로 검색"};
+        String[] searchMenu = {"카테고리", "도서명", "저자"};
         String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
-        int[] width={4, 20, 20, 20, 15};
+        int[] width={SMALL, LARGE, HUGE, LARGE, MIDDLE};
         //no, cate, title, writer, status
         int i=0;
 
@@ -244,6 +290,7 @@ public class BorrowCommand implements Command {
 
         switch (searchOption) {
             case 1:
+                System.out.print("카테고리: 소설, 과학, 역사, 자기계발, 철학\n");
                 searchKeyword = input("검색할 카테고리를 입력하세요: ");
                 for (Book book : bookList) {
                     if (book.getBookCategory().toLowerCase().contains(searchKeyword.toLowerCase())) {
@@ -305,6 +352,7 @@ public class BorrowCommand implements Command {
             System.out.print(printTableLine(width));
             //////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////
+            bookBorrow();
         }
     }
 

@@ -64,7 +64,9 @@ public class UserCommand implements Command{
         //User 환영 메세지
         System.out.print("'"+currentUser.getName() + "'"+"님 환영합니다!\n");
         //(TEST)User List
-        read();
+        //read();
+        ReturnCommand rc = ReturnCommand.getInstance();
+        rc.printBorrowStatusByUser();
         //SubMenu 출력
         System.out.print(printUserMenu(0));
     }//Method printTUI END

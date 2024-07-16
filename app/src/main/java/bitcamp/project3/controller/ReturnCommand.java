@@ -121,9 +121,9 @@ public class ReturnCommand {
     private void printMenuTUI(){
         setClearCmd();
 
-        System.out.printf("안녕하세요 '%s' 님\n", currentUser);
+        System.out.printf("안녕하세요 '%s' 님\n", currentUser.getName());
         printBorrowBookList();
-        printBookList();
+//        printBookList();
 //        cmd();
 
         System.out.print(printCustomMenu(menus));
@@ -143,7 +143,7 @@ public class ReturnCommand {
             }
         }
 
-        printBorrowBookList();
+//        printBorrowBookList();
 
         int selectNo = Prompt.inputInt("반납할 도서의 번호를 입력하세요 (취소: 0): ");
         if (selectNo == 0) {
@@ -178,7 +178,7 @@ public class ReturnCommand {
             //no, title, borrowDate, RetueDate
             int i=0;
 
-            System.out.println("도서반납 입니다.");
+//            System.out.println("대출 도서");
 
             // 현재 사용자가 대출한 책 목록 출력
             List<Borrow> userBorrows = new ArrayList<>();
@@ -189,7 +189,7 @@ public class ReturnCommand {
             }
 
             if (userBorrows.isEmpty()) {
-                System.out.println("현재 대출 중인 도서가 없습니다.");
+                System.out.println("현재 대출 중인 도서가 없습니다.\n\n");
                 return;
             }
             //////////////////////////////////////////////////////////////
@@ -221,7 +221,7 @@ public class ReturnCommand {
 
         private void printBookList() {
             String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
-            int[] width={4, 20, 20, 20, 15};
+            int[] width={SMALL, LARGE, HUGE, LARGE, MIDDLE};
             //no, cate, title, writer, status
             int i=0;
 
@@ -311,12 +311,12 @@ public class ReturnCommand {
     private void printAllBorrowStatus() {
         System.out.println("\n[전체 대출 현황]");
         if (borrowList == null || borrowList.isEmpty()) {
-            System.out.println("현재 대출 중인 도서가 없습니다.");
+            System.out.println("현재 대출 중인 도서가 없습니다.\n\n");
             return;
         }
 
         String[] columns = {"No", "사용자", "도서명", "대출일", "반납예정일"};
-        int[] widths = {4, 15, 20, 20, 20};
+        int[] widths = {SMALL, LARGE, HUGE, LARGE, MIDDLE};
         printTableHeader(columns, widths);
 
         int index = 1;
@@ -332,10 +332,10 @@ public class ReturnCommand {
         System.out.print(printTableLine(widths));
     }
 
-    private void printBorrowStatusByUser() {
-        System.out.println("\n[사용자별 대출 현황]");
+    protected void printBorrowStatusByUser() {
+//        System.out.println("\n[사용자별 대출 현황]");
         if (borrowList == null || borrowList.isEmpty()) {
-            System.out.println("현재 대출 중인 도서가 없습니다.");
+            System.out.println("현재 대출 중인 도서가 없습니다.\n\n");
             return;
         }
 
@@ -348,9 +348,9 @@ public class ReturnCommand {
             User user = entry.getKey();
             List<Borrow> userBorrows = entry.getValue();
 
-            System.out.printf("\n사용자: %s\n", user.getName());
+//            System.out.printf("\n사용자: %s\n", user.getName());
             String[] columns = {"No", "도서명", "대출일", "반납예정일"};
-            int[] widths = {4, 20, 20, 20};
+            int[] widths = {SMALL, HUGE, LARGE, LARGE};
             printTableHeader(columns, widths);
 
             int index = 1;

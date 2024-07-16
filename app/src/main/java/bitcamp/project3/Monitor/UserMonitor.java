@@ -111,11 +111,11 @@ public class UserMonitor extends Monitor {
     void processUserMenu(int ans) {
         switch (ans) {
             case 1: //도서 대출
-                System.out.println("도서대출 메뉴입니다.");
+//                System.out.println("도서대출 메뉴입니다.");
                 borrowCommand.execute();
                 break;
             case 2: //대출 반납
-                System.out.println("대출반납 메뉴입니다.");
+//                System.out.println("대출반납 메뉴입니다.");
                 returnCommand.execute();
                 break;
             case 3: //회원 정보 수정
