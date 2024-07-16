@@ -191,7 +191,7 @@ public class BookCommand implements Command {
     @Override
     public void update() {
 //        System.out.println("도서수정 입니다.");
-        int bookNo = inputInt("도서번호?");
+        int bookNo = inputInt(yellowColorCode+"도서번호?"+resetColorCode);
         Book bookToUpdate = null;
 
         for (Book book : bookList) {
@@ -206,16 +206,16 @@ public class BookCommand implements Command {
             return;
         }
 
-        bookToUpdate.setBookCategory(Prompt.input("카테고리"));
-        bookToUpdate.setTitle(Prompt.input("책 이름?"));
-        bookToUpdate.setAuthor(Prompt.input("책 저자?"));
-        bookToUpdate.setMbti("MBTI ?");
+        bookToUpdate.setBookCategory(Prompt.input(yellowColorCode+"카테고리"+resetColorCode));
+        bookToUpdate.setTitle(Prompt.input(yellowColorCode+"책 이름?"+resetColorCode));
+        bookToUpdate.setAuthor(Prompt.input(yellowColorCode+"책 저자?"+resetColorCode));
+        bookToUpdate.setMbti(yellowColorCode+"MBTI ?"+resetColorCode);
 
 //        bookToUpdate.setM(inputInt("M ?"));
 //        bookToUpdate.setB(inputInt("B ?"));
 //        bookToUpdate.setT(inputInt("T ?"));
 //        bookToUpdate.setI(inputInt("I ?"));
-        System.out.println("변경되었습니다.");
+        System.out.println(lightSkyBlueColorCode+"변경되었습니다."+resetColorCode);
     }
     //    Book book = (Book) bookList.get(bookList.indexOf(new Book(bookNo)));
     //    if (book == null) {
@@ -236,9 +236,9 @@ public class BookCommand implements Command {
     //도서삭제
     @Override
     public void delete() {
-        System.out.println("도서삭제 입니다.");
+//        System.out.println("도서삭제 입니다.");
 
-        int bookNo = inputInt("책번호?");
+        int bookNo = inputInt(yellowColorCode+"책번호?"+resetColorCode);
         Book bookToRemove = null;
 
         for (Book book : bookList) {
@@ -250,7 +250,7 @@ public class BookCommand implements Command {
 
         if (bookToRemove != null) {
             bookList.remove(bookToRemove);
-            System.out.printf("%d번 %s를 삭제했습니다.\n", bookToRemove.getNo(), bookToRemove.getTitle());
+            System.out.printf(lightSkyBlueColorCode+"%d번 %s를 삭제했습니다.\n"+resetColorCode, bookToRemove.getNo(), bookToRemove.getTitle());
         } else {
             errorNotHereBook();
         }

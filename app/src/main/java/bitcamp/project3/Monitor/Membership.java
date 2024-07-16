@@ -5,6 +5,7 @@ import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.User;
 import java.util.Iterator;
 
+import static bitcamp.project3.util.Prompt.*;
 import static bitcamp.project3.util.SystemMsg.*;
 
 
@@ -78,7 +79,7 @@ public class Membership {
     private String membershipGuide(){
         String str = "";
 
-//        str += printMembershipTUI();
+        str += printMembershipTUI();
         str += "[1] 로그인\n[2] 회원가입\n[0] 종료\n";
 
         return str;
@@ -87,8 +88,27 @@ public class Membership {
     private String printMembershipTUI(){
         String str = "";
 
-        str = "[관리자] ID:root PW:0000\n"+
-              "[유저] ID:user PW:0000\n";
+//        str = "[관리자] ID:root PW:0000\n"+
+//              "[유저] ID:user PW:0000\n";
+
+        str =   lightSkyBlueColorCode +" _____                                                     _____ \n" +
+                lightSkyBlueColorCode +"( ___ )---------------------------------------------------( ___ )\n" +
+                lightSkyBlueColorCode +" |   |                                                     |   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+"  ____    ____  ______   _________  _____       "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+" |_   \\  /   _||_   _ \\ |  _   _  ||_   _|      "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+"   |   \\/   |    | |_) ||_/ | | \\_|  | |        "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+"   | |\\  /| |    |  __'.    | |      | |        "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+"  _| |_\\/_| |_  _| |__) |  _| |_    _| |_       "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+" |_____||_____||_______/__|_____| _|_____|      "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+" |_   _ \\   .'   `.  .'   `.|_  ||_  _|         "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+"   | |_) | /  .-.  \\/  .-.  \\ | |_/ /           "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+"   |  __'. | |   | || |   | | |  __'.           "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+"  _| |__) |\\  `-'  /\\  `-'  /_| |  \\ \\_         "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |     "+yellowColorCode+" |_______/  `.___.'  `.___.'|____||____|        "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |                                                     "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |   |               📖  이재욱, 이선아  📖               "+ lightSkyBlueColorCode +"|   | \n" +
+                lightSkyBlueColorCode +" |___|                                                     |___| \n" +
+                lightSkyBlueColorCode +"(_____)---------------------------------------------------(_____)\n\n"+resetColorCode;
 
         return str;
     }

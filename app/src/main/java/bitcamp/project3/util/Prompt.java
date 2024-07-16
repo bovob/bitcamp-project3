@@ -15,6 +15,11 @@ public class Prompt {
     public static final int LARGE = 20;
     public static final int HUGE = 30;
 
+    public static String boldTextCode = "\u001B[1m";
+    public static String lightSkyBlueColorCode = "\u001B[38;2;135;206;250m";
+    public static String yellowColorCode = "\u001B[38;2;255;255;153m";
+    public static String resetColorCode = "\u001B[0m";
+
     static Scanner keyboardScanner = new Scanner(System.in);
 
     // String 값 Input

@@ -145,7 +145,7 @@ public class ReturnCommand {
 
 //        printBorrowBookList();
 
-        int selectNo = Prompt.inputInt("반납할 도서의 번호를 입력하세요 (취소: 0): ");
+        int selectNo = Prompt.inputInt(yellowColorCode+"반납할 도서의 번호를 입력하세요 (취소: 0): "+resetColorCode);
         if (selectNo == 0) {
             errorReturnBook();
             return;
@@ -169,7 +169,7 @@ public class ReturnCommand {
         // borrowList에서 해당 대출 정보 제거
         borrowList.remove(selectedBorrow);
 
-        System.out.printf("%s 도서가 성공적으로 반납되었습니다.\n", selectedBorrow.getTitle());
+        System.out.printf(lightSkyBlueColorCode+"%s 도서가 성공적으로 반납되었습니다.\n"+resetColorCode, selectedBorrow.getTitle());
     }
 
         private void printBorrowBookList() {

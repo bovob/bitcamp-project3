@@ -138,7 +138,7 @@ public class BorrowCommand implements Command {
 
     private void bookBorrow() {
 //        System.out.println("도서대출 입니다.");
-        int bookNo = inputInt("도서번호를 입력하세요: ");
+        int bookNo = inputInt(yellowColorCode+"도서번호를 입력하세요: "+resetColorCode);
 
         // bookList에서 해당 도서 찾기
         Book selectedBook = null;
@@ -290,7 +290,7 @@ public class BorrowCommand implements Command {
         switch (searchOption) {
             case 1:
                 System.out.print("카테고리: 소설, 과학, 역사, 자기계발, 철학\n");
-                searchKeyword = input("검색할 카테고리를 입력하세요: ");
+                searchKeyword = input(yellowColorCode+"검색할 카테고리를 입력하세요: "+resetColorCode);
                 for (Book book : bookList) {
                     if (book.getBookCategory().toLowerCase().contains(searchKeyword.toLowerCase())) {
                         searchResults.add(book);
@@ -298,7 +298,7 @@ public class BorrowCommand implements Command {
                 }
                 break;
             case 2:
-                searchKeyword = input("검색할 도서명을 입력하세요: ");
+                searchKeyword = input(yellowColorCode+"검색할 도서명을 입력하세요: "+resetColorCode);
                 for (Book book : bookList) {
                     if (book.getTitle().toLowerCase().contains(searchKeyword.toLowerCase())) {
                         searchResults.add(book);
@@ -306,7 +306,7 @@ public class BorrowCommand implements Command {
                 }
                 break;
             case 3:
-                searchKeyword = input("검색할 저자를 입력하세요: ");
+                searchKeyword = input(yellowColorCode+"검색할 저자를 입력하세요: "+resetColorCode);
                 for (Book book : bookList) {
                     if (book.getAuthor().toLowerCase().contains(searchKeyword.toLowerCase())) {
                         searchResults.add(book);
@@ -323,7 +323,7 @@ public class BorrowCommand implements Command {
         if (searchResults.isEmpty()) {
             errorAccordBook();
         } else {
-            System.out.println("검색 결과:");
+//            System.out.println("검색 결과:");
 
 
             //////////////////////////////////////////////////////////////

@@ -6,6 +6,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static bitcamp.project3.util.Prompt.lightSkyBlueColorCode;
+import static bitcamp.project3.util.Prompt.resetColorCode;
 import static bitcamp.project3.util.SystemMsg.*;
 
 
@@ -198,7 +200,7 @@ public class MbtiCommand implements Command{
                 mbti.setPj(result);
                 break;
             default:
-                System.out.print("Check Read File Function...\n");
+                System.out.print(lightSkyBlueColorCode+"Check Read File Function...\n"+resetColorCode);
         }
     }
 
@@ -227,8 +229,8 @@ public class MbtiCommand implements Command{
 
     private boolean isExistsFile(){
         if(!F.exists()){
-            System.out.print("해당 경로에 아래 파일을 다운받아주세요.\n" +
-                    PATH);
+            System.out.print(lightSkyBlueColorCode+"해당 경로에 아래 파일을 다운받아주세요.\n" +
+                    PATH+resetColorCode);
             return false;
         }
         return true;

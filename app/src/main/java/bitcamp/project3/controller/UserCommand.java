@@ -167,7 +167,7 @@ public class UserCommand implements Command{
         //+----+---------------+---------------+---------------+
         str.append(printTableLine(width));
 
-        System.out.print(str);
+        System.out.print(lightSkyBlueColorCode+str+resetColorCode);
     }//Method read END
 
     //User 정보 출력
@@ -245,13 +245,15 @@ public class UserCommand implements Command{
         String str = "";
 
                 //'user'님의 회원 정보
-        str = "'"       + user.getName() +"'님의 회원 정보\n"+
+        str = lightSkyBlueColorCode+
+                "'"       + user.getName() +"'님의 회원 정보\n"+
                 //ID: user
               "ID: "    + user.getId()                  +"\n"+
                 //PW: 0000
               "PW: "    + user.getPw()                  +"\n"+
                 //MBTI: istj
-              "MBTI: "  + user.getMbti().getMbti()     +"\n\n";
+              "MBTI: "  + user.getMbti().getMbti()     +"\n\n"
+                +resetColorCode;
 
         //sub Menu 출력
         str += printUserMenu(3);
@@ -264,7 +266,7 @@ public class UserCommand implements Command{
 
     //PW update
     private void setUserPw(){
-        String pw = input(String.format("새 PW(이전: %s) ",currentUser.getPw()));
+        String pw = input(String.format(yellowColorCode+"새 PW(이전: %s) "+resetColorCode,currentUser.getPw()));
         currentUser.setPw(pw);
         successUpdate();
     }//Method setUserPw END
@@ -295,20 +297,20 @@ public class UserCommand implements Command{
         while(true) {
             try {
 
-                System.out.print("삭제할 유저 번호?(이전: 0)\n");
-                ans = inputInt(">");
+                System.out.print(yellowColorCode+"삭제할 유저 번호?(이전: 0)\n");
+                ans = inputInt(">"+resetColorCode);
 
                 if(ans == 0){
                     return;
                 }
 
                 if(ans ==1){
-                    System.out.print("삭제할 수 없는 유저입니다.\n");
+                    errorDeleteAdmin();
                     continue;
                 }
 
                 if(isValidateUserNum(ans)) {
-                    System.out.printf("'%s'님이 삭제되었습니다.\n", userList.get(ans - 1).getName());
+                    System.out.printf(lightSkyBlueColorCode+"'%s'님이 삭제되었습니다.\n"+resetColorCode, userList.get(ans - 1).getName());
                     userList.remove(ans - 1);
                     return;
                 }else{
