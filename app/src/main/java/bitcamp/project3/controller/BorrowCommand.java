@@ -18,22 +18,20 @@ import static bitcamp.project3.util.TableFormat.*;
 public class BorrowCommand implements Command {
 
     String menuTitle = "대출";
-    User currentUser;
+    static User currentUser;
         //= "user";
 
     //List<Book> bookList;
     List<Borrow> borrowList = new ArrayList<>();
-    List<Book> bookList;
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
-    public BorrowCommand() {
-
+    public BorrowCommand(User user) {
+        currentUser = user;
     }
 
-    public BorrowCommand(List<Book> bookList, User currentUser) {
-        this.bookList = bookList;
-        this.currentUser = currentUser;
+    public BorrowCommand(List<Book> bookList) {
+//        this.bookList = bookList;
     }
 
 
@@ -43,11 +41,12 @@ public class BorrowCommand implements Command {
     private static BorrowCommand mc;
 
     // setup BookCommand Instance
-    public static BorrowCommand getInstance() {
+    public static BorrowCommand getInstance(User user) {
 
         if (mc == null) {
-            mc = new BorrowCommand();
+            mc = new BorrowCommand(user);
         }
+        currentUser = user;
 
         return mc;
     }// Method getInstance END
@@ -114,7 +113,7 @@ public class BorrowCommand implements Command {
 
         // bookList에서 해당 도서 찾기
         Book selectedBook = null;
-        for (Book book : bookList) {
+        for (Book book : BookCommand.getInstance().getBookList()) {
             if (book.getNo() == bookNo) {
                 selectedBook = book;
                 break;
@@ -151,7 +150,7 @@ public class BorrowCommand implements Command {
 
     // 대출리스트 Update
     private void updateBorrowListInOtherClasses() {
-        ReturnCommand.getInstance().setBorrowList(this.borrowList);
+        ReturnCommand.getInstance(currentUser).setBorrowList(this.borrowList);
         AdminMonitor.getInstance().updateBorrowList(this.borrowList);
     }
 
@@ -211,7 +210,7 @@ public class BorrowCommand implements Command {
         System.out.print(printTableLine(width));
 
         //table data
-        for (Book book : bookList) {
+        for (Book book : BookCommand.getInstance().getBookList()) {
             System.out.print(printTableDataFormat( width[0], String.format("%s", book.getNo())) );
             System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
             System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
@@ -231,7 +230,7 @@ public class BorrowCommand implements Command {
         int i=0;
         List<Book> resultList = new ArrayList<>();
 
-        for (Book book : bookList) {
+        for (Book book : BookCommand.getInstance().getBookList()) {
             if (book.getMbti().toLowerCase().contains(type.toLowerCase())) {
                 resultList.add(book);
             }
@@ -293,7 +292,7 @@ public class BorrowCommand implements Command {
             case 1:
                 System.out.print("카테고리: 소설, 과학, 역사, 자기계발, 철학\n");
                 searchKeyword = input(yellowColorCode+"검색할 카테고리를 입력하세요: "+resetColorCode);
-                for (Book book : bookList) {
+                for (Book book : BookCommand.getInstance().getBookList()) {
                     if (book.getBookCategory().toLowerCase().contains(searchKeyword.toLowerCase())) {
                         searchResults.add(book);
                     }
@@ -301,7 +300,7 @@ public class BorrowCommand implements Command {
                 break;
             case 2:
                 searchKeyword = input(yellowColorCode+"검색할 도서명을 입력하세요: "+resetColorCode);
-                for (Book book : bookList) {
+                for (Book book : BookCommand.getInstance().getBookList()) {
                     if (book.getTitle().toLowerCase().contains(searchKeyword.toLowerCase())) {
                         searchResults.add(book);
                     }
@@ -309,7 +308,7 @@ public class BorrowCommand implements Command {
                 break;
             case 3:
                 searchKeyword = input(yellowColorCode+"검색할 저자를 입력하세요: "+resetColorCode);
-                for (Book book : bookList) {
+                for (Book book : BookCommand.getInstance().getBookList()) {
                     if (book.getAuthor().toLowerCase().contains(searchKeyword.toLowerCase())) {
                         searchResults.add(book);
                     }
@@ -402,6 +401,14 @@ public class BorrowCommand implements Command {
 
     public void setBorrowList(List borrowList) {
         this.borrowList = borrowList;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }
 

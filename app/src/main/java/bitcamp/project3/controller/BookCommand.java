@@ -20,7 +20,7 @@ public class BookCommand implements Command {
 //    {"도서등록","도서목록","도서수정","도서삭제"}   //1~
 
     // 도서 Dummy 생성
-    ArrayList<Book> bookList = new ArrayList<>(Book.generateDummyData(5));
+    static ArrayList<Book> bookList;
     List<Borrow> borrowList;
 
     ///////////////////////////////////////////////////////////
@@ -226,13 +226,13 @@ public class BookCommand implements Command {
 
     }
 
-    public List getBookList() {
+    public ArrayList<Book> getBookList() {
         return this.bookList;
     }
 
-
-
-
+    public static void setBookList(ArrayList<Book> bookList) {
+        BookCommand.bookList = bookList;
+    }
 
     ///////////////////////////////////////////////////////////
     ///////////////// public getter, setter ///////////////////

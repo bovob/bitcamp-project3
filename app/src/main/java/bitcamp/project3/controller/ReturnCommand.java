@@ -18,7 +18,7 @@ public class ReturnCommand {
         String menuTitle = "반납";
         String[] menus = {"도서반납"};
 
-        User currentUser;
+        static User currentUser;
 
         List<Book> bookList;
         List<Borrow> borrowList;
@@ -27,10 +27,13 @@ public class ReturnCommand {
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
 
+    ReturnCommand(User user){
+
+    }
+
     public ReturnCommand(List<Book> bookList, List<Borrow> borrowList, User currentUser) {
         this.bookList = bookList;
         this.borrowList = borrowList;
-        this.currentUser = currentUser;
     }
 
 
@@ -40,11 +43,12 @@ public class ReturnCommand {
     private static ReturnCommand rc;
 
     // setup BookCommand Instance
-    public static ReturnCommand getInstance() {
+    public static ReturnCommand getInstance(User user) {
 
         if (rc == null) {
-            rc = new ReturnCommand();
+            rc = new ReturnCommand(user);
         }
+        currentUser = user;
 
         return rc;
     }// Method getInstance END
@@ -348,4 +352,11 @@ public class ReturnCommand {
         return this.borrowList;
     }
 
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 }

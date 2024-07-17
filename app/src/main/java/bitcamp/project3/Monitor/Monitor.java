@@ -7,10 +7,10 @@ import bitcamp.project3.controller.UserCommand;
 
 public class Monitor {
 
-    public UserCommand userCommand = UserCommand.getInstance(1);
-    public BorrowCommand borrowCommand = BorrowCommand.getInstance();
-    public BookCommand bookCommand = BookCommand.getInstance();
-    public ReturnCommand returnCommand = ReturnCommand.getInstance();
+//    public UserCommand userCommand = UserCommand.getInstance();
+//    public BorrowCommand borrowCommand = BorrowCommand.getInstance();
+//    public BookCommand bookCommand = BookCommand.getInstance();
+//    public ReturnCommand returnCommand = ReturnCommand.getInstance();
 
     // 메뉴 검증
     protected static boolean isValidateMenu(int menuNo, String[] menus) {

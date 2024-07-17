@@ -4,6 +4,10 @@ import bitcamp.project3.Monitor.AdminMonitor;
 import bitcamp.project3.Monitor.Membership;
 import bitcamp.project3.controller.BookCommand;
 import bitcamp.project3.Monitor.UserMonitor;
+import bitcamp.project3.controller.BorrowCommand;
+import bitcamp.project3.vo.Book;
+
+import java.util.ArrayList;
 
 import static bitcamp.project3.util.Prompt.close;
 
@@ -50,6 +54,8 @@ public class App {
     // Main
     public static void main(String[] args) {
         App app = new App();
+        //더미 생성
+        BookCommand.setBookList(new ArrayList<>(Book.generateDummyData()));
 
         // 로그인 후 회원SeqNo get
         // 관리자SeqNo : 0
