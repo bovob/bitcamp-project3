@@ -22,7 +22,7 @@ public class BorrowCommand implements Command {
         //= "user";
 
     //List<Book> bookList;
-    List<Borrow> borrowList = new ArrayList<>();
+    static List<Borrow> borrowList = new ArrayList<>();
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
@@ -150,8 +150,8 @@ public class BorrowCommand implements Command {
 
     // 대출리스트 Update
     private void updateBorrowListInOtherClasses() {
-        ReturnCommand.getInstance(currentUser).setBorrowList(this.borrowList);
-        AdminMonitor.getInstance().updateBorrowList(this.borrowList);
+//        ReturnCommand.getInstance(currentUser).setBorrowList(this.borrowList);
+//        AdminMonitor.getInstance().updateBorrowList(this.borrowList);
     }
 
 
@@ -395,20 +395,21 @@ public class BorrowCommand implements Command {
     //////////////////////////// -- ///////////////////////////
     ///////////////////////////////////////////////////////////
 
-    public List getBorrowList() {
-        return this.borrowList;
+    public static List<Borrow> getBorrowList() {
+        return borrowList;
     }
 
-    public void setBorrowList(List borrowList) {
-        this.borrowList = borrowList;
+    public static void setBorrowList(List<Borrow> borrowList) {
+        BorrowCommand.borrowList = borrowList;
     }
 
-    public User getCurrentUser() {
+    public static void removeBorrowList(Borrow b) {
+        borrowList.remove(b);
+    }
+
+    public static User getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
 }
 
