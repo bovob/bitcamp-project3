@@ -291,8 +291,8 @@ public class ReturnCommand {
             System.out.print(printTableDataFormat(widths[0], String.valueOf(index)));
             System.out.print(printTableDataFormat(widths[1], borrow.getUser().getName()));
             System.out.print(printTableDataFormat(widths[2], borrow.getTitle()));
-            System.out.print(printTableDataFormat(widths[2], String.format("%s",borrow.getStartDate())));
-            System.out.print(printTableDataFormat(widths[3], String.format("%s",borrow.getEndDate())));
+            System.out.print(printTableDataFormat(widths[3], String.format("%s",borrow.getStartDate())));
+            System.out.print(printTableDataFormat(widths[4], String.format("%s",borrow.getEndDate())));
             System.out.print(":\n");
             index++;
         }

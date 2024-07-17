@@ -117,10 +117,10 @@ public class BookCommand implements Command {
     public void create() {
 //        System.out.println("도서등록 입니다.");
         Book book = new Book();
-
-        book.setBookCategory(Prompt.input("카테고리"));
-        book.setTitle(Prompt.input("책 이름?"));
-        book.setAuthor(Prompt.input("책 저자?"));
+        System.out.println("[카테고리 목록 : 소설, 과학, 역사, 자기 계발, 철학]");
+        book.setBookCategory(Prompt.input("카테고리 > "));
+        book.setTitle(Prompt.input("도서 명 > "));
+        book.setAuthor(Prompt.input("저자 명 > "));
         book.setMbti("MBTI? ");
 
         bookList.add(book);
