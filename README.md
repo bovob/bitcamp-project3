@@ -2,7 +2,8 @@
 
 - Git : https://github.com/SA030/bitcamp-project3.git
 - Account
-  <br>|  ID  | P/W |  비고  |
+  <br>
+  |  ID  | P/W |  비고  |
   | :--: | :--: | :----: |
   | root | 0000 | 관리자 |
   | user | 0000 |  유저  |
@@ -28,7 +29,7 @@
 
 | **이재욱** | **이선아** |
 | :--------: | :--------: |
-|  |  |
+| [<img src="https://avatars.githubusercontent.com/u/66761864?v=4" height=150 width=150> <br/> @bovob] |[<img src="https://avatars.githubusercontent.com/u/170715429?v=4" height=150 width=150> <br/> @SA030] |
 
 </div>
 <br>
