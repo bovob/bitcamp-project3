@@ -45,11 +45,25 @@ public class TableFormat {
     //format(koean)
     public static String koreanFormat(int width, String data){
         int titleLen = getlengthWord(data);
+        int cnt = getCountWord(data);
         String str ="";
 
-        str = "%-"+ (width-titleLen/2) +"s";
+        str = "%-"+ (width-cnt) +"s";
         return str;
 
+    }
+
+    public static int getCountWord(String word){
+        char[] arr = word.toCharArray();
+        int cnt = 0;
+
+        for(char w : arr){
+            if(Pattern.matches("^[가-힣]*$", String.format("%c", w) ) ){
+                cnt++;
+            }
+        }
+
+        return cnt;
     }
 
     //check byte(korean)
