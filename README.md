@@ -96,6 +96,65 @@
 <br>
 
 ## 6. 기능
+
+### 1. 회원가입
+
+- 처음 방문한 User는 이름/ID/PW 를 입력받습니다.
+- MBTI 검사를 진행합니다.
+  
+![UserAccount](https://github.com/user-attachments/assets/6722b619-6924-4f67-a4a5-50dafdc5cdb8)
+
+### 2. 도서대출
+
+- User MBTI와 관련된 추천도서를 추천합니다.
+- 도서번호를 통하여 해당 도서를 대출합니다.
+
+![UserBorrow](https://github.com/user-attachments/assets/c13ca6f8-758e-492d-944a-fe16b9318830)
+
+### 3. 도서검색
+
+- 도서검색은 카테고리/도서명/저자 로 나누어집니다.
+- 검색을 통하여 도서번호/카테고리/도서명/저자/대출여부 를 확인 할 수 있습니다.
+
+![UserSearch](https://github.com/user-attachments/assets/a1cf8d26-c510-4f50-8c7f-2b6329a9eed9)
+
+### 4. 도서반납
+
+- 도서반납은 대출번호를 입력하여 진행됩니다.
+
+![UserReturn](https://github.com/user-attachments/assets/3a8122ca-0666-4c7f-9858-5f5f806e7cab)
+
+### 5. 회원정보수
+
+- 유저의 PW 및 MBTI를 재검사 할 수 있습니다.
+
+![ISFPtoISTJ](https://github.com/user-attachments/assets/8e1f1784-6652-4fac-898b-a0dc2236058f)
+
+### 6. 도서등록
+
+- 관리자로 로그인합니다.
+- 도서관리를 통하여 카테고리/도서 명/저자 명 을 입력받습니다.
+- 도서수정은 도서번호를 입력받아 카테고리/도서 명/저자 명 및 추천 MBTI를 설정할 수 있습니다.
+- 도서삭제는 도서번호를 입력받아 해당 도서를 삭제합니다.
+
+![AdminBook](https://github.com/user-attachments/assets/f485aa13-92e7-461d-92a7-aeb0ab15fc08)
+
+### 7. 도서대출 현황
+
+- 관리자로 로그인합니다.
+- 전체 도서의 대출목록을 출력합니다.
+
+![AdminBorrow](https://github.com/user-attachments/assets/eba3d70e-db03-413f-8f86-e6596d4d55c6)
+
+### 8. 유저관리
+
+- 관리자로 로그인합니다.
+- 전체 유저목록을 확인 할 수 있습니다.
+- 유저번호를 입력하여 삭제할 수 있습니다.
+
+![AdminUserdel](https://github.com/user-attachments/assets/8b1cb9d9-34da-4fef-ab54-c6b2451c9c15)
+
+
 <br>
 
 ## 7. 후기
