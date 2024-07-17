@@ -70,9 +70,63 @@
  ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BookCommand.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BorrowCommand.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Command.ja정
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Command.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MbtiCommand.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReturnCommand.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserCommand.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂Monitor
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AdminMonitor.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Membership.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Monitor.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserMonitor.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂util
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GetHtml.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MenuFormat.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Prompt.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SystemMsg.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜TableFormat.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂vo
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Book.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Borrow.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜User.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜App.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜DummyData.java
+ ┗ 📜build.gradle
+``````
+<br>
 
-- 유저의 PW 및 MBTI를 재검사 할 수 있습니다.
+## 6. 기능
+
+### 1. 회원가입
+
+- 처음 방문한 User는 이름/ID/PW 를 입력받습니다.
+- MBTI 검사를 진행합니다.
+- 
+![UserAccount](https://github.com/user-attachments/assets/e9c6e77a-4edc-4816-8fe8-3d467feb23ce)
+
+### 2. 도서대출
+
+- User MBTI와 관련된 추천도서를 추천합니다.
+- 도서번호를 통하여 해당 도서를 대출합니다.
+  
+![UserBorrow](https://github.com/user-attachments/assets/c47ec914-b416-40eb-aeaa-2374cd239e69)
+
+### 3. 도서검색
+
+- 도서검색은 카테고리/도서명/저자 로 나누어집니다.
+- 검색을 통하여 도서번호/카테고리/도서명/저자/대출여부 를 확인 할 수 있습니다.
+
+![UserSearch](https://github.com/user-attachments/assets/57a23f79-c5da-4b7c-abba-c697d32620cd)
+
+### 4. 도서반납
+
+- 도서반납은 대출번호를 입력하여 진행됩니다.
+
+![UserReturn](https://github.com/user-attachments/assets/128484b7-193f-4f0c-a0e4-979fd07a32cf)
+
+### 5.회원정보수
+
+- 유저의 PW 및 MBTI를 재검사 할 수 있습니다.  
 
 ![ISFPtoISTJ](https://github.com/user-attachments/assets/8e1f1784-6652-4fac-898b-a0dc2236058f)
 
