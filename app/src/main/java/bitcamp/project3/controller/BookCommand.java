@@ -139,7 +139,7 @@ public class BookCommand implements Command {
         ////////////////////////result table//////////////////////////
         //////////////////////////////////////////////////////////////
         //table title
-        System.out.print(printTableLine(width));
+        System.out.print(lightSkyBlueColorCode+printTableLine(width));
         for(String data: calm){
             System.out.print(printTableDataFormat(width[i++], data));
         }
@@ -161,7 +161,7 @@ public class BookCommand implements Command {
         }
 
         //END line
-        System.out.print(printTableLine(width));
+        System.out.print(printTableLine(width)+resetColorCode);
         //////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////
     }

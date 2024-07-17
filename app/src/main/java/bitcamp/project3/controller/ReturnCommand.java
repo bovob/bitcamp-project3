@@ -174,7 +174,7 @@ public class ReturnCommand {
             //////////////////////////////////////////////////////////////
             //table title
             System.out.println("현재 대출 중인 도서 목록:");
-            System.out.print(printTableLine(width));
+            System.out.print(lightSkyBlueColorCode+printTableLine(width));
             for(String data: calm){
                 System.out.print(printTableDataFormat(width[i++], data));
             }
@@ -193,7 +193,7 @@ public class ReturnCommand {
             }
 
             //END line
-            System.out.print(printTableLine(width));
+            System.out.print(printTableLine(width)+resetColorCode);
         }
 
         private void printBookList() {
@@ -214,7 +214,7 @@ public class ReturnCommand {
             ////////////////////////result table//////////////////////////
             //////////////////////////////////////////////////////////////
             //table title
-            System.out.print(printTableLine(width));
+            System.out.print(lightSkyBlueColorCode+printTableLine(width));
             for(String data: calm){
                 System.out.print(printTableDataFormat(width[i++], data));
             }
@@ -227,12 +227,12 @@ public class ReturnCommand {
                 System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
                 System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
                 System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
-                System.out.print(printTableDataFormat( width[4], String.format("%s", book.isCheck() ? "대출중" : "대출가능") ));
+                System.out.print(valid(book, width[4]));
                 System.out.print(":\n");
             }
 
             //END line
-            System.out.print(printTableLine(width));
+            System.out.print(printTableLine(width)+resetColorCode);
             //////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////
         }
@@ -299,7 +299,7 @@ public class ReturnCommand {
             System.out.print(":\n");
             index++;
         }
-        System.out.print(printTableLine(widths));
+        System.out.print(printTableLine(widths)+resetColorCode);
     }
 
     protected void printBorrowStatusByUser() {
@@ -330,12 +330,12 @@ public class ReturnCommand {
                 System.out.print(":\n");
                 index++;
             }
-            System.out.print(printTableLine(widths));
+            System.out.print(printTableLine(widths)+resetColorCode);
         }
     }
 
     private void printTableHeader(String[] columns, int[] widths) {
-        System.out.print(printTableLine(widths));
+        System.out.print(lightSkyBlueColorCode+printTableLine(widths));
         for (int i = 0; i < columns.length; i++) {
             System.out.print(printTableDataFormat(widths[i], columns[i]));
         }

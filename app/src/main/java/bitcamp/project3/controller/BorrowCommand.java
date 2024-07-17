@@ -184,7 +184,7 @@ public class BorrowCommand implements Command {
 //            System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
 //            System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
 //            System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
-//            System.out.print(printTableDataFormat( width[4], String.format("%s", book.isCheck() ? "대출중" : "대출가능") ));
+//            System.out.print(valid(book, width[4]));
 //            System.out.print(":\n");
 //        }
 //
@@ -199,7 +199,7 @@ public class BorrowCommand implements Command {
     private void allBookPrint(){
         String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
         int[] width={SMALL, LARGE, HUGE, LARGE, MIDDLE};
-                System.out.print(printTableLine(width));
+                System.out.print(lightSkyBlueColorCode+printTableLine(width));
 //        for(String data: calm){
 //            System.out.print(printTableDataFormat(width[i++], data));
 //        }
@@ -215,13 +215,17 @@ public class BorrowCommand implements Command {
             System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
             System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
             System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
-            System.out.print(printTableDataFormat( width[4], String.format("%s", book.isCheck() ? "대출중" : "대출가능") ));
+            System.out.print(valid(book, width[4]));
             System.out.print(":\n");
         }
 
         //END line
-        System.out.print(printTableLine(width));
+        System.out.print(printTableLine(width)+resetColorCode);
+
+
     }
+
+
 
     private void bookMbti(String type){
         String[] calm={"No", "카테고리", "도서명", "저자", "대출상태"};
@@ -245,7 +249,7 @@ public class BorrowCommand implements Command {
         ////////////////////////result table//////////////////////////
         //////////////////////////////////////////////////////////////
         //table title
-        System.out.print(printTableLine(width));
+        System.out.print(lightSkyBlueColorCode+printTableLine(width));
         for(String data: calm){
             System.out.print(printTableDataFormat(width[i++], data));
         }
@@ -258,12 +262,12 @@ public class BorrowCommand implements Command {
             System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
             System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
             System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
-            System.out.print(printTableDataFormat( width[4], String.format("%s", book.isCheck() ? "대출중" : "대출가능") ));
+            System.out.print(valid(book, width[4]));
             System.out.print(":\n");
         }
 
         //END line
-        System.out.print(printTableLine(width));
+        System.out.print(printTableLine(width)+resetColorCode);
         //////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////
     }
@@ -330,7 +334,7 @@ public class BorrowCommand implements Command {
             ////////////////////////result table//////////////////////////
             //////////////////////////////////////////////////////////////
             //table title
-            System.out.print(printTableLine(width));
+            System.out.print(lightSkyBlueColorCode+printTableLine(width));
             for(String data: calm){
                 System.out.print(printTableDataFormat(width[i++], data));
             }
@@ -343,12 +347,15 @@ public class BorrowCommand implements Command {
                 System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
                 System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
                 System.out.print(printTableDataFormat( width[3], String.format("%s", book.getAuthor())) );
-                System.out.print(printTableDataFormat( width[4], String.format("%s", book.isCheck() ? "대출중" : "대출가능") ));
+                System.out.print(valid(book, width[4]));
                 System.out.print(":\n");
             }
 
+
+
+
             //END line
-            System.out.print(printTableLine(width));
+            System.out.print(printTableLine(width)+resetColorCode);
             //////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////
             bookBorrow();

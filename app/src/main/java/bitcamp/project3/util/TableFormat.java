@@ -68,7 +68,7 @@ public class TableFormat {
 
     //check byte(korean)
     public static int getlengthWord(String word){
-        if(!getType(word)) {
+        if(getType(word)) {
             try {
                 return word.getBytes("euc-kr").length;
             } catch (UnsupportedEncodingException e) {
@@ -80,7 +80,7 @@ public class TableFormat {
 
     //get type(korean?)
     public static boolean getType(String word){
-        return !Pattern.matches("^[가-힣]*$", word);
+        return Pattern.matches("^[가-힣]*$", word);
     }
 
 }

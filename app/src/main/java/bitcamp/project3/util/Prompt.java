@@ -1,11 +1,15 @@
 package bitcamp.project3.util;
 
+import bitcamp.project3.vo.Book;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import static bitcamp.project3.util.SystemMsg.errorProgramExit;
+import static bitcamp.project3.util.TableFormat.koreanFormat;
+import static bitcamp.project3.util.TableFormat.printTableDataFormat;
 
 public class Prompt {
 
@@ -18,6 +22,7 @@ public class Prompt {
     public static String boldTextCode = "\u001B[1m";
     public static String lightSkyBlueColorCode = "\u001B[38;2;135;206;250m";
     public static String yellowColorCode = "\u001B[38;2;255;255;153m";
+    public static String pinkColorCode = "\u001B[35m";
     public static String resetColorCode = "\u001B[0m";
 
     static Scanner keyboardScanner = new Scanner(System.in);
@@ -49,12 +54,19 @@ public class Prompt {
     // MBTI
     public static String inputMBTI(String Mbti, String options) {
         while (true) {
-            String input = input(Mbti +" ("+ options+" )?").toUpperCase();
-            if (input.length() == 1 && options.contains(input)){
+            String input = input(Mbti + " (" + options + " )?").toUpperCase();
+            if (input.length() == 1 && options.contains(input)) {
                 return input;
             }
-            System.out.printf("잘못된 입력입니다." +options+" 중 하나를 입력해주세요.");
+            System.out.printf("잘못된 입력입니다." + options + " 중 하나를 입력해주세요.");
         }
+    }
+
+
+    public static String valid(Book book, int width){
+        return book.isCheck()?
+                "|"+pinkColorCode+String.format(koreanFormat(width, "대출 중"), "대출 중")+lightSkyBlueColorCode
+                : printTableDataFormat(width, String.format("%s", "대출 가능"));
     }
 
 
