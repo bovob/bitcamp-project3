@@ -38,7 +38,7 @@ public class AdminMonitor extends Monitor {
 //        this.bookCommand = new BookCommand(borrowList);
     }
 
-    private List<Borrow> borrowList;
+//    private List<Borrow> borrowList;
 
 
     ///////////////////////////////////////////////////////////
@@ -120,9 +120,9 @@ public class AdminMonitor extends Monitor {
                 bc.adminExecute();
                 break;
             case 2: //대출 관리
-                this.borrowList = BorrowCommand.getInstance(current).getBorrowList();
+//                this.borrowList = BorrowCommand.getInstance(current).getBorrowList();
                 ReturnCommand rc = ReturnCommand.getInstance(current);
-                updateBorrowList(this.borrowList);
+//                updateBorrowList(this.borrowList);
                 rc.adminExecute();
                 break;
             case 3: //유저 관리
@@ -162,7 +162,7 @@ public class AdminMonitor extends Monitor {
         AdminMonitor.adminMenus = adminMenus;
     }
 
-    public void updateBorrowList(List<Borrow> updatedList) {
-        this.borrowList = updatedList;
-    }
+//    public void updateBorrowList(List<Borrow> updatedList) {
+//        this.borrowList = updatedList;
+//    }
 }

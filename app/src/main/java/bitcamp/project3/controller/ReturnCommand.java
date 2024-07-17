@@ -20,8 +20,8 @@ public class ReturnCommand {
 
         static User currentUser;
 
-        List<Book> bookList;
-        List<Borrow> borrowList;
+//        List<Book> bookList;
+//        List<Borrow> borrowList;
 
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
@@ -31,10 +31,9 @@ public class ReturnCommand {
 
     }
 
-    public ReturnCommand(List<Book> bookList, List<Borrow> borrowList, User currentUser) {
-        this.bookList = bookList;
-        this.borrowList = borrowList;
-    }
+//    public ReturnCommand(List<Borrow> borrowList) {
+//        this.bookList = bookList;
+//    }
 
 
     ///////////////////////////////////////////////////////////
@@ -62,9 +61,9 @@ public class ReturnCommand {
     ///////////////////////////////////////////////////////////
     ///////////////////////// Method //////////////////////////
     ///////////////////////////////////////////////////////////
-    public ReturnCommand() {
-        this.bookList = new ArrayList<>();
-    }
+//    public ReturnCommand() {
+//        this.bookList = new ArrayList<>();
+//    }
 
     // 메인실행
     public void execute() {
@@ -117,7 +116,7 @@ public class ReturnCommand {
     private void bookReturn() {
         // 현재 사용자가 대출한 책 목록 출력
         List<Borrow> userBorrows = new ArrayList<>();
-        for (Borrow borrow : borrowList) {
+        for (Borrow borrow : BorrowCommand.getBorrowList()) {
             if (borrow.getUser().equals(currentUser)) {
                 userBorrows.add(borrow);
             }
@@ -138,7 +137,7 @@ public class ReturnCommand {
         Borrow selectedBorrow = userBorrows.get(selectNo - 1);
 
         // 해당 도서를 bookList에서 찾아 대출 상태 변경
-        for (Book book : bookList) {
+        for (Book book : BookCommand.getInstance().getBookList()) {
             if (book.getTitle().equals(selectedBorrow.getTitle())) {
                 book.setCheck(false);
                 break;
@@ -146,7 +145,7 @@ public class ReturnCommand {
         }
 
         // borrowList에서 해당 대출 정보 제거
-        borrowList.remove(selectedBorrow);
+        BorrowCommand.removeBorrowList(selectedBorrow);
 
         System.out.printf(lightSkyBlueColorCode+"%s 도서가 성공적으로 반납되었습니다.\n"+resetColorCode, selectedBorrow.getTitle());
     }
@@ -160,7 +159,7 @@ public class ReturnCommand {
 
             // 현재 사용자가 대출한 책 목록 출력
             List<Borrow> userBorrows = new ArrayList<>();
-            for (Borrow borrow : borrowList) {
+            for (Borrow borrow : BorrowCommand.getBorrowList()) {
                 if (borrow.getUser().equals(currentUser)) {
                     userBorrows.add(borrow);
                 }
@@ -204,7 +203,7 @@ public class ReturnCommand {
             int i=0;
 
 
-            if (bookList == null){
+            if (BookCommand.getInstance().getBookList() == null){
                 errorAccordBook();
                 return;
             }
@@ -223,7 +222,7 @@ public class ReturnCommand {
             System.out.print(printTableLine(width));
 
             //table data
-            for (Book book : bookList) {
+            for (Book book : BookCommand.getInstance().getBookList()) {
                 System.out.print(printTableDataFormat( width[0], String.format("%s", book.getNo())) );
                 System.out.print(printTableDataFormat( width[1], String.format("%s", book.getBookCategory())) );
                 System.out.print(printTableDataFormat( width[2], String.format("%s", book.getTitle())) );
@@ -281,7 +280,7 @@ public class ReturnCommand {
 
     private void printAllBorrowStatus() {
         System.out.println("\n[전체 대출 현황]");
-        if (borrowList == null || borrowList.isEmpty()) {
+        if (BorrowCommand.getBorrowList() == null || BorrowCommand.getBorrowList().isEmpty()) {
             errorNothingLend();
             return;
         }
@@ -291,12 +290,12 @@ public class ReturnCommand {
         printTableHeader(columns, widths);
 
         int index = 1;
-        for (Borrow borrow : this.borrowList) {
+        for (Borrow borrow : BorrowCommand.getBorrowList()) {
             System.out.print(printTableDataFormat(widths[0], String.valueOf(index)));
             System.out.print(printTableDataFormat(widths[1], borrow.getUser().getName()));
             System.out.print(printTableDataFormat(widths[2], borrow.getTitle()));
-            System.out.print(printTableDataFormat(widths[2], String.format("%s",borrow.getStartDate())));
-            System.out.print(printTableDataFormat(widths[3], String.format("%s",borrow.getEndDate())));
+            System.out.print(printTableDataFormat(widths[3], String.format("%s",borrow.getStartDate())));
+            System.out.print(printTableDataFormat(widths[4], String.format("%s",borrow.getEndDate())));
             System.out.print(":\n");
             index++;
         }
@@ -304,13 +303,13 @@ public class ReturnCommand {
     }
 
     protected void printBorrowStatusByUser() {
-        if (borrowList == null || borrowList.isEmpty()) {
+        if (BorrowCommand.getBorrowList() == null || BorrowCommand.getBorrowList().isEmpty()) {
             errorNothingLend();
             return;
         }
 
         Map<User, List<Borrow>> borrowsByUser = new HashMap<>();
-        for (Borrow borrow : borrowList) {
+        for (Borrow borrow : BorrowCommand.getBorrowList()) {
             borrowsByUser.computeIfAbsent(borrow.getUser(), k -> new ArrayList<>()).add(borrow);
         }
 
@@ -343,14 +342,14 @@ public class ReturnCommand {
         System.out.print(":\n");
         System.out.print(printTableLine(widths));
     }
-
-    public void setBorrowList(List<Borrow> borrowList) {
-        this.borrowList = borrowList;
-    }
-
-    public List<Borrow> getBorrowList() {
-        return this.borrowList;
-    }
+//
+//    public void setBorrowList(List<Borrow> borrowList) {
+//        this.borrowList = borrowList;
+//    }
+//
+//    public List<Borrow> getBorrowList() {
+//        return this.borrowList;
+//    }
 
     public User getCurrentUser() {
         return currentUser;

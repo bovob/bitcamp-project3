@@ -1,11 +1,14 @@
 package bitcamp.project3.vo;
 
+import java.util.List;
+
 public class User {
     String name = "OREO";
     String id = "OREO";
     String pw = "0000";
     Mbti mbti;
     int takeCnt;
+    List<Borrow> borrowList;
 
     public static class Mbti{
         int ei;
@@ -237,5 +240,21 @@ public class User {
 
     public void setTakeCnt(int takeCnt) {
         this.takeCnt = takeCnt;
+    }
+
+    public List<Borrow> getBorrowList() {
+        return borrowList;
+    }
+
+    public void setBorrowList(List<Borrow> borrowList) {
+        this.borrowList = borrowList;
+    }
+
+    public void addBorrowList(Borrow borrow) {
+        this.borrowList.add(borrow);
+    }
+
+    public void removeBorrowList(Borrow borrow) {
+        this.borrowList.remove(borrow);
     }
 }
