@@ -34,7 +34,7 @@ public class Book {
     }
 
     //더미생성
-    public static List<Book> generateDummyData(int count) {
+    public static List<Book> generateDummyData() {
         List<Book> booklist = new ArrayList<>();
         String[] categories = {"소설", "과학", "역사", "자기계발", "철학"};
         String[] authors = {"김작가", "이저자", "박문학", "최과학", "정역사"};

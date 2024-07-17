@@ -3,6 +3,7 @@ package bitcamp.project3.Monitor;
 import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.controller.UserCommand;
+import bitcamp.project3.vo.User;
 
 import static bitcamp.project3.util.Prompt.*;
 import static bitcamp.project3.util.SystemMsg.*;
@@ -23,8 +24,8 @@ public class UserMonitor extends Monitor {
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
     public UserMonitor(){
-        borrowCommand = new BorrowCommand(bookCommand.getBookList(), UserCommand.getCurrentUser());
-        returnCommand = new ReturnCommand(bookCommand.getBookList(), borrowCommand.getBorrowList(), UserCommand.getCurrentUser());
+//        BorrowCommand bc = new BorrowCommand( bookCommand.getBookList());
+//        returnCommand = new ReturnCommand( bookCommand.getBookList(), bc.getBorrowList(), UserCommand.getCurrentUser());
     }
 
 
@@ -62,7 +63,10 @@ public class UserMonitor extends Monitor {
     public void execute(int ans) {
         int menus = userMenus[0].length;
         int menuNo;
+
         setUserNo(ans);
+        User currentUser = UserCommand.getUserList().get(userNo);
+        UserCommand.setCurrentUser(currentUser);
 
         //userMenu Main Menu Start
         printUserMonitorTUI();
@@ -108,14 +112,18 @@ public class UserMonitor extends Monitor {
     // Valid Menu Num
     // 유저 메뉴 프로세스
     void processUserMenu(int ans) {
+        User current = UserCommand.getCurrentUser();
+
         switch (ans) {
             case 1: //도서 대출
 //                System.out.println("도서대출 메뉴입니다.");
-                borrowCommand.execute();
+                BorrowCommand bc = BorrowCommand.getInstance(current);
+                bc.execute();
                 break;
             case 2: //대출 반납
 //                System.out.println("대출반납 메뉴입니다.");
-                returnCommand.execute();
+                ReturnCommand rc = ReturnCommand.getInstance(current);
+                rc.execute();
                 break;
             case 3: //회원 정보 수정
                 UserCommand uc = UserCommand.getInstance(getUserNo());

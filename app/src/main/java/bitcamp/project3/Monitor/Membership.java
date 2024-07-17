@@ -179,7 +179,7 @@ public class Membership {
         while(iter.hasNext()) {
             currentUser = iter.next();
 
-            if (id.equals(currentUser.getName()))
+            if (id.equals(currentUser.getId()))
                 return true;
         }
         return false;

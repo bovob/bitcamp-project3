@@ -11,9 +11,9 @@ public class Prompt {
 
     //width length
     public static final int SMALL = 4;
-    public static final int MIDDLE = 15;
-    public static final int LARGE = 20;
-    public static final int HUGE = 30;
+    public static final int MIDDLE = 20;
+    public static final int LARGE = 30;
+    public static final int HUGE = 40;
 
     public static String boldTextCode = "\u001B[1m";
     public static String lightSkyBlueColorCode = "\u001B[38;2;135;206;250m";

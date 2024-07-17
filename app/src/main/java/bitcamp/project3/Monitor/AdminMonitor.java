@@ -5,6 +5,7 @@ import bitcamp.project3.controller.BorrowCommand;
 import bitcamp.project3.controller.ReturnCommand;
 import bitcamp.project3.controller.UserCommand;
 import bitcamp.project3.vo.Borrow;
+import bitcamp.project3.vo.User;
 
 import java.util.List;
 
@@ -26,14 +27,15 @@ public class AdminMonitor extends Monitor {
     ////////////////////// Constructor ////////////////////////
     ///////////////////////////////////////////////////////////
     public AdminMonitor(){
-        this.bookCommand = new BookCommand(this.borrowCommand.getBorrowList());
-        this.borrowCommand = new BorrowCommand(bookCommand.getBookList(), userCommand.getCurrentUser());
-        this.returnCommand = new ReturnCommand(bookCommand.getBookList(), borrowCommand.getBorrowList(), userCommand.getCurrentUser());
+//        this.bookCommand = new BookCommand(this.borrowCommand.getBorrowList());
+//        this.borrowCommand = new BorrowCommand(bookCommand.getBookList());
+//        this.returnCommand = new ReturnCommand(bookCommand.getBookList(), borrowCommand.getBorrowList(), UserCommand.getCurrentUser());
     }
 
 
     public AdminMonitor(List<Borrow> borrowList){
-        this.bookCommand = new BookCommand(borrowList);
+
+//        this.bookCommand = new BookCommand(borrowList);
     }
 
     private List<Borrow> borrowList;
@@ -109,14 +111,17 @@ public class AdminMonitor extends Monitor {
 
     // 관리자 메뉴 프로세스
     void processAdminMenu(int ans) {
-        BookCommand bc = BookCommand.getInstance();
-        ReturnCommand rc = ReturnCommand.getInstance();
+//        UserCommand uc = UserCommand.getInstance(0);
+        User current = UserCommand.getCurrentUser();
+
         switch (ans) {
             case 1: //도서 관리
+                BookCommand bc = BookCommand.getInstance();
                 bc.adminExecute();
                 break;
             case 2: //대출 관리
-                this.borrowList = BorrowCommand.getInstance().getBorrowList();
+                this.borrowList = BorrowCommand.getInstance(current).getBorrowList();
+                ReturnCommand rc = ReturnCommand.getInstance(current);
                 updateBorrowList(this.borrowList);
                 rc.adminExecute();
                 break;

@@ -21,6 +21,8 @@ public class UserCommand implements Command{
     UserCommand(){
         create(new String[]{"root", "root", "0000"},new int[]{0,0,0,0});    //default:0
         create(new String[]{"user", "user", "0000"},new int[]{0,0,0,0});
+        create(new String[]{"선아", "user01", "0000"},new int[]{0,0,0,3});
+        create(new String[]{"재욱", "user00", "0000"},new int[]{3,3,1,1});
     }
 
 
@@ -65,7 +67,7 @@ public class UserCommand implements Command{
         System.out.print("'"+currentUser.getName() + "'"+"님 환영합니다!\n");
         //(TEST)User List
         //read();
-        ReturnCommand rc = ReturnCommand.getInstance();
+        ReturnCommand rc = ReturnCommand.getInstance(currentUser);
         rc.printBorrowStatusByUser();
         //SubMenu 출력
         System.out.print(printUserMenu(0));
