@@ -7,9 +7,7 @@
   | :--: | :--: | :----: |
   | root | 0000 | 관리자 |
   | user | 0000 |  유저  |
-
 <br>
-
 ## 1. 프로젝트 소개
 
 ### 프로젝트 명 : MBTI BOOK
@@ -22,7 +20,7 @@
 - 회원가입시 간단한 MBTI 테스트를 통하여 본인의 MBTI를 확인할 수 있습니다.
 - 유저는 현재 도서관의 책 목록을 확인하며 본인의 MBTI에 맞추어 추천도서가 출력됩니다.
 - 관리자는 카테고리별 도서를 등록하여 해당 도서의 추천 MBTI 태그를 추가할 수 있습니다.
-
+<br>
 ## 2. 팀원 구성
 
 <div align="center">
@@ -33,12 +31,10 @@
 
 </div>
 <br>
-
 ## 3. 개발 환경
 
-<img src="https://img.shields.io/badge/Java-007396?style=flastic&logo=OpenJDK&logoColor=white"/> 
-<img src="https://img.shields.io/badge/IntelliJ-000000?style=flastic&logo=intellijidea&logoColor=white"/>
-
+<img src="https://img.shields.io/badge/Java-007396?style=flastic&logo=OpenJDK&logoColor=white"/>  <img src="https://img.shields.io/badge/IntelliJ-000000?style=flastic&logo=intellijidea&logoColor=white"/>
+<br>
 ## 4. 역할분담
 
 ### 이재욱
@@ -50,7 +46,7 @@
 
 - **관리자** : 유저관리
 - **유저** : 로그인 전반, MBTI 검사
-
+<br>
 ## 5. 프로젝트 구조
 
 ``````
@@ -90,9 +86,9 @@
  ┃ ┃ ┃ ┃ ┃ ┗ 📜DummyData.java
  ┗ 📜build.gradle
 ``````
-
+<br>
 ## 6. 기능
-
+<br>
 ## 7. 후기
 
 ### 이재욱
