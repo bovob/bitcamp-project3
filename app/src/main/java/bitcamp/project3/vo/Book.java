@@ -41,7 +41,7 @@ public class Book {
 
         booklist.addAll(DummyData.addDummyBook());
 
-        setSeqNo(32);
+        //setSeqNo(18);
         return booklist;
     }
     //더미seqNo 이후 설정

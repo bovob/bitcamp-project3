@@ -1,5 +1,7 @@
 package bitcamp.project3;
 
+import static bitcamp.project3.vo.Book.setSeqNo;
+
 import bitcamp.project3.vo.Book;
 
 import java.util.ArrayList;
@@ -77,6 +79,7 @@ public class DummyData {
             Book book = new Book(dum);
             book.setNo(++i);
             booklist.add(book);
+            setSeqNo(i);
         }
 
         return booklist;

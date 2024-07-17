@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
@@ -303,36 +304,68 @@ public class ReturnCommand {
     }
 
     protected void printBorrowStatusByUser() {
-        if (BorrowCommand.getBorrowList() == null || BorrowCommand.getBorrowList().isEmpty()) {
+        // User 대출 리스트
+        // .getBorrowList() 리스트 Get
+        // .stream() 스트림 변환
+        // .filter(  borrow .getUser() 유저정보를
+        //                  .equals(currentUser) 와 일치하는지 비교)
+        //                                                          .collect(모아진 데이터를
+        //                                                                   .toList() 리스트저장);
+        List<Borrow> userBorrows = BorrowCommand.getBorrowList().stream()
+            .filter(borrow -> borrow.getUser().equals(currentUser)).collect(Collectors.toList());
+
+        //if (BorrowCommand.getBorrowList() == null || BorrowCommand.getBorrowList().isEmpty()) {
+        //    errorNothingLend();
+        //    return;
+        //}
+
+        if (userBorrows.isEmpty()) {
             errorNothingLend();
             return;
         }
 
-        Map<User, List<Borrow>> borrowsByUser = new HashMap<>();
-        for (Borrow borrow : BorrowCommand.getBorrowList()) {
-            borrowsByUser.computeIfAbsent(borrow.getUser(), k -> new ArrayList<>()).add(borrow);
+        String[] columns = {"No", "도서명", "대출일", "반납예정일"};
+        int[] widths = {SMALL, HUGE, LARGE, LARGE};
+        printTableHeader(columns, widths);
+
+        int index = 1;
+        for (Borrow borrow : userBorrows) {
+            System.out.print(printTableDataFormat(widths[0], String.valueOf(index)));
+            System.out.print(printTableDataFormat(widths[1], borrow.getTitle()));
+            System.out.print(printTableDataFormat(widths[2], String.format("%s", borrow.getStartDate())));
+            System.out.print(printTableDataFormat(widths[3], String.format("%s", borrow.getEndDate())));
+            System.out.print(":\n");
+            index++;
         }
-
-        for (Map.Entry<User, List<Borrow>> entry : borrowsByUser.entrySet()) {
-            User user = entry.getKey();
-            List<Borrow> userBorrows = entry.getValue();
-
-            String[] columns = {"No", "도서명", "대출일", "반납예정일"};
-            int[] widths = {SMALL, HUGE, LARGE, LARGE};
-            printTableHeader(columns, widths);
-
-            int index = 1;
-            for (Borrow borrow : userBorrows) {
-                System.out.print(printTableDataFormat(widths[0], String.valueOf(index)));
-                System.out.print(printTableDataFormat(widths[1], borrow.getTitle()));
-                System.out.print(printTableDataFormat(widths[2], String.format("%s",borrow.getStartDate())));
-                System.out.print(printTableDataFormat(widths[3], String.format("%s",borrow.getEndDate())));
-                System.out.print(":\n");
-                index++;
-            }
-            System.out.print(printTableLine(widths)+resetColorCode);
-        }
+        System.out.print(printTableLine(widths)+resetColorCode);
     }
+
+    /**    Map<User, List<Borrow>> borrowsByUser = new HashMap<>();
+    //    for (Borrow borrow : BorrowCommand.getBorrowList()) {
+    //        borrowsByUser.computeIfAbsent(borrow.getUser(), k -> new ArrayList<>()).add(borrow);
+    //    }
+    //
+    //    for (Map.Entry<User, List<Borrow>> entry : borrowsByUser.entrySet()) {
+    //        User user = entry.getKey();
+    //        List<Borrow> userBorrows = entry.getValue();
+    //
+    //        String[] columns = {"No", "도서명", "대출일", "반납예정일"};
+    //        int[] widths = {SMALL, HUGE, LARGE, LARGE};
+    //        printTableHeader(columns, widths);
+    //
+    //        int index = 1;
+    //        for (Borrow borrow : userBorrows) {
+    //            System.out.print(printTableDataFormat(widths[0], String.valueOf(index)));
+    //            System.out.print(printTableDataFormat(widths[1], borrow.getTitle()));
+    //            System.out.print(printTableDataFormat(widths[2], String.format("%s",borrow.getStartDate())));
+    //            System.out.print(printTableDataFormat(widths[3], String.format("%s",borrow.getEndDate())));
+    //            System.out.print(":\n");
+    //            index++;
+    //        }
+    //        System.out.print(printTableLine(widths));
+    //    }
+    //}
+     */
 
     private void printTableHeader(String[] columns, int[] widths) {
         System.out.print(lightSkyBlueColorCode+printTableLine(widths));
