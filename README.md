@@ -1,4 +1,5 @@
 # 📖 MBTI 취향에 맞춘 도서대출
+![BookMBTI](https://github.com/user-attachments/assets/2b19ea96-5ab1-4f08-8ddd-40a7607f0035)
 
 - Git : https://github.com/SA030/bitcamp-project3.git
 - Account
@@ -101,7 +102,7 @@
 
 - 처음 방문한 User는 이름/ID/PW 를 입력받습니다.
 - MBTI 검사를 진행합니다.
-- 
+ 
 ![UserAccount](https://github.com/user-attachments/assets/e9c6e77a-4edc-4816-8fe8-3d467feb23ce)
 
 ### 2. 도서대출
@@ -124,7 +125,7 @@
 
 ![UserReturn](https://github.com/user-attachments/assets/128484b7-193f-4f0c-a0e4-979fd07a32cf)
 
-### 5.회원정보수
+### 5.회원정보수정
 
 - 유저의 PW 및 MBTI를 재검사 할 수 있습니다.  
 
