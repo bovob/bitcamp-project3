@@ -9,7 +9,7 @@ public class DummyData {
     //더미생성
     public static List<Book> addDummyBook() {
         List<Book> booklist = new ArrayList<>();
-        String[] categories = {"소설", "과학", "역사", "자기계발", "철학"};
+        String[] categories = {"소설", "과학", "역사", "자기 계발", "철학"};
                               //NOV     SCI     HIS     SEL         PHI
         final String NOV = categories[0];
         final String SCI = categories[1];
