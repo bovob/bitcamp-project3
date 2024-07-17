@@ -13,8 +13,8 @@ import static bitcamp.project3.util.SystemMsg.*;
 
 
 public class MbtiCommand implements Command{
-//    private static final String PATH = "C:\\Users\\BIT\\git\\bitcamp-project3\\app\\doc\\mbtiTest.txt";
-    private static final String PATH = "C:\\Users\\BITCAMP\\git\\bitcamp-project3\\app\\doc\\mbtiTest.txt";
+    private static final String PATH = "C:\\Users\\BIT\\git\\bitcamp-project3\\app\\doc\\mbtiTest.txt";
+//    private static final String PATH = "C:\\Users\\BITCAMP\\git\\bitcamp-project3\\app\\doc\\mbtiTest.txt";
     private static final File F = new File(PATH);
     private static ArrayList<String> F_list = new ArrayList<>();
     private static LinkedList<Score> scoreList = new LinkedList<>();
