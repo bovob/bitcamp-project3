@@ -64,28 +64,6 @@ public class ReturnCommand {
 
     // 메인실행
     public void execute() {
-/*System.out.printf("안녕하세요 '%s' 님\n", currentUser);
-        System.out.println("++대출도서 목록예정++\n");
-        printBookList();
-        cmd();
-        String command = Prompt.input(String.format("메인/%s>", menuTitle));
-        if (command.equals("menu")) {
-            cmd();
-            continue;
-        } else if (command.equals("0")) { // 이전 메뉴 선택
-            return;
-        }
-        int menuNo = Integer.parseInt(command);
-        String menuName = getMenuTitle(menuNo, menus);
-        if (menuName == null) {
-            System.out.println("유효한 메뉴 번호가 아닙니다.");
-            continue;
-        }
-        switch (menuName){
-            case "도서반납":
-                bookReturn();
-                break;
-        }**/
         while (processMenu()) {
             try {
 
@@ -123,8 +101,6 @@ public class ReturnCommand {
 
         System.out.printf("안녕하세요 '%s' 님\n", currentUser.getName());
         printBorrowBookList();
-//        printBookList();
-//        cmd();
 
         System.out.print(printCustomMenu(menus));
     }
@@ -143,7 +119,6 @@ public class ReturnCommand {
             }
         }
 
-//        printBorrowBookList();
 
         int selectNo = Prompt.inputInt(yellowColorCode+"반납할 도서의 번호를 입력하세요 (취소: 0): "+resetColorCode);
         if (selectNo == 0) {
@@ -178,7 +153,6 @@ public class ReturnCommand {
             //no, title, borrowDate, RetueDate
             int i=0;
 
-//            System.out.println("대출 도서");
 
             // 현재 사용자가 대출한 책 목록 출력
             List<Borrow> userBorrows = new ArrayList<>();
@@ -225,15 +199,6 @@ public class ReturnCommand {
             //no, cate, title, writer, status
             int i=0;
 
-/*            System.out.println("번호 | 카테고리 | 도서명 | 저자 | 대출 상태");
-
-            for (Book book : bookList) {
-                System.out.printf("%d  |   %s  |  %s  |  %s  |  %s\n",
-                    book.getNo(), book.getBookCategory(), book.getTitle(),
-                    book.getAuthor(), book.isCheck() ? "대출 중" : "대출 가능");
-            }**/
-
-//            System.out.println("도서목록 입니다.");
 
             if (bookList == null){
                 errorAccordBook();
@@ -265,6 +230,8 @@ public class ReturnCommand {
 
             //END line
             System.out.print(printTableLine(width));
+            //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
         }
 
     ///////////////////////////////////////////////////////////
@@ -333,7 +300,6 @@ public class ReturnCommand {
     }
 
     protected void printBorrowStatusByUser() {
-//        System.out.println("\n[사용자별 대출 현황]");
         if (borrowList == null || borrowList.isEmpty()) {
             errorNothingLend();
             return;
@@ -348,7 +314,6 @@ public class ReturnCommand {
             User user = entry.getKey();
             List<Borrow> userBorrows = entry.getValue();
 
-//            System.out.printf("\n사용자: %s\n", user.getName());
             String[] columns = {"No", "도서명", "대출일", "반납예정일"};
             int[] widths = {SMALL, HUGE, LARGE, LARGE};
             printTableHeader(columns, widths);

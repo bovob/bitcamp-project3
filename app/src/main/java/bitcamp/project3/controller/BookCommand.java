@@ -10,8 +10,7 @@ import java.util.List;
 import static bitcamp.project3.util.MenuFormat.*;
 import static bitcamp.project3.util.Prompt.*;
 import static bitcamp.project3.util.SystemMsg.*;
-import static bitcamp.project3.util.TableFormat.printTableDataFormat;
-import static bitcamp.project3.util.TableFormat.printTableLine;
+import static bitcamp.project3.util.TableFormat.*;
 
 public class BookCommand implements Command {
 
@@ -19,7 +18,7 @@ public class BookCommand implements Command {
     //"도서 관리"
     String menuTitle = AdminMonitor.getAdminMenus()[0][0];
 //    {"도서등록","도서목록","도서수정","도서삭제"}   //1~
-//    String[] menus = AdminMonitor.getAdminMenus()[1];
+
     // 도서 Dummy 생성
     ArrayList<Book> bookList = new ArrayList<>(Book.generateDummyData(5));
     List<Borrow> borrowList;
@@ -64,39 +63,7 @@ public class BookCommand implements Command {
     ///////////////////////////////////////////////////////////
     // 메인실행
     public void adminExecute() {
-/*        cmd();
-        if (command.equals("menu")) {
-                cmd();
-                continue;
-            } else if (command.equals("9")) { // 이전 메뉴 선택
-                return;
-            }
 
-                int menuNo = Integer.parseInt(command);
-                String menuName = getMenuTitle(menuNo, menus);
-                if (menuName == null) {
-                    System.out.println("유효한 메뉴 번호가 아닙니다.");
-                    continue;
-                }
-                switch (menuNo){
-                    case 1: //도서 등록
-                        create();
-                        break;
-                    case 2: //도서 삭제
-                        read();
-                        break;
-                    case 3: //도서 수정
-                        update();
-                        break;
-                    case 4: //도서 삭제
-                        delete();
-                        break;
-                    case 0:
-                        break;
-                    default:
-                        printNumberLimitException();
-                }
-                bookMenuProcess(menuNo);**/
         while (processMenu()) {
             try {
 
@@ -154,14 +121,8 @@ public class BookCommand implements Command {
         book.setBookCategory(Prompt.input("카테고리"));
         book.setTitle(Prompt.input("책 이름?"));
         book.setAuthor(Prompt.input("책 저자?"));
-
         book.setMbti("MBTI? ");
 
-//        book.setM(inputInt("M ?"));
-//        book.setB(inputInt("B ?"));
-//        book.setT(inputInt("T ?"));
-//        book.setI(inputInt("I ?"));
-        //book.setNo(Book.getNextSeqNo());
         bookList.add(book);
 
     }
@@ -203,25 +164,6 @@ public class BookCommand implements Command {
         System.out.print(printTableLine(width));
         //////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////
-
-
-//        System.out.println("도서목록 입니다.");
-//        System.out.println("번호 | 카테고리 | 도서명 저자 MBTI");
-//        for (Object obj : bookList.toArray()){
-//            Book book = (Book) obj;
-//
-//            System.out.printf("%d  |   %s  | %s  %s  %s\n", book.getNo(),
-//                                                            book.getBookCategory() ,
-//                                                            book.getTitle(),
-//                                                            book.getAuthor(),
-//                                                            book.getMbti());
-//
-//
-//
-////            System.out.printf("%d  |   %s  | %s  %s  %d %d %d %d\n",
-////            book.getNo(), book.getBookCategory() , book.getTitle(), book.getAuthor(),
-////            book.getM(), book.getB(), book.getT(), book.getI());
-//        }
     }
 
 
@@ -249,33 +191,12 @@ public class BookCommand implements Command {
         bookToUpdate.setAuthor(Prompt.input(yellowColorCode+"책 저자?"+resetColorCode));
         bookToUpdate.setMbti(Prompt.input(yellowColorCode+"MBTI ?"+resetColorCode));
 
-//        bookToUpdate.setM(inputInt("M ?"));
-//        bookToUpdate.setB(inputInt("B ?"));
-//        bookToUpdate.setT(inputInt("T ?"));
-//        bookToUpdate.setI(inputInt("I ?"));
         System.out.println(lightSkyBlueColorCode+"변경되었습니다."+resetColorCode);
     }
-    //    Book book = (Book) bookList.get(bookList.indexOf(new Book(bookNo)));
-    //    if (book == null) {
-    //        System.out.printf("없는 책입니다.");
-    //    }
-    //    book.setBookCategory(Prompt.input("카테고리"));
-    //    book.setTitle(Prompt.input("책 이름?"));
-    //    book.setAuthor(Prompt.input("책 저자?"));
-    //    book.setM(inputInt("M ?"));
-    //    book.setB(inputInt("B ?"));
-    //    book.setT(inputInt("T ?"));
-    //    book.setI(inputInt("I ?"));
-    //    System.out.println("변경되었습니다.");
-    //}
-
-
 
     //도서삭제
     @Override
     public void delete() {
-//        System.out.println("도서삭제 입니다.");
-
         int bookNo = inputInt(yellowColorCode+"책번호?"+resetColorCode);
         Book bookToRemove = null;
 
@@ -293,25 +214,11 @@ public class BookCommand implements Command {
             errorNotHereBook();
         }
     }
-    //    int index = bookList.indexOf(new Book(bookNo));
-    //
-    //    Book book = (Book) bookList.get(index);
-    //    if (book != null){
-    //        bookList.remove(bookList.indexOf(index));
-    //        System.out.printf("%d번 %s를 삭제했습니다.\n", book.getNo(), book.getTitle());
-    //    } else{
-    //        System.out.printf("없는 도서번호 입니다.");
-    //    }
-    //}
 
 
     @Override
     public void cmd() {
-//        System.out.printf("[%s]\n", menuTitle);
-//        for (int i = 0; i < menus.length; i++) {
-//            System.out.printf("%d. %s\n", (i + 1), menus[i]);
-//        }
-//        System.out.println("9. 이전");
+
     }
 
     @Override

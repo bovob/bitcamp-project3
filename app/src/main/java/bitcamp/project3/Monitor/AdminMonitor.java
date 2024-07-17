@@ -113,22 +113,15 @@ public class AdminMonitor extends Monitor {
         ReturnCommand rc = ReturnCommand.getInstance();
         switch (ans) {
             case 1: //도서 관리
-//                System.out.println("도서관리 메뉴로 접속합니다.");
-
-//                String menuTitle = Monitor.getMenuTitle(ans, adminMenus[0]);
-//                System.out.print(printAdminMenu(ans));;
                 bc.adminExecute();
                 break;
             case 2: //대출 관리
-//                System.out.println("대출관리 메뉴로 접속합니다.");
                 this.borrowList = BorrowCommand.getInstance().getBorrowList();
                 updateBorrowList(this.borrowList);
                 rc.adminExecute();
                 break;
             case 3: //유저 관리
                 UserCommand uc = UserCommand.getInstance(0);
-
-//                System.out.println("유저관리 메뉴로 접속합니다.");
                 uc.adminExcute();
 
                 break;

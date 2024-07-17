@@ -10,7 +10,7 @@ import static bitcamp.project3.util.Prompt.close;
 //                       Monitor, util.*
 //                              |
 //  App: Membership -----[0]AdminMonitor    --[1]BookCommand
-//                                          --[2]
+//                                          --[2]BorrowCommand
 //                                          --[3]UserCommand
 //
 //
@@ -28,12 +28,12 @@ import static bitcamp.project3.util.Prompt.close;
 //      Mbti mbti;                              LocalDate endDate;                      String bookCategory;
 //      int takeCnt;                            String title;                           int count;
 //                                              String user;                            int no;
-//      Class Mbti {                        }                                           int M;
-//          int ei;                                                                     int B;
-//          int ns;                                                                     int T;
-//          int ft;                                                                     int I;
-//          int pj;                                                                     boolean check;
-//      }                                                                           }
+//      Class Mbti {                        }                                           String mbti
+//          int ei;                                                                     boolean check;
+//          int ns;                                                                 }
+//          int ft;
+//          int pj;
+//      }
 //  }
 //
 
@@ -73,18 +73,6 @@ public class App {
             //user
             um.execute(check);
 
-//
-//            switch (check) {
-//                case 0:
-//                    rm.adminExecute();
-//                    break;
-//                case 1:
-//                    um.execute();
-//                    break;
-//                case -1:
-//                    close();
-//                    return;
-//            }
         }
     }
 }

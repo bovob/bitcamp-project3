@@ -36,10 +36,6 @@ public class BorrowCommand implements Command {
         this.currentUser = currentUser;
     }
 
-//    public BorrowCommand(String title, LinkedList bookList) {
-//        this.menuTitle = title;
-//        this.bookList = bookList;
-//    }
 
     ///////////////////////////////////////////////////////////
     ////////////////////// getInstance() //////////////////////
@@ -68,29 +64,6 @@ public class BorrowCommand implements Command {
     ///////////////////////////////////////////////////////////
     // 메인실행
     public void execute() {
-/*            String command = input(String.format("메인/%s>", menuTitle));
-            if (command.equals("menu")) {
-                System.out.print(printUserMenu(1));
-                continue;
-            } else if (command.equals("0")) { // 이전 메뉴 선택
-                return;
-            }
-                int menuNo = Integer.parseInt(command);
-                String menuName = getMenuTitle(menuNo, menus);
-                if (menuName == null) {
-                    System.out.println("유효한 메뉴 번호가 아닙니다.");
-                    continue;
-                }
-                switch (menuNo){
-                    case 1:
-                        bookBorrow();
-                        break;
-                    case 2:
-                        bookSearch();
-                        break;
-                    default:
-                        printNumberLimitException();
-                }*/
             while (processMenu()) {
                 try {
 
@@ -137,7 +110,6 @@ public class BorrowCommand implements Command {
 
 
     private void bookBorrow() {
-//        System.out.println("도서대출 입니다.");
         int bookNo = inputInt(yellowColorCode+"도서번호를 입력하세요: "+resetColorCode);
 
         // bookList에서 해당 도서 찾기
@@ -193,14 +165,12 @@ public class BorrowCommand implements Command {
 
         String userMbti = currentUser.getMbti().getMbti();
 
-//        System.out.println("도서목록 입니다.");
-
         //Mbti 설명
         GetHtml.printMbtiDescription(userMbti);
         bookMbti(userMbti);
-        //////////////////////////////////////////////////////////////
-        ////////////////////////result table//////////////////////////
-        //////////////////////////////////////////////////////////////
+//        //////////////////////////////////////////////////////////////
+//        ////////////////////////result table//////////////////////////
+//        //////////////////////////////////////////////////////////////
 //        //table title
 //        System.out.print(printTableLine(width));
 //        for(String data: calm){
@@ -221,8 +191,8 @@ public class BorrowCommand implements Command {
 //
 //        //END line
 //        System.out.print(printTableLine(width));
-        //////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////
+//        //////////////////////////////////////////////////////////////
+//        //////////////////////////////////////////////////////////////
 
     }
 
@@ -280,7 +250,7 @@ public class BorrowCommand implements Command {
         int i=0;
 
         setClearCmd();
-//        System.out.println("도서 검색");
+
         System.out.print(printCustomMenu(searchMenu));
         int searchOption = inputInt("검색 옵션을 선택하세요: ");
 
@@ -323,7 +293,6 @@ public class BorrowCommand implements Command {
         if (searchResults.isEmpty()) {
             errorAccordBook();
         } else {
-//            System.out.println("검색 결과:");
 
 
             //////////////////////////////////////////////////////////////
@@ -354,14 +323,6 @@ public class BorrowCommand implements Command {
             bookBorrow();
         }
     }
-
-//    public void cmd() {
-//        System.out.printf("[%s]\n", menuTitle);
-//        for (int i = 0; i < menus.length; i++) {
-//            System.out.printf("[%d] %s\n", (i + 1), menus[i]);
-//        }
-//        System.out.println("[0] 이전메뉴");
-//    }
 
 
     @Override

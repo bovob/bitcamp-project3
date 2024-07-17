@@ -13,10 +13,6 @@ public class Book {
     private String bookCategory;
     private int no;
     private String mbti="istj";
-//    private int M;
-//    private int B;
-//    private int T;
-//    private int I;
     private boolean check;
 
     public Book() {
@@ -42,16 +38,6 @@ public class Book {
         List<Book> booklist = new ArrayList<>();
         String[] categories = {"소설", "과학", "역사", "자기계발", "철학"};
         String[] authors = {"김작가", "이저자", "박문학", "최과학", "정역사"};
-
-//        for (int i = 0; i < count; i++) {
-//            Book book = new Book();
-//            book.setNo(i+1);
-//            book.setTitle("책제목");
-//            book.setAuthor(authors[i]);
-//            book.setBookCategory(categories[i]);
-//            book.setMbti("entp");
-//            booklist.add(book);
-//        }
 
         booklist.addAll(DummyData.addDummyBook());
 
@@ -86,38 +72,6 @@ public class Book {
         return ++seqNo;
     }
 
-//    public int getM() {
-//        return M;
-//    }
-//
-//    public void setM(int m) {
-//        M = m;
-//    }
-//
-//    public int getB() {
-//        return B;
-//    }
-//
-//    public void setB(int b) {
-//        B = b;
-//    }
-//
-//    public int getT() {
-//        return T;
-//    }
-//
-//    public void setT(int t) {
-//        T = t;
-//    }
-//
-//
-//    public int getI() {
-//        return I;
-//    }
-//
-//    public void setI(int i) {
-//        I = i;
-//    }
 
     public String getMbti() {
         return mbti;
